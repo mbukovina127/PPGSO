@@ -28,12 +28,12 @@
 ## TO DO:
 Týždeň 1:
 
-&#9744; Nainštalovať OpenGL
+- [ ] Nainštalovať OpenGL
 
-&#9744; Vytvoriť prostredie
+- [ ] Vytvoriť prostredie
 
 Tyždeň 2:
 
-&#9744; Načitať objekty
+- [ ] Načitať objekty
 
 
