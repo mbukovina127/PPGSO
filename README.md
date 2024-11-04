@@ -34,6 +34,20 @@ Týždeň 1:
 
 Tyždeň 2:
 
+- [ ] Vyhladanie modelov
+
 - [ ] Načitať objekty
 
+Tyždeň 3:
 
+- [ ] Osvetlenie
+
+- [ ] Animácie
+
+Týždeň 4:
+
+- [ ] Simulácia
+
+Týždeň 5:
+
+- [ ] Filter
