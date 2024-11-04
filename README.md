@@ -1,7 +1,6 @@
 # PPGSO_projekt_Apartman
 ## Iveta Lešková a Marko Bukovina
 
-## TO DO:
 
 | Uloha                                                 |                                                                                              | Body  |         |
 |-------------------------------------------------------|----------------------------------------------------------------------------------------------|-------|---------|
@@ -26,6 +25,11 @@
 | **Post-processing**                                   | základný per-pixel filter/ konvolučný filter/ pokročilý filter                               | 1/2/4 | &#9744; |
 |                                                       |                                                                                              | 43    | 0       |
 
-
+## TO DO:
+Týždeň 1:
+&#9744; Nainštalovať OpenGL
+&#9744; Vytvoriť prostredie
+Tyždeň 2:
+&#9744; Načitať objekty
 
 
