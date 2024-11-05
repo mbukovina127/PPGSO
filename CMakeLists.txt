@@ -106,3 +106,8 @@ target_include_directories(ppgso PUBLIC
 #
 file(COPY "data/" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 install(DIRECTORY data/ DESTINATION .)
+
+## exec
+add_executable(main src/main.cpp)
+target_link_libraries(main ppgso shaders)
+install(TARGETS main DESTINATION .)
