@@ -28,7 +28,7 @@
 ## TO DO:
 Týždeň 1:
 
-- [ ] Nainštalovať OpenGL
+- [x] Nainštalovať OpenGL
 
 - [ ] Vytvoriť prostredie
 
