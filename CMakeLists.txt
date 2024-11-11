@@ -108,6 +108,9 @@ file(COPY "data/" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 install(DIRECTORY data/ DESTINATION .)
 
 ## exec
-add_executable(main src/main.cpp)
+add_executable(main src/main.cpp
+        src/apartman.cpp
+        src/scene.h
+        src/Object.h)
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)
