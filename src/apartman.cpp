@@ -5,7 +5,9 @@
 
 #include <window.h>
 
-class SceneWindow : public Window {
+#include "scene.h"
+
+class SceneWindow : public ppgso::Window {
 private:
     Scene begin_scene;
 

@@ -111,6 +111,7 @@ install(DIRECTORY data/ DESTINATION .)
 add_executable(main src/main.cpp
         src/apartman.cpp
         src/scene.h
-        src/Object.h)
+        src/Object.h
+        src/camera.h)
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)

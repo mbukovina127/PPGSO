@@ -11,10 +11,9 @@
 class Object {
 
 public:
-    glm::vec3 globalPosition() {};
-      //while parent is not null
-        // position += parent.position
-        // return position
+    glm::vec3 globalPosition() {
+        return {0,0,0};
+    };
 
 
     glm::vec3 position{0,0,0};

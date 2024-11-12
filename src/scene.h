@@ -7,6 +7,7 @@
 #include <memory>
 #include <vector>
 
+#include "camera.h"
 #include "Object.h"
 
 class Scene {
