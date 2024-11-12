@@ -7,6 +7,7 @@
 #include <memory>
 #include <vector>
 #include <glm/glm.hpp>
+#include "scene.h"
 
 class Object {
 
@@ -30,6 +31,10 @@ public:
 
     std::vector<std::unique_ptr<Object>> children;
     std::unique_ptr<Object> parent;
+
+    virtual bool update(Scene &scene, float dt) = 0;
+
+    virtual void render(Scene &scene) = 0;
 
 };
 

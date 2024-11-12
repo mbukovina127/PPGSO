@@ -108,7 +108,7 @@ file(COPY "data/" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 install(DIRECTORY data/ DESTINATION .)
 
 ## exec
-add_executable(main src/main.cpp
+add_executable(main
         src/apartman.cpp
         src/scene.h
         src/Object.h
