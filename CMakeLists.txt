@@ -107,11 +107,14 @@ target_include_directories(ppgso PUBLIC
 file(COPY "data/" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 install(DIRECTORY data/ DESTINATION .)
 
-## exec
+
 add_executable(main
-        src/apartman.cpp
-        src/scene.h
-        src/Object.h
-        src/camera.h)
+        src/project/apartman.cpp
+        src/project/scene.h
+        src/project/object.h
+        src/project/camera.h
+        src/project/scene.cpp
+        src/project/object.cpp)
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)
+add_custom_command(TARGET main POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/ ${CMAKE_CURRENT_BINARY_DIR})

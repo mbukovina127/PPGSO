@@ -7,7 +7,7 @@
 
 class Camera {
 public:
-    void update();
+    void update(){};
 };
 
 #endif //CAMERA_H

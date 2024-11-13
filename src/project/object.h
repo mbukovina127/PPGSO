@@ -7,7 +7,9 @@
 #include <memory>
 #include <vector>
 #include <glm/glm.hpp>
-#include "scene.h"
+
+// Forward declare a scene
+class Scene;
 
 class Object {
 

@@ -10,7 +10,7 @@
 #include <map>
 #include <list>
 
-#include <ppgso/ppgso.h>
+#include <../ppgso/ppgso.h>
 
 #include "camera.h"
 #include "scene.h"
