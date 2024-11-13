@@ -1,0 +1,11 @@
+Model Information:
+* title:	Wooden Shelf
+* source:	https://sketchfab.com/3d-models/wooden-shelf-5bb777dbc1634a7d82eaa40fef5eef52
+* author:	MatthewHicks (https://sketchfab.com/MatthewHicks)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Wooden Shelf" (https://sketchfab.com/3d-models/wooden-shelf-5bb777dbc1634a7d82eaa40fef5eef52) by MatthewHicks (https://sketchfab.com/MatthewHicks) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
