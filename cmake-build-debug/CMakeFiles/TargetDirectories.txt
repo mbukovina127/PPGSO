@@ -1,9 +1,0 @@
-Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/shaders.dir
-Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/ppgso.dir
-Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/main.dir
-Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/edit_cache.dir
-Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/list_install_components.dir
-Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/install.dir
-Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/install/local.dir
-Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/install/strip.dir
