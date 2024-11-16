@@ -30,8 +30,6 @@ private:
    * Creating unique smart pointers to objects that are stored in the scene object list
    */
   void initScene() {
-
-    stbi_set_flip_vertically_on_load(true);
     scene.objects.clear();
     // Create a camera
     // auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f); nejde
