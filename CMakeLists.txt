@@ -161,7 +161,6 @@ target_include_directories(ppgso PUBLIC
 add_executable(main
         src/project/apartman.cpp
         src/project/scene.h
-        src/project/scene.cpp
         src/project/object.h
         src/project/camera.h
         src/project/mesh.h

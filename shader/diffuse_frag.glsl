@@ -1,10 +1,9 @@
 #version 330
 // A texture is expected as program attribute
 uniform sampler2D texture_diffuse1;
-uniform sampler2D texture_diffuse2;
-uniform sampler2D texture_diffuse3;
 uniform sampler2D texture_specular1;
-uniform sampler2D texture_specular2;
+uniform sampler2D texture_ao1;
+
 
 //// Direction of light
 //uniform vec3 LightDirection;
@@ -30,6 +29,9 @@ void main() {
 
   // Lookup the color in Texture on coordinates given by texCoord
   // NOTE: Texture coordinate is inverted vertically for compatibility with OBJ
-  FragColor = texture(texture_diffuse1, TexCoords);
+  vec4 diff = texture(texture_diffuse1, texCoord);
+  vec4 ao = texture(texture_ao1, texCoord);
+
+  FragmentColor = diff  * ao;
 //  FragmentColor.a = Transparency;
 }

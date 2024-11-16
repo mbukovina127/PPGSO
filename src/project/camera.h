@@ -11,8 +11,8 @@
 class Camera {
 public:
     glm::vec3 up{0,1,0};
-    glm::vec3 position{0,3,0};
-    glm::vec3 back{0,0,-1};
+    glm::vec3 position{2,0,2};
+    glm::vec3 center{0,0,0};
 
     glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
@@ -24,7 +24,7 @@ public:
      * @param near - Distance to the near frustum plane
      * @param far - Distance to the far frustum plane
      */
-    Camera(float fow = 45.0f, float ratio = 1.0f, float near = 0.1f, float far = 10.0f) {
+    Camera(float fow = 60.0f, float ratio = 1.7f, float near = 0.1f, float far = 100.0f) {
      float fowInRad = (ppgso::PI/180.0f) * fow;
 
      projectionMatrix = glm::perspective(fowInRad, ratio, near, far);
@@ -34,7 +34,7 @@ public:
      * Update Camera viewMatrix based on up, position and back vectors
      */
     void update() {
-      viewMatrix = lookAt(position, position-back, up);
+      viewMatrix = glm::lookAt(position, center, up);
     }
 
     /*!

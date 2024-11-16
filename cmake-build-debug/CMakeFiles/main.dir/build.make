@@ -83,26 +83,11 @@ CMakeFiles/main.dir/src/project/apartman.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/project/apartman.cpp.s"
 	D:\1EFFE~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S Z:\Dokumenty\ULOHY\PPGSO_projekt\src\project\apartman.cpp -o CMakeFiles\main.dir\src\project\apartman.cpp.s
 
-CMakeFiles/main.dir/src/project/scene.cpp.obj: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/src/project/scene.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
-CMakeFiles/main.dir/src/project/scene.cpp.obj: Z:/Dokumenty/ULOHY/PPGSO_projekt/src/project/scene.cpp
-CMakeFiles/main.dir/src/project/scene.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=Z:\Dokumenty\ULOHY\PPGSO_projekt\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/src/project/scene.cpp.obj"
-	D:\1EFFE~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/project/scene.cpp.obj -MF CMakeFiles\main.dir\src\project\scene.cpp.obj.d -o CMakeFiles\main.dir\src\project\scene.cpp.obj -c Z:\Dokumenty\ULOHY\PPGSO_projekt\src\project\scene.cpp
-
-CMakeFiles/main.dir/src/project/scene.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/project/scene.cpp.i"
-	D:\1EFFE~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E Z:\Dokumenty\ULOHY\PPGSO_projekt\src\project\scene.cpp > CMakeFiles\main.dir\src\project\scene.cpp.i
-
-CMakeFiles/main.dir/src/project/scene.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/project/scene.cpp.s"
-	D:\1EFFE~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S Z:\Dokumenty\ULOHY\PPGSO_projekt\src\project\scene.cpp -o CMakeFiles\main.dir\src\project\scene.cpp.s
-
 CMakeFiles/main.dir/src/project/imgloader.cpp.obj: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/project/imgloader.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
 CMakeFiles/main.dir/src/project/imgloader.cpp.obj: Z:/Dokumenty/ULOHY/PPGSO_projekt/src/project/imgloader.cpp
 CMakeFiles/main.dir/src/project/imgloader.cpp.obj: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=Z:\Dokumenty\ULOHY\PPGSO_projekt\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/src/project/imgloader.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=Z:\Dokumenty\ULOHY\PPGSO_projekt\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/src/project/imgloader.cpp.obj"
 	D:\1EFFE~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/project/imgloader.cpp.obj -MF CMakeFiles\main.dir\src\project\imgloader.cpp.obj.d -o CMakeFiles\main.dir\src\project\imgloader.cpp.obj -c Z:\Dokumenty\ULOHY\PPGSO_projekt\src\project\imgloader.cpp
 
 CMakeFiles/main.dir/src/project/imgloader.cpp.i: cmake_force
@@ -116,14 +101,12 @@ CMakeFiles/main.dir/src/project/imgloader.cpp.s: cmake_force
 # Object files for target main
 main_OBJECTS = \
 "CMakeFiles/main.dir/src/project/apartman.cpp.obj" \
-"CMakeFiles/main.dir/src/project/scene.cpp.obj" \
 "CMakeFiles/main.dir/src/project/imgloader.cpp.obj"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
 main.exe: CMakeFiles/main.dir/src/project/apartman.cpp.obj
-main.exe: CMakeFiles/main.dir/src/project/scene.cpp.obj
 main.exe: CMakeFiles/main.dir/src/project/imgloader.cpp.obj
 main.exe: CMakeFiles/main.dir/build.make
 main.exe: libppgso.a
@@ -134,7 +117,7 @@ main.exe: Z:/Dokumenty/ULOHY/PPGSO_projekt/dependencies/lib/mingw/libassimp.a
 main.exe: CMakeFiles/main.dir/linkLibs.rsp
 main.exe: CMakeFiles/main.dir/objects1.rsp
 main.exe: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=Z:\Dokumenty\ULOHY\PPGSO_projekt\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable main.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=Z:\Dokumenty\ULOHY\PPGSO_projekt\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable main.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\main.dir\link.txt --verbose=$(VERBOSE)
 	"D:\1 effe\JetBrains\CLion 2024.2.1\bin\cmake\win\x64\bin\cmake.exe" -E copy_directory Z:/Dokumenty/ULOHY/PPGSO_projekt/data/ Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug
 

@@ -13,6 +13,11 @@ public:
     BPACK(string const &path, bool gamma = false) : Model(path, gamma) {}
 
     bool update(Scene &scene, float dt) override {
+        rotation.z += dt/5;
+        modelMatrix = glm::translate(glm::mat4(1.0f), position)
+        // * glm::rotate( glm::mat4(1.0f), glm::radians(sin(dt)), glm::vec3(0, 1, 0))
+        * glm::orientate4(rotation)
+        * glm::scale(glm::mat4(1.0f), scale);
         return true;
     }
     void render (Scene &scene) override {

@@ -3,8 +3,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/project/apartman.cpp.obj.d"
   "CMakeFiles/main.dir/src/project/imgloader.cpp.obj"
   "CMakeFiles/main.dir/src/project/imgloader.cpp.obj.d"
-  "CMakeFiles/main.dir/src/project/scene.cpp.obj"
-  "CMakeFiles/main.dir/src/project/scene.cpp.obj.d"
   "libmain.dll.a"
   "main.exe"
   "main.exe.manifest"

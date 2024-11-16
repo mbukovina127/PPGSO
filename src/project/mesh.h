@@ -79,8 +79,7 @@ public:
                 number = std::to_string(heightNr++); // transfer unsigned int to string
 
             // now set the sampler to the correct texture unit
-            shader.setUniform((name+number), static_cast<int>(i));
-            // glUniform1i(glGetUniformLocation(shader.getProgram(), (name + number).c_str()), i);
+            glUniform1i(glGetUniformLocation(shader.getProgram(), (name + number).c_str()), i);
             // and finally bind the texture
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }

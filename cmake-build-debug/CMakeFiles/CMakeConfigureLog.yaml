@@ -578,3 +578,124 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "cmake/FindASSIMP.cmake:196 (try_run)"
+      - "CMakeLists.txt:60 (find_package)"
+    directories:
+      source: "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp"
+      binary: "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake"
+    buildResult:
+      variable: "ASSIMP_VERSION_MAJOR_COMPILE_RESULT"
+      cached: true
+      stdout: |
+        Change Dir: 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): "D:/1 effe/JetBrains/CLion 2024.2.1/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 D:/1EFFE~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_54f10/fast
+        mingw32-make[1]: Entering directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        D:/1EFFE~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_54f10.dir\\build.make CMakeFiles/cmTC_54f10.dir/build
+        mingw32-make[2]: Entering directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_54f10.dir/assimp_version_major.cpp.obj
+        D:\\1EFFE~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE  @CMakeFiles/cmTC_54f10.dir/includes_CXX.rsp  -o CMakeFiles\\cmTC_54f10.dir\\assimp_version_major.cpp.obj -c Z:\\Dokumenty\\ULOHY\\PPGSO_projekt\\cmake-build-debug\\CMakeFiles\\assimp_version_major.cpp
+        Linking CXX executable cmTC_54f10.exe
+        "D:\\1 effe\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_54f10.dir\\link.txt --verbose=1
+        "D:\\1 effe\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_54f10.dir/objects.a
+        D:\\1EFFE~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\ar.exe qc CMakeFiles\\cmTC_54f10.dir/objects.a @CMakeFiles\\cmTC_54f10.dir\\objects1.rsp
+        D:\\1EFFE~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE -Wl,--whole-archive CMakeFiles\\cmTC_54f10.dir/objects.a -Wl,--no-whole-archive -o cmTC_54f10.exe -Wl,--out-implib,libcmTC_54f10.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_54f10.dir\\linkLibs.rsp
+        mingw32-make[2]: Leaving directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        mingw32-make[1]: Leaving directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        
+      exitCode: 0
+    runResult:
+      variable: "ASSIMP_VERSION_MAJOR"
+      cached: true
+      stdout: |
+      stderr: |
+      exitCode: 5
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "cmake/FindASSIMP.cmake:201 (try_run)"
+      - "CMakeLists.txt:60 (find_package)"
+    directories:
+      source: "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp"
+      binary: "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake"
+    buildResult:
+      variable: "ASSIMP_VERSION_MINOR_COMPILE_RESULT"
+      cached: true
+      stdout: |
+        Change Dir: 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): "D:/1 effe/JetBrains/CLion 2024.2.1/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 D:/1EFFE~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_f5233/fast
+        mingw32-make[1]: Entering directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        D:/1EFFE~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_f5233.dir\\build.make CMakeFiles/cmTC_f5233.dir/build
+        mingw32-make[2]: Entering directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_f5233.dir/assimp_version_minor.cpp.obj
+        D:\\1EFFE~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE  @CMakeFiles/cmTC_f5233.dir/includes_CXX.rsp  -o CMakeFiles\\cmTC_f5233.dir\\assimp_version_minor.cpp.obj -c Z:\\Dokumenty\\ULOHY\\PPGSO_projekt\\cmake-build-debug\\CMakeFiles\\assimp_version_minor.cpp
+        Linking CXX executable cmTC_f5233.exe
+        "D:\\1 effe\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_f5233.dir\\link.txt --verbose=1
+        "D:\\1 effe\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_f5233.dir/objects.a
+        D:\\1EFFE~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\ar.exe qc CMakeFiles\\cmTC_f5233.dir/objects.a @CMakeFiles\\cmTC_f5233.dir\\objects1.rsp
+        D:\\1EFFE~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE -Wl,--whole-archive CMakeFiles\\cmTC_f5233.dir/objects.a -Wl,--no-whole-archive -o cmTC_f5233.exe -Wl,--out-implib,libcmTC_f5233.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_f5233.dir\\linkLibs.rsp
+        mingw32-make[2]: Leaving directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        mingw32-make[1]: Leaving directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        
+      exitCode: 0
+    runResult:
+      variable: "ASSIMP_VERSION_MINOR"
+      cached: true
+      stdout: |
+      stderr: |
+      exitCode: 3
+  -
+    kind: "try_run-v1"
+    backtrace:
+      - "cmake/FindASSIMP.cmake:206 (try_run)"
+      - "CMakeLists.txt:60 (find_package)"
+    directories:
+      source: "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp"
+      binary: "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake"
+    buildResult:
+      variable: "ASSIMP_VERSION_REVISION_COMPILE_RESULT"
+      cached: true
+      stdout: |
+        Change Dir: 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): "D:/1 effe/JetBrains/CLion 2024.2.1/bin/cmake/win/x64/bin/cmake.exe" -E env VERBOSE=1 D:/1EFFE~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_7e815/fast
+        mingw32-make[1]: Entering directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        D:/1EFFE~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_7e815.dir\\build.make CMakeFiles/cmTC_7e815.dir/build
+        mingw32-make[2]: Entering directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_7e815.dir/assimp_version_revision.cpp.obj
+        D:\\1EFFE~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE  @CMakeFiles/cmTC_7e815.dir/includes_CXX.rsp  -o CMakeFiles\\cmTC_7e815.dir\\assimp_version_revision.cpp.obj -c Z:\\Dokumenty\\ULOHY\\PPGSO_projekt\\cmake-build-debug\\CMakeFiles\\assimp_version_revision.cpp
+        Linking CXX executable cmTC_7e815.exe
+        "D:\\1 effe\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_7e815.dir\\link.txt --verbose=1
+        "D:\\1 effe\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_7e815.dir/objects.a
+        D:\\1EFFE~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\ar.exe qc CMakeFiles\\cmTC_7e815.dir/objects.a @CMakeFiles\\cmTC_7e815.dir\\objects1.rsp
+        D:\\1EFFE~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE -Wl,--whole-archive CMakeFiles\\cmTC_7e815.dir/objects.a -Wl,--no-whole-archive -o cmTC_7e815.exe -Wl,--out-implib,libcmTC_7e815.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_7e815.dir\\linkLibs.rsp
+        mingw32-make[2]: Leaving directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        mingw32-make[1]: Leaving directory 'Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/CMakeFiles/CMakeTmp'
+        
+      exitCode: 0
+    runResult:
+      variable: "ASSIMP_VERSION_REVISION"
+      cached: true
+      stdout: |
+      stderr: |
+      exitCode: 1565824753
+...

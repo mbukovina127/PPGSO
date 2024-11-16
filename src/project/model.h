@@ -219,6 +219,7 @@ private:
                 texture.path = str.C_Str();
                 textures.push_back(texture);
                 textures_loaded.push_back(texture);  // store it as texture loaded for entire model, to ensure we won't unnecessary load duplicate textures.
+                std::cout << texture.path << std::endl;
             }
         }
         return textures;

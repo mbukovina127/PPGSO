@@ -631,30 +631,6 @@ src/project/imgloader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/project/imgloader.cpp.s
 .PHONY : src/project/imgloader.cpp.s
 
-src/project/scene.obj: src/project/scene.cpp.obj
-.PHONY : src/project/scene.obj
-
-# target to build an object file
-src/project/scene.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/project/scene.cpp.obj
-.PHONY : src/project/scene.cpp.obj
-
-src/project/scene.i: src/project/scene.cpp.i
-.PHONY : src/project/scene.i
-
-# target to preprocess a source file
-src/project/scene.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/project/scene.cpp.i
-.PHONY : src/project/scene.cpp.i
-
-src/project/scene.s: src/project/scene.cpp.s
-.PHONY : src/project/scene.s
-
-# target to generate assembly for a file
-src/project/scene.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/src/project/scene.cpp.s
-.PHONY : src/project/scene.cpp.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -724,9 +700,6 @@ help:
 	@echo ... src/project/imgloader.obj
 	@echo ... src/project/imgloader.i
 	@echo ... src/project/imgloader.s
-	@echo ... src/project/scene.obj
-	@echo ... src/project/scene.i
-	@echo ... src/project/scene.s
 .PHONY : help
 
 

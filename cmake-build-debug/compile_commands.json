@@ -103,12 +103,6 @@
 },
 {
   "directory": "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug",
-  "command": "D:\\1EFFE~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE -DGLEW_STATIC -DGLM_FORCE_RADIANS -DUSE_ASSIMP=1 @CMakeFiles/main.dir/includes_CXX.rsp -fopenmp -g -Wpedantic -Wall -Wno-c++98-compat -Wextra -Wno-sign-conversion -Wno-unused-parameter -std=gnu++14 -fdiagnostics-color=always -o CMakeFiles\\main.dir\\src\\project\\scene.cpp.obj -c Z:\\Dokumenty\\ULOHY\\PPGSO_projekt\\src\\project\\scene.cpp",
-  "file": "Z:/Dokumenty/ULOHY/PPGSO_projekt/src/project/scene.cpp",
-  "output": "CMakeFiles/main.dir/src/project/scene.cpp.obj"
-},
-{
-  "directory": "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug",
   "command": "D:\\1EFFE~1\\JETBRA~1\\CLION2~1.1\\bin\\mingw\\bin\\G__~1.EXE -DGLEW_STATIC -DGLM_FORCE_RADIANS -DUSE_ASSIMP=1 @CMakeFiles/main.dir/includes_CXX.rsp -fopenmp -g -Wpedantic -Wall -Wno-c++98-compat -Wextra -Wno-sign-conversion -Wno-unused-parameter -std=gnu++14 -fdiagnostics-color=always -o CMakeFiles\\main.dir\\src\\project\\imgloader.cpp.obj -c Z:\\Dokumenty\\ULOHY\\PPGSO_projekt\\src\\project\\imgloader.cpp",
   "file": "Z:/Dokumenty/ULOHY/PPGSO_projekt/src/project/imgloader.cpp",
   "output": "CMakeFiles/main.dir/src/project/imgloader.cpp.obj"

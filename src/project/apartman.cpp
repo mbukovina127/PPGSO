@@ -7,6 +7,7 @@
 // - Controls: LEFT, RIGHT, "R" to reset, SPACE to fire
 
 #include <iostream>
+#include <stb_image.h>
 
 #include <../ppgso/ppgso.h>
 
@@ -29,6 +30,8 @@ private:
    * Creating unique smart pointers to objects that are stored in the scene object list
    */
   void initScene() {
+
+    stbi_set_flip_vertically_on_load(true);
     scene.objects.clear();
     // Create a camera
     // auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f); nejde
@@ -37,7 +40,6 @@ private:
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     backpack->scale = {0.5, 0.5, 0.5};
     scene.objects.push_back(std::move(backpack));
-
 
   }
 
@@ -54,10 +56,10 @@ public:
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
 
-    // // Enable polygon culling
-    // glEnable(GL_CULL_FACE);
-    // glFrontFace(GL_CCW);
-    // glCullFace(GL_BACK);
+    // Enable polygon culling
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CCW);
+    glCullFace(GL_BACK);
 
     initScene();
   }
@@ -76,9 +78,13 @@ public:
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+    scene.camera->update();
+
     scene.shader->use();
-    scene.shader->setUniform("ProjectionMatrix", glm::mat4(1.0f));
-    scene.shader->setUniform("ViewMatrix", glm::mat4(1.0f));
+    scene.shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
+    scene.shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
+    scene.update(dt);
     scene.objects[0]->render(scene);
     // Update and render all objects
     // scene.update(dt);
