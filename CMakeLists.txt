@@ -173,7 +173,7 @@ target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)
 add_custom_command(TARGET main POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/ ${CMAKE_CURRENT_BINARY_DIR})
 
-file(COPY "data/" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-install(DIRECTORY data/ DESTINATION .)
+file(COPY "data/_cvika" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+install(DIRECTORY data/_cvika DESTINATION .)
 
 
