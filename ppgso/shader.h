@@ -58,6 +58,14 @@ namespace ppgso {
      */
     void setUniform(const std::string &name, float value) const;
 
+   /*!
+     * Set a floating point value as an input for the shader program variable "name"
+     *
+     * @param name - Name of the shader program uniform input variable.
+     * @param value - Value to set input to.
+     */
+    void setUniform(const std::string &name, GLint value) const;
+
     /*!
      * Set a vector as an input for the shader program variable "name"
      *

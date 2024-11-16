@@ -2,7 +2,7 @@
 # It should find bundled binary dependencies automatically when using MinGW compiler
 # On Linux and Mac the dependencies (glm, glew, glfw) need to be installed manually
 
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
 project(ppgso CXX)
 
 #
@@ -29,9 +29,13 @@ if (MINGW)
   set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "${CMAKE_SOURCE_DIR}/dependencies/lib/mingw")
 elseif (MSVC)
   set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} "${CMAKE_SOURCE_DIR}/dependencies/include/")
-  if(MSVC_VERSION == 1500)
+
+  # Edit by: Samuel Zaprazny
+  # EQUAL & GREATER_EQUAL instead of == & >=
+  # == & >= was causing errors in the latest Visual Studio
+  if(MSVC_VERSION EQUAL 1500)
     set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "${CMAKE_SOURCE_DIR}/dependencies/lib/vc2015")
-  elseif(MSVC_VERSION >= 1900)
+  elseif(MSVC_VERSION GREATER_EQUAL 1900)
     set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "${CMAKE_SOURCE_DIR}/dependencies/lib/vc2019")
   endif()
   set(USE_STRICT_COMPILE_WARNINGS OFF CACHE BOOL "" FORCE)
@@ -50,6 +54,27 @@ find_package(GLFW3 REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(GLM REQUIRED)
 find_package(OpenGL REQUIRED)
+
+# Edit by: Samuel Zaprazny
+# Finding ASSIMP
+find_package(ASSIMP)
+
+if (ASSIMP_FOUND)
+  add_definitions(-DUSE_ASSIMP=1)
+
+  if (WIN32 AND MINGW)
+    set(ASSIMP_ROOT_DIR "${ASSIMP_ROOT_DIR}/bin/mingw/")
+  elseif (WIN32 AND MSVC)
+    set(ASSIMP_ROOT_DIR "${ASSIMP_ROOT_DIR}/bin/vc/")
+  endif ()
+
+  # Installing Assimp binaries to project binary directory if using WINDOWS
+  if (WIN32)
+    file(COPY ${ASSIMP_ROOT_DIR} DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+    install(DIRECTORY ${ASSIMP_ROOT_DIR} DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+  endif ()
+
+endif ()
 
 # Optional packages
 find_package(OpenMP)
@@ -75,22 +100,48 @@ set(PPGSO_SHADER_SRC
 add_resources(shaders ${PPGSO_SHADER_SRC})
 
 # PPGSO library
-add_library(ppgso STATIC
-        ppgso/mesh.cpp
-        ppgso/tiny_obj_loader.cpp
-        ppgso/shader.cpp
-        ppgso/image.cpp
-        ppgso/image_bmp.cpp
-        ppgso/image_raw.cpp
-        ppgso/texture.cpp
-        ppgso/window.cpp
-        )
+if (ASSIMP_FOUND)
+  message(STATUS "Using ASSIMP object loader")
+  add_library(ppgso STATIC
+          ppgso/Mesh_Assimp.cpp
+          ppgso/tiny_obj_loader.cpp
+          ppgso/shader.cpp
+          ppgso/image.cpp
+          ppgso/image_bmp.cpp
+          ppgso/image_raw.cpp
+          ppgso/texture.cpp
+          ppgso/window.cpp
+  )
+else ()
+  message(STATUS "Using TINY object loader")
+  add_library(ppgso STATIC
+          ppgso/Mesh_Tiny.cpp
+          ppgso/tiny_obj_loader.cpp
+          ppgso/shader.cpp
+          ppgso/image.cpp
+          ppgso/image_bmp.cpp
+          ppgso/image_raw.cpp
+          ppgso/texture.cpp
+          ppgso/window.cpp
+  )
+endif ()
 
 # Make sure GLM uses radians and GLEW is a static library
 target_compile_definitions(ppgso PUBLIC -DGLM_FORCE_RADIANS -DGLEW_STATIC)
 
-# Link to GLFW, GLEW and OpenGL
-target_link_libraries(ppgso PUBLIC ${GLFW_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
+# Edit by: Samuel Zaprazny
+# Linking assimp library
+if (ASSIMP_FOUND)
+    # Link to GLFW, GLEW. OpenGL and ASSIMP
+    target_link_libraries(ppgso PUBLIC ${GLFW_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES} ${ASSIMP_LIBRARIES})
+    install(TARGETS ppgso DESTINATION .)
+else ()
+  # Link to GLFW, GLEW. OpenGL without ASSIMP
+  # Using Tiny Obj Loader
+  target_link_libraries(ppgso PUBLIC ${GLFW_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES} ${ASSIMP_LIBRARIES})
+  install(TARGETS ppgso DESTINATION .)
+endif ()
+
 # Pass on include directories
 target_include_directories(ppgso PUBLIC
         ppgso
@@ -98,23 +149,32 @@ target_include_directories(ppgso PUBLIC
         ${GLEW_INCLUDE_DIRS}
         ${GLM_INCLUDE_DIRS}
         ${OPENGL_INCLUDE_DIRS}
+        ${ASSIMP_INCLUDE_DIRS}
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # TARGETS
 #
-file(COPY "data/" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-install(DIRECTORY data/ DESTINATION .)
 
 
 add_executable(main
         src/project/apartman.cpp
         src/project/scene.h
+        src/project/scene.cpp
         src/project/object.h
         src/project/camera.h
-        src/project/scene.cpp
-        src/project/object.cpp)
+        src/project/mesh.h
+        src/project/model.h
+        src/project/test_backpack.h
+        src/project/imgloader.cpp
+        src/project/imgloader.h
+)
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)
 add_custom_command(TARGET main POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/ ${CMAKE_CURRENT_BINARY_DIR})
+
+file(COPY "data/" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+install(DIRECTORY data/ DESTINATION .)
+
+

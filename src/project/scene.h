@@ -8,18 +8,23 @@
 #include <vector>
 
 #include "camera.h"
-#include "object.h"
+#include "model.h"
+#include <shaders/diffuse_frag_glsl.h>
+#include <shaders/diffuse_vert_glsl.h>
+#include <shaders/color_vert_glsl.h>
+#include <shaders/color_frag_glsl.h>
+
+
 
 class Scene {
 public:
+    std::unique_ptr<ppgso::Shader> shader = make_unique<ppgso::Shader>(color_vert_glsl, color_frag_glsl);
+    std::unique_ptr<Camera> camera = std::make_unique<Camera>();
+    std::vector< std::unique_ptr<Model>> objects;
 
     void update(float time);
 
     void render();
-
-    std::unique_ptr<Camera> camera;
-
-    std::vector< std::unique_ptr<Object>> objects;
 
 };
 

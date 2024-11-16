@@ -1,8 +1,8 @@
-# Install script for directory: /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman
+# Install script for directory: Z:/Dokumenty/ULOHY/PPGSO_projekt
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/_install")
+  set(CMAKE_INSTALL_PREFIX "Z:/Dokumenty/ULOHY/PPGSO_projekt/_install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,25 +34,45 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump")
+  set(CMAKE_OBJDUMP "D:/1 effe/JetBrains/CLion 2024.2.1/bin/mingw/bin/objdump.exe")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE DIRECTORY FILES "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/data/")
+  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
+   "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/")
+  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+  file(INSTALL DESTINATION "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug" TYPE DIRECTORY FILES "Z:/Dokumenty/ULOHY/PPGSO_projekt/dependencies/bin/mingw/")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE EXECUTABLE FILES "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/main")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./main" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./main")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE STATIC_LIBRARY FILES "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/libppgso.a")
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  include("Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/ppgso.dir/install-cxx-module-bmi-Debug.cmake" OPTIONAL)
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE EXECUTABLE FILES "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/main.exe")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./main.exe" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./main.exe")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip" -u -r "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./main")
+      execute_process(COMMAND "D:/1 effe/JetBrains/CLion 2024.2.1/bin/mingw/bin/strip.exe" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./main.exe")
     endif()
   endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/CMakeFiles/main.dir/install-cxx-module-bmi-Debug.cmake" OPTIONAL)
+  include("Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/CMakeFiles/main.dir/install-cxx-module-bmi-Debug.cmake" OPTIONAL)
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE DIRECTORY FILES "Z:/Dokumenty/ULOHY/PPGSO_projekt/data/")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -63,5 +83,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

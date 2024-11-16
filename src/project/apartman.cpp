@@ -7,13 +7,12 @@
 // - Controls: LEFT, RIGHT, "R" to reset, SPACE to fire
 
 #include <iostream>
-#include <map>
-#include <list>
 
 #include <../ppgso/ppgso.h>
 
-#include "camera.h"
 #include "scene.h"
+#include "test_backpack.h"
+
 
 const unsigned int WIDTH = 1280;
 const unsigned int HEIGHT = 720;
@@ -33,14 +32,16 @@ private:
     scene.objects.clear();
 
     // Create a camera
-    //auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f); nejde
+    // auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f); nejde
 
-    // Add space background
-    //scene.objects.push_back(std::make_unique<Space>());
+    //add obejcts to scene
+    // auto backpack = std::make_unique<BPACK>("testpack/backpack.obj");
+    // backpack->scale = {0.5, 0.5, 0.5};
+    // scene.objects.push_back(std::move(backpack));
 
-    // Add generator to scene?
 
-    // Add player to the scene?
+
+
   }
 
 public:
@@ -64,44 +65,6 @@ public:
     initScene();
   }
 
-  /*!
-   * Handles pressed key when the window is focused
-   * @param key Key code of the key being pressed/released
-   * @param scanCode Scan code of the key being pressed/released
-   * @param action Action indicating the key state change
-   * @param mods Additional modifiers to consider
-
-  void onKey(int key, int scanCode, int action, int mods) override {
-
-  }
-  */
-
-
-  /*!
-   * Handle cursor position changes
-   * @param cursorX Mouse horizontal position in window coordinates
-   * @param cursorY Mouse vertical position in window coordinates
-
-  void onCursorPos(double cursorX, double cursorY) override {
-    scene.cursor.x = cursorX;
-    scene.cursor.y = cursorY;
-  }
-  */
-
-  /*!
-   * Handle cursor buttons
-   * @param button Mouse button being manipulated
-   * @param action Mouse bu
-   * @param mods
-
-  void onMouseButton(int button, int action, int mods) override {
-
-  }
-  */
-
-  /*!
-   * Window update implementation that will be called automatically from pollEvents
-   */
   void onIdle() override {
     // Track time
     static auto time = (float) glfwGetTime();
@@ -111,14 +74,27 @@ public:
 
     time = (float) glfwGetTime();
 
+    scene.shader->use();
+    scene.shader->setUniform("ProjectionMatrix", glm::mat4(1.0f));
+    scene.shader->setUniform("ViewMatrix", glm::mat4(1.0f));
+    scene.shader->setUniform("ModelMatrix", glm::mat4(1.0f));
+
     // Set gray background
-    glClearColor(.5f, .5f, .5f, 0);
+    glClearColor(.5f, .5f, .5f, 1);
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    glBegin(GL_TRIANGLES);
+    glColor3f(1.0f, 0.0f, 0.0f); // Red
+    glVertex3f(-0.5f, -0.5f, 0.0f);
+    glColor3f(0.0f, 1.0f, 0.0f); // Green
+    glVertex3f(0.5f, -0.5f, 0.0f);
+    glColor3f(0.0f, 0.0f, 1.0f); // Blue
+    glVertex3f(0.0f, 0.5f, 0.0f);
+    glEnd();
     // Update and render all objects
-    scene.update(dt);
-    scene.render();
+    // scene.update(dt);
+    // scene.render();
   }
 };
 

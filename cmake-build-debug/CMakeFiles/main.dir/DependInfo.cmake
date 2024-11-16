@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/apartman.cpp" "CMakeFiles/main.dir/src/project/apartman.cpp.o" "gcc" "CMakeFiles/main.dir/src/project/apartman.cpp.o.d"
-  "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/object.cpp" "CMakeFiles/main.dir/src/project/object.cpp.o" "gcc" "CMakeFiles/main.dir/src/project/object.cpp.o.d"
-  "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/scene.cpp" "CMakeFiles/main.dir/src/project/scene.cpp.o" "gcc" "CMakeFiles/main.dir/src/project/scene.cpp.o.d"
+  "Z:/Dokumenty/ULOHY/PPGSO_projekt/src/project/apartman.cpp" "CMakeFiles/main.dir/src/project/apartman.cpp.obj" "gcc" "CMakeFiles/main.dir/src/project/apartman.cpp.obj.d"
+  "Z:/Dokumenty/ULOHY/PPGSO_projekt/src/project/imgloader.cpp" "CMakeFiles/main.dir/src/project/imgloader.cpp.obj" "gcc" "CMakeFiles/main.dir/src/project/imgloader.cpp.obj.d"
+  "Z:/Dokumenty/ULOHY/PPGSO_projekt/src/project/scene.cpp" "CMakeFiles/main.dir/src/project/scene.cpp.obj" "gcc" "CMakeFiles/main.dir/src/project/scene.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

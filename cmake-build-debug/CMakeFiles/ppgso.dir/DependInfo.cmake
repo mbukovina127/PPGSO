@@ -8,14 +8,14 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/image.cpp" "CMakeFiles/ppgso.dir/ppgso/image.cpp.o" "gcc" "CMakeFiles/ppgso.dir/ppgso/image.cpp.o.d"
-  "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/image_bmp.cpp" "CMakeFiles/ppgso.dir/ppgso/image_bmp.cpp.o" "gcc" "CMakeFiles/ppgso.dir/ppgso/image_bmp.cpp.o.d"
-  "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/image_raw.cpp" "CMakeFiles/ppgso.dir/ppgso/image_raw.cpp.o" "gcc" "CMakeFiles/ppgso.dir/ppgso/image_raw.cpp.o.d"
-  "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/mesh.cpp" "CMakeFiles/ppgso.dir/ppgso/mesh.cpp.o" "gcc" "CMakeFiles/ppgso.dir/ppgso/mesh.cpp.o.d"
-  "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/shader.cpp" "CMakeFiles/ppgso.dir/ppgso/shader.cpp.o" "gcc" "CMakeFiles/ppgso.dir/ppgso/shader.cpp.o.d"
-  "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/texture.cpp" "CMakeFiles/ppgso.dir/ppgso/texture.cpp.o" "gcc" "CMakeFiles/ppgso.dir/ppgso/texture.cpp.o.d"
-  "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/tiny_obj_loader.cpp" "CMakeFiles/ppgso.dir/ppgso/tiny_obj_loader.cpp.o" "gcc" "CMakeFiles/ppgso.dir/ppgso/tiny_obj_loader.cpp.o.d"
-  "/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/window.cpp" "CMakeFiles/ppgso.dir/ppgso/window.cpp.o" "gcc" "CMakeFiles/ppgso.dir/ppgso/window.cpp.o.d"
+  "Z:/Dokumenty/ULOHY/PPGSO_projekt/ppgso/Mesh_Assimp.cpp" "CMakeFiles/ppgso.dir/ppgso/Mesh_Assimp.cpp.obj" "gcc" "CMakeFiles/ppgso.dir/ppgso/Mesh_Assimp.cpp.obj.d"
+  "Z:/Dokumenty/ULOHY/PPGSO_projekt/ppgso/image.cpp" "CMakeFiles/ppgso.dir/ppgso/image.cpp.obj" "gcc" "CMakeFiles/ppgso.dir/ppgso/image.cpp.obj.d"
+  "Z:/Dokumenty/ULOHY/PPGSO_projekt/ppgso/image_bmp.cpp" "CMakeFiles/ppgso.dir/ppgso/image_bmp.cpp.obj" "gcc" "CMakeFiles/ppgso.dir/ppgso/image_bmp.cpp.obj.d"
+  "Z:/Dokumenty/ULOHY/PPGSO_projekt/ppgso/image_raw.cpp" "CMakeFiles/ppgso.dir/ppgso/image_raw.cpp.obj" "gcc" "CMakeFiles/ppgso.dir/ppgso/image_raw.cpp.obj.d"
+  "Z:/Dokumenty/ULOHY/PPGSO_projekt/ppgso/shader.cpp" "CMakeFiles/ppgso.dir/ppgso/shader.cpp.obj" "gcc" "CMakeFiles/ppgso.dir/ppgso/shader.cpp.obj.d"
+  "Z:/Dokumenty/ULOHY/PPGSO_projekt/ppgso/texture.cpp" "CMakeFiles/ppgso.dir/ppgso/texture.cpp.obj" "gcc" "CMakeFiles/ppgso.dir/ppgso/texture.cpp.obj.d"
+  "Z:/Dokumenty/ULOHY/PPGSO_projekt/ppgso/tiny_obj_loader.cpp" "CMakeFiles/ppgso.dir/ppgso/tiny_obj_loader.cpp.obj" "gcc" "CMakeFiles/ppgso.dir/ppgso/tiny_obj_loader.cpp.obj.d"
+  "Z:/Dokumenty/ULOHY/PPGSO_projekt/ppgso/window.cpp" "CMakeFiles/ppgso.dir/ppgso/window.cpp.obj" "gcc" "CMakeFiles/ppgso.dir/ppgso/window.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

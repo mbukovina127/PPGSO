@@ -1,11 +1,13 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/main.dir/src/project/apartman.cpp.o"
-  "CMakeFiles/main.dir/src/project/apartman.cpp.o.d"
-  "CMakeFiles/main.dir/src/project/object.cpp.o"
-  "CMakeFiles/main.dir/src/project/object.cpp.o.d"
-  "CMakeFiles/main.dir/src/project/scene.cpp.o"
-  "CMakeFiles/main.dir/src/project/scene.cpp.o.d"
-  "main"
+  "CMakeFiles/main.dir/src/project/apartman.cpp.obj"
+  "CMakeFiles/main.dir/src/project/apartman.cpp.obj.d"
+  "CMakeFiles/main.dir/src/project/imgloader.cpp.obj"
+  "CMakeFiles/main.dir/src/project/imgloader.cpp.obj.d"
+  "CMakeFiles/main.dir/src/project/scene.cpp.obj"
+  "CMakeFiles/main.dir/src/project/scene.cpp.obj.d"
+  "libmain.dll.a"
+  "main.exe"
+  "main.exe.manifest"
   "main.pdb"
 )
 
