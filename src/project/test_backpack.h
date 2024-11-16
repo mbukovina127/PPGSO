@@ -6,26 +6,27 @@
 #define TEST_BACKPACK_H
 #include "model.h"
 #include "scene.h"
+#include <ppgso/shader.h>
 
 class BPACK : public Model {
 public:
     BPACK(string const &path, bool gamma = false) : Model(path, gamma) {}
+
     bool update(Scene &scene, float dt) override {
         return true;
     }
-    void render (Scene &scene) override
-    {
-        // Set up light
-        // shader->setUniform("LightDirection", scene.lightDirection);
+    void render (Scene &scene) override {
+        // Generate the model matrix from position, rotation, and scale
+        generateModelMatrix();
 
-        // use camera
-        // scene.shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-        // scene.shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
+        // Use a shader program (assuming scene has a shader or it's passed in some other way)
 
-        // render mesh
+        // Pass the model matrix to the shader
+        scene.shader->use();
         scene.shader->setUniform("ModelMatrix", modelMatrix);
 
-        for (auto mesh: meshes) {
+        // Render each mesh
+        for (auto &mesh : meshes) {
             mesh.render(*scene.shader);
         }
     }

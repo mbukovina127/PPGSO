@@ -6,14 +6,14 @@ uniform sampler2D texture_diffuse3;
 uniform sampler2D texture_specular1;
 uniform sampler2D texture_specular2;
 
-// Direction of light
-uniform vec3 LightDirection;
-
-// (optional) Transparency
-uniform float Transparency;
-
-// (optional) Texture offset
-uniform vec2 TextureOffset;
+//// Direction of light
+//uniform vec3 LightDirection;
+//
+//// (optional) Transparency
+//uniform float Transparency;
+//
+//// (optional) Texture offset
+//uniform vec2 TextureOffset;
 
 // The vertex shader will feed this input
 in vec2 texCoord;
@@ -26,10 +26,10 @@ out vec4 FragmentColor;
 
 void main() {
   // Compute diffuse lighting
-  float diffuse = max(dot(normal, vec4(normalize(LightDirection), 1.0f)), 0.0f);
+//  float diffuse = max(dot(normal, vec4(normalize(LightDirection), 1.0f)), 0.0f);
 
   // Lookup the color in Texture on coordinates given by texCoord
   // NOTE: Texture coordinate is inverted vertically for compatibility with OBJ
-  FragmentColor = texture(texture_diffuse1, vec2(texCoord.x, 1.0 - texCoord.y) + TextureOffset) * diffuse;
-  FragmentColor.a = Transparency;
+  FragColor = texture(texture_diffuse1, TexCoords);
+//  FragmentColor.a = Transparency;
 }

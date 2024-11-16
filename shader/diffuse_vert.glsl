@@ -1,9 +1,8 @@
 #version 330
 // The inputs will be fed by the vertex buffer objects
 layout(location = 0) in vec3 Position;
-layout(location = 1) in vec2 TexCoord;
-layout(location = 2) in vec3 Normal;
-
+layout(location = 1) in vec3 Normal;
+layout(location = 2) in vec2 TexCoord;
 // Matrices as program attributes
 uniform mat4 ProjectionMatrix;
 uniform mat4 ViewMatrix;

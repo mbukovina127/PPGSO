@@ -14,9 +14,6 @@
 # EXTERNAL cache entries
 ########################
 
-//The directory containing a CMake configuration file for ASSIMP.
-ASSIMP_DIR:PATH=ASSIMP_DIR-NOTFOUND
-
 //Path to a file.
 ASSIMP_INCLUDE_DIR:PATH=Z:/Dokumenty/ULOHY/PPGSO_projekt/dependencies/include
 

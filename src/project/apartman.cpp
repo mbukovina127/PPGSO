@@ -30,16 +30,13 @@ private:
    */
   void initScene() {
     scene.objects.clear();
-
     // Create a camera
     // auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f); nejde
 
     //add obejcts to scene
-    // auto backpack = std::make_unique<BPACK>("testpack/backpack.obj");
-    // backpack->scale = {0.5, 0.5, 0.5};
-    // scene.objects.push_back(std::move(backpack));
-
-
+    auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
+    backpack->scale = {0.5, 0.5, 0.5};
+    scene.objects.push_back(std::move(backpack));
 
 
   }
@@ -50,17 +47,17 @@ public:
    */
   SceneWindow() : Window{"apartman", WIDTH, HEIGHT} {
     //hideCursor();
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
+    // glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
 
     // Initialize OpenGL state
     // Enable Z-buffer
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
 
-    // Enable polygon culling
-    glEnable(GL_CULL_FACE);
-    glFrontFace(GL_CCW);
-    glCullFace(GL_BACK);
+    // // Enable polygon culling
+    // glEnable(GL_CULL_FACE);
+    // glFrontFace(GL_CCW);
+    // glCullFace(GL_BACK);
 
     initScene();
   }
@@ -74,24 +71,15 @@ public:
 
     time = (float) glfwGetTime();
 
-    scene.shader->use();
-    scene.shader->setUniform("ProjectionMatrix", glm::mat4(1.0f));
-    scene.shader->setUniform("ViewMatrix", glm::mat4(1.0f));
-    scene.shader->setUniform("ModelMatrix", glm::mat4(1.0f));
-
     // Set gray background
     glClearColor(.5f, .5f, .5f, 1);
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glBegin(GL_TRIANGLES);
-    glColor3f(1.0f, 0.0f, 0.0f); // Red
-    glVertex3f(-0.5f, -0.5f, 0.0f);
-    glColor3f(0.0f, 1.0f, 0.0f); // Green
-    glVertex3f(0.5f, -0.5f, 0.0f);
-    glColor3f(0.0f, 0.0f, 1.0f); // Blue
-    glVertex3f(0.0f, 0.5f, 0.0f);
-    glEnd();
+    scene.shader->use();
+    scene.shader->setUniform("ProjectionMatrix", glm::mat4(1.0f));
+    scene.shader->setUniform("ViewMatrix", glm::mat4(1.0f));
+    scene.objects[0]->render(scene);
     // Update and render all objects
     // scene.update(dt);
     // scene.render();
