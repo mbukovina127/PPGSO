@@ -17,6 +17,6 @@ FIND_PATH Z:/Dokumenty/ULOHY/PPGSO_projekt/dependencies/include
 -- Found OpenMP_CXX: -fopenmp (found version "4.5")
 -- Found OpenMP: TRUE (found version "4.5")
 -- Using ASSIMP object loader
--- Configuring done (4.8s)
+-- Configuring done (5.2s)
 -- Generating done (0.0s)
 -- Build files have been written to: Z:/Dokumenty/ULOHY/PPGSO_projekt/cmake-build-debug
