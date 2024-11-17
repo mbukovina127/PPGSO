@@ -161,13 +161,13 @@ target_include_directories(ppgso PUBLIC
 add_executable(main
         src/project/apartman.cpp
         src/project/scene.h
-        src/project/object.h
         src/project/camera.h
         src/project/mesh.h
         src/project/model.h
         src/project/test_backpack.h
         src/project/imgloader.cpp
         src/project/imgloader.h
+        src/project/chair.h
 )
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)

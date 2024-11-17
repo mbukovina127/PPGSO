@@ -39,13 +39,6 @@ public:
     string directory;
     bool gammaCorrection;
 
-    //my parameters
-    glm::vec3 position{0,0,0};
-    glm::vec3 rotation{0,0,0};
-    glm::vec3 scale{1,1,1};
-    glm::mat4 modelMatrix{1};
-
-
     // constructor, expects a filepath to a 3D model.
     Model(string const &path, bool gamma = false) : gammaCorrection(gamma)
     {
@@ -53,16 +46,49 @@ public:
     }
     virtual ~Model() = default;
 
+    //my parameters
+    glm::vec3 position{0,0,0};
+    glm::vec3 rotation{0,0,0};
+    glm::vec3 scale{1,1,1};
+    glm::mat4 modelMatrix{1};
+
+    Model* parent = nullptr;
+    std::vector<std::unique_ptr<Model>> children;
+
+    // prida objekt ako dieta a nastavy rodica
+    void addChild(std::unique_ptr<Model> child) {
+        child->parent = this;
+        this->children.push_back(std::move(child));
+    }
+
     virtual bool update(Scene &scene, float dt) = 0;
 
     // draws the model, and thus all its meshes
     virtual void render(Scene &scene) = 0;
 
+    // glm::vec3 getPosition(const Model &node) {
+    //     if (node.parent == nullptr)
+    //         return node.position;
+    //     return node.position + getPosition(*node.parent);
+    // }
+    // glm::vec3 getRotation(const Model &node) {
+    //     if (node.parent == nullptr)
+    //         return node.rotation;
+    //     return node.rotation + getRotation(*node.parent);
+    // }
+    // glm::vec3 getScale(const Model &node) {
+    //     if (node.parent == nullptr)
+    //         return node.scale;
+    //     return node.scale + getScale(*node.parent);
+    // }
+
 
     void generateModelMatrix() {
-        modelMatrix = glm::translate(glm::mat4(1.0f), position)
-                    * glm::orientate4(rotation)
-                    * glm::scale(glm::mat4(1.0f), scale);
+        auto parentMatrix = parent ? parent->modelMatrix : glm::mat4(1.0f);
+        modelMatrix = parentMatrix
+                    * glm::translate(glm::mat4(1.0f), position)
+                    * glm::scale(glm::mat4(1.0f), scale)
+                    * glm::orientate4(rotation);
     }
 
 
@@ -187,8 +213,30 @@ private:
         std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
         textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
+        auto mat = loadMaterial(material);
+
         // return a mesh object created from the extracted mesh data
-        return Mesh(vertices, indices, textures);
+        return Mesh(vertices, indices, textures, mat);
+    }
+    // loading mtl materials
+    Material loadMaterial(aiMaterial* mat) {
+        Material material;
+        aiColor3D color(0.f, 0.f, 0.f);
+        float shininess;
+
+        mat->Get(AI_MATKEY_COLOR_DIFFUSE, color);
+        material.diffuse = glm::vec3(color.r, color.b, color.g);
+        // dont need these for now
+        mat->Get(AI_MATKEY_COLOR_AMBIENT, color);
+        material.ambient = glm::vec3(color.r, color.b, color.g);
+
+        mat->Get(AI_MATKEY_COLOR_SPECULAR, color);
+        material.specular = glm::vec3(color.r, color.b, color.g);
+
+        mat->Get(AI_MATKEY_SHININESS, shininess);
+        material.shine = shininess;
+
+        return material;
     }
 
     // checks all material textures of a given type and loads the textures if they're not loaded yet.

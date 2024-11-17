@@ -11,6 +11,7 @@
 
 #include <../ppgso/ppgso.h>
 
+#include "chair.h"
 #include "scene.h"
 #include "test_backpack.h"
 
@@ -30,15 +31,19 @@ private:
    * Creating unique smart pointers to objects that are stored in the scene object list
    */
   void initScene() {
-    scene.objects.clear();
+    scene.models.clear();
     // Create a camera
     // auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f); nejde
 
     //add obejcts to scene
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     backpack->scale = {0.5, 0.5, 0.5};
-    scene.objects.push_back(std::move(backpack));
+    auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
+    chair->position = {1,-1,1};
 
+    backpack->addChild(std::move(chair));
+
+    scene.models.push_back(std::move(backpack));
   }
 
 public:
@@ -79,11 +84,8 @@ public:
 
     scene.camera->update();
 
-    scene.shader->use();
-    scene.shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-    scene.shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
     scene.update(dt);
-    scene.objects[0]->render(scene);
+    scene.render();
     // Update and render all objects
     // scene.update(dt);
     // scene.render();

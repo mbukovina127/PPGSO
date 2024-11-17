@@ -29,6 +29,12 @@ struct Vertex {
 	//weights from each bone
 	float m_Weights[MAX_BONE_INFLUENCE];
 };
+struct Material {
+    glm::vec3 diffuse;
+    glm::vec3 ambient;
+    glm::vec3 specular;
+    float shine;
+};
 
 struct Texture {
     unsigned int id;
@@ -42,15 +48,16 @@ public:
     vector<Vertex>       vertices;
     vector<unsigned int> indices;
     vector<Texture>      textures;
+    Material             material;
     unsigned int VAO;
 
     // constructor
-    Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures)
+    Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material)
     {
         this->vertices = vertices;
         this->indices = indices;
         this->textures = textures;
-
+        this->material = material;
         // now that we have all the required data, set the vertex buffers and its attribute pointers.
         setupMesh();
     }
@@ -63,6 +70,10 @@ public:
         unsigned int specularNr = 1;
         unsigned int normalNr   = 1;
         unsigned int heightNr   = 1;
+
+        // setting unifrom to 0 in case the mesh doesnt have texture
+        shader.setUniform("using_textures", 0);
+
         for(unsigned int i = 0; i < textures.size(); i++)
         {
             glActiveTexture(GL_TEXTURE0 + i); // active proper texture unit before binding
@@ -71,19 +82,26 @@ public:
             string name = textures[i].type;
             if(name == "texture_diffuse")
                 number = std::to_string(diffuseNr++);
-            else if(name == "texture_specular")
-                number = std::to_string(specularNr++); // transfer unsigned int to string
-            else if(name == "texture_normal")
-                number = std::to_string(normalNr++); // transfer unsigned int to string
-            else if(name == "texture_height")
-                number = std::to_string(heightNr++); // transfer unsigned int to string
+            else
+                continue;
+            // else if(name == "texture_specular")
+            //     number = std::to_string(specularNr++); // transfer unsigned int to string
+            // else if(name == "texture_normal")
+            //     number = std::to_string(normalNr++); // transfer unsigned int to string
+            // else if(name == "texture_height")
+            //     number = std::to_string(heightNr++); // transfer unsigned int to string
 
             // now set the sampler to the correct texture unit
-            glUniform1i(glGetUniformLocation(shader.getProgram(), (name + number).c_str()), i);
+            auto loc = glGetUniformLocation(shader.getProgram(), (name + number).c_str());
+            if (loc != -1) shader.setUniform("using_textures", 1);
+            glUniform1i(loc, i);
             // and finally bind the texture
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }
 
+
+        // add material to the mesh / shader
+        shader.setUniform("material_diffuse", material.diffuse);
         // draw mesh
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
