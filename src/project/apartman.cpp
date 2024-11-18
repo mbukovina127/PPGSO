@@ -11,9 +11,10 @@
 
 #include <../ppgso/ppgso.h>
 
-#include "chair.h"
+#include "models/chair.h"
 #include "scene.h"
-#include "test_backpack.h"
+#include "models/room.h"
+#include "models/test_backpack.h"
 
 
 const unsigned int WIDTH = 1280;
@@ -43,6 +44,9 @@ private:
 
     backpack->addChild(std::move(chair));
 
+    auto room = std::make_unique<Room>("../data/room/room.obj");
+    room->position.y = -2;
+    scene.models.push_back(std::move(room));
     scene.models.push_back(std::move(backpack));
   }
 

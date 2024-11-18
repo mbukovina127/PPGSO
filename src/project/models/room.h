@@ -1,24 +1,19 @@
 //
-// Created by marko on 17. 11. 2024.
+// Created by marko on 18. 11. 2024.
 //
 
-#ifndef CHAIR_H
-#define CHAIR_H
-#include "scene.h"
-#include "model.h"
+#ifndef ROOM_H
+#define ROOM_H
+
+#include "../scene.h"
+#include "../model.h"
 #include <ppgso/shader.h>
 
-class Chair : public Model {
+class Room : public Model {
 public:
-    Chair(string const &path, bool gamma = false) : Model(path, gamma) {}
-    float fulltime = 0;
+    Room(string const &path, bool gamma = false) : Model(path, gamma) {}
+
     bool update(Scene &scene, float dt) override {
-        fulltime += dt;
-        position.x = sin(fulltime);
-        modelMatrix = glm::translate(glm::mat4(1.0f), position)
-        // * glm::rotate( glm::mat4(1.0f), glm::radians(sin(dt)), glm::vec3(0, 1, 0))
-        * glm::orientate4(rotation)
-        * glm::scale(glm::mat4(1.0f), scale);
         return true;
     }
 
@@ -37,6 +32,4 @@ public:
         }
     }
 };
-
-
-#endif //CHAIR_H
+#endif //ROOM_H

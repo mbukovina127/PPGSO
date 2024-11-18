@@ -4,8 +4,8 @@
 
 #ifndef TEST_BACKPACK_H
 #define TEST_BACKPACK_H
-#include "model.h"
-#include "scene.h"
+#include "../model.h"
+#include "../scene.h"
 #include <ppgso/shader.h>
 
 class BPACK : public Model {
@@ -14,10 +14,6 @@ public:
 
     bool update(Scene &scene, float dt) override {
         rotation.z += dt/5;
-        modelMatrix = glm::translate(glm::mat4(1.0f), position)
-        // * glm::rotate( glm::mat4(1.0f), glm::radians(sin(dt)), glm::vec3(0, 1, 0))
-        * glm::orientate4(rotation)
-        * glm::scale(glm::mat4(1.0f), scale);
         return true;
     }
     void render (Scene &scene) override {
