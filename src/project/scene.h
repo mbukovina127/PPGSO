@@ -13,7 +13,7 @@
 class Scene {
 public:
     std::unique_ptr<ppgso::Shader> shader = make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
-    std::unique_ptr<Camera> camera = std::make_unique<Camera>();
+    std::unique_ptr<Camera> camera;
     std::vector<std::unique_ptr<Model>> models;
 
     void update(float time) {

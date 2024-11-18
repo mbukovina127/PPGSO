@@ -13,6 +13,7 @@
 
 #include "models/chair.h"
 #include "scene.h"
+#include "camera.h"
 #include "models/room.h"
 #include "models/test_backpack.h"
 
@@ -34,20 +35,23 @@ private:
   void initScene() {
     scene.models.clear();
     // Create a camera
-    // auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f); nejde
+    scene.camera = std::make_unique<Camera>();
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    //add obejcts to scene
+    //LODING OBJECTS
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
-    backpack->scale = {0.5, 0.5, 0.5};
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
-    chair->position = {1,-1,1};
-
-    backpack->addChild(std::move(chair));
-
     auto room = std::make_unique<Room>("../data/room/room.obj");
-    room->position.y = -2;
+    //positioning
+    backpack->scale = {0.5, 0.5, 0.5};
+    chair->position = {1,-1,1};
+    room->addChild(std::move(chair));
+    room->addChild(std::move(backpack));
+
+    //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));
-    scene.models.push_back(std::move(backpack));
   }
 
 public:
@@ -80,6 +84,9 @@ public:
 
     time = (float) glfwGetTime();
 
+    // process input
+    processInput(this->window, dt);
+
     // Set gray background
     glClearColor(.5f, .5f, .5f, 1);
     // Clear depth and color buffers
@@ -93,6 +100,22 @@ public:
     // Update and render all objects
     // scene.update(dt);
     // scene.render();
+  }
+
+  void processInput(GLFWwindow *window, float dt)
+  {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+      glfwSetWindowShouldClose(window, true);
+
+    float cameraSpeed = static_cast<float>(2.5 * dt);
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+      cameraPostion += cameraSpeed * cameraFront;
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+      cameraPostion -= cameraSpeed * cameraFront;
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+      cameraPostion -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+      cameraPostion += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
   }
 };
 

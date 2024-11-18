@@ -12,20 +12,13 @@
 #include <assimp/postprocess.h>
 
 #include <src/project/mesh.h>
-#include <ppgso/shader.h>
 
 #include <string>
-#include <fstream>
 #include <sstream>
 #include <iostream>
-#include <map>
 #include <vector>
-#include <shaders/diffuse_frag_glsl.h>
-#include <shaders/diffuse_vert_glsl.h>
 
 #include "imgloader.h"
-#include "scene.h"
-#include "scene.h"
 
 class Scene;
 using namespace std;
