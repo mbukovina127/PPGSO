@@ -99,9 +99,12 @@ public:
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }
 
-
+        // TODO: possible failure point
         // add material to the mesh / shader
-        shader.setUniform("material_diffuse", material.diffuse);
+        shader.setUniform("material.diffuse",  material.diffuse);
+        shader.setUniform("material.ambient",  material.ambient);
+        shader.setUniform("material.specular", material.specular);
+        shader.setUniform("material.shininess", material.shine);
         // draw mesh
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);

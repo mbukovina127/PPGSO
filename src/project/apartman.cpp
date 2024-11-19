@@ -51,10 +51,11 @@ private:
     chair->position = {1,-1,1};
     // room->addChild(std::move(chair));
     // room->addChild(std::move(backpack));
-    room->addChild(std::move(lamp));
+    // room->addChild(std::move(lamp));
 
     //ADDING THEM TO THE SCENE
-    scene.models.push_back(std::move(room));
+    // scene.models.push_back(std::move(room));
+    scene.models.push_back(std::move(chair));
   }
 
 public:
