@@ -14,6 +14,7 @@
 #include "models/chair.h"
 #include "scene.h"
 #include "camera.h"
+#include "models/lamp.h"
 #include "models/room.h"
 #include "models/test_backpack.h"
 
@@ -44,11 +45,13 @@ private:
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
     auto room = std::make_unique<Room>("../data/room/room.obj");
+    auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
     //positioning
     backpack->scale = {0.5, 0.5, 0.5};
     chair->position = {1,-1,1};
-    room->addChild(std::move(chair));
-    room->addChild(std::move(backpack));
+    // room->addChild(std::move(chair));
+    // room->addChild(std::move(backpack));
+    room->addChild(std::move(lamp));
 
     //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));

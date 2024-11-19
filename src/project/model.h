@@ -32,6 +32,14 @@ public:
     string directory;
     bool gammaCorrection;
 
+    glm::vec3 position{0,0,0};
+    glm::vec3 rotation{0,0,0};
+    glm::vec3 scale{1,1,1};
+    glm::mat4 modelMatrix{1};
+
+    Model* parent = nullptr;
+    std::vector<std::unique_ptr<Model>> children;
+
     // constructor, expects a filepath to a 3D model.
     Model(string const &path, bool gamma = false) : gammaCorrection(gamma)
     {
@@ -40,13 +48,6 @@ public:
     virtual ~Model() = default;
 
     //my parameters
-    glm::vec3 position{0,0,0};
-    glm::vec3 rotation{0,0,0};
-    glm::vec3 scale{1,1,1};
-    glm::mat4 modelMatrix{1};
-
-    Model* parent = nullptr;
-    std::vector<std::unique_ptr<Model>> children;
 
     // prida objekt ako dieta a nastavy rodica
     void addChild(std::unique_ptr<Model> child) {
