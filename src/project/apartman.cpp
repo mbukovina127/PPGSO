@@ -7,7 +7,7 @@
 // - Controls: LEFT, RIGHT, "R" to reset, SPACE to fire
 
 #include <iostream>
-#include <stb_image.h>
+#include <dependencies/include/stb_image.h>
 
 #include <../ppgso/ppgso.h>
 

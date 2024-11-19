@@ -5,8 +5,6 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 #include <ppgso.h>
-#include <glm/detail/type_mat.hpp>
-#include <glm/detail/type_vec.hpp>
 
 glm::vec3 cameraPostion{2,0,2};
 glm::vec3 cameraFront{0,0,0};
