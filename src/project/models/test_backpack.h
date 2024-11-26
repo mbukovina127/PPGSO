@@ -13,7 +13,9 @@ public:
     BPACK(string const &path, bool gamma = false) : Model(path, gamma) {}
 
     bool update(Scene &scene, float dt) override {
-        rotation.z += dt/5;
+        for (auto &child : children) {
+            child->update(scene, dt);
+        }
         return true;
     }
     void render (Scene &scene) override {

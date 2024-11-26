@@ -15,7 +15,15 @@ public:
 
     bool update(Scene &scene, float dt) override {
         fulltime += dt;
-        position.x = sin(fulltime);
+
+        if (fulltime > 10 && fulltime < 20) {
+            rotation.z += dt/5;
+        }
+
+        for (auto &child : children) {
+            child->update(scene, dt);
+        }
+
         return true;
     }
 

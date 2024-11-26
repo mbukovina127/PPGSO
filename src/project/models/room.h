@@ -14,6 +14,10 @@ public:
     Room(string const &path, bool gamma = false) : Model(path, gamma) {}
 
     bool update(Scene &scene, float dt) override {
+        for (auto &child : children) {
+            child->update(scene, dt);
+        }
+
         return true;
     }
 
