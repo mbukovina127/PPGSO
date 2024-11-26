@@ -44,15 +44,15 @@ private:
     //LODING OBJECTS
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
-    auto room = std::make_unique<Room>("../data/room/room.obj");
+    auto room = std::make_unique<Room>("../data/room2/room.obj");
     auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
     auto laptop = std::make_unique<Lamp>("../data/laptop/laptop.obj");
     //positioning
     backpack->scale = {0.2, 0.2, 0.2};
     backpack->position = {0.0, 0.85, 0.0};
     backpack->rotation = {-0.3, 0.0, 0.0};
-    chair->position = {-1,0,-1.2};
-    chair->scale = {1.5, 1.5, 1.5};
+    chair->position = {0.2,0,-0.5};
+    chair->scale = {1.2, 1.2, 1.2};
     laptop->position = {0.4, 0.1, 0};
 
     room->addChild(std::move(lamp));
