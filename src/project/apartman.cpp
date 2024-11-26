@@ -11,6 +11,7 @@
 
 #include <../ppgso/ppgso.h>
 
+#include "axis.h"
 #include "models/chair.h"
 #include "scene.h"
 #include "camera.h"
@@ -41,6 +42,10 @@ private:
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
+    // Add colorful axes
+    auto axes = std::make_unique<Axis>();
+
+
     //LODING OBJECTS
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
@@ -61,6 +66,7 @@ private:
     room->addChild(std::move(laptop));
     //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));
+    scene.models.push_back(std::move(axes));
   }
 
 public:
