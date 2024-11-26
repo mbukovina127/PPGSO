@@ -170,6 +170,7 @@ add_executable(main
         src/project/models/chair.h
         src/project/models/room.h
         src/project/models/lamp.h
+        src/project/models/laptop.h
 )
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)

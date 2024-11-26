@@ -46,15 +46,19 @@ private:
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
     auto room = std::make_unique<Room>("../data/room/room.obj");
     auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
+    auto laptop = std::make_unique<Lamp>("../data/laptop/laptop.obj");
     //positioning
     backpack->scale = {0.2, 0.2, 0.2};
     backpack->position = {0.0, 0.85, 0.0};
     backpack->rotation = {-0.3, 0.0, 0.0};
     chair->position = {-1,0,-1.2};
     chair->scale = {1.5, 1.5, 1.5};
+    laptop->position = {0.4, 0.1, 0};
+
     room->addChild(std::move(lamp));
     chair->addChild(std::move(backpack));
     room->addChild(std::move(chair));
+    room->addChild(std::move(laptop));
     //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));
   }
