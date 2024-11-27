@@ -11,7 +11,6 @@
 
 #include <../ppgso/ppgso.h>
 
-#include "axis.h"
 #include "models/chair.h"
 #include "scene.h"
 #include "camera.h"
@@ -42,31 +41,21 @@ private:
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    // Add colorful axes
-    auto axes = std::make_unique<Axis>();
-
-
     //LODING OBJECTS
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
-    auto room = std::make_unique<Room>("../data/room2/room.obj");
-    auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
-    auto laptop = std::make_unique<Lamp>("../data/laptop/laptop.obj");
+    auto room = std::make_unique<Room>("../data/room/room.obj");
+    // auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
     //positioning
-    backpack->scale = {0.2, 0.2, 0.2};
-    backpack->position = {0.0, 0.85, 0.0};
-    backpack->rotation = {-0.3, 0.0, 0.0};
-    chair->position = {0.2,0,-0.5};
-    chair->scale = {1.2, 1.2, 1.2};
-    laptop->position = {0.4, 0.1, 0};
+    chair->position.x = 5;
+    chair->scale = glm::vec3{3};
+    backpack->addChild(std::move(chair));
+    // room->addChild(std::move(backpack));
+    // room->addChild(std::move(lamp));
 
-    room->addChild(std::move(lamp));
-    chair->addChild(std::move(backpack));
-    room->addChild(std::move(chair));
-    room->addChild(std::move(laptop));
     //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));
-    scene.models.push_back(std::move(axes));
+    scene.models.push_back(std::move(backpack));
   }
 
 public:
