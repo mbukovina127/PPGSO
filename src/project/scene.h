@@ -42,10 +42,22 @@ public:
         shader->setUniform("ViewMatrix", camera->viewMatrix);
         // need to set camera position / light position / color /
         shader->setUniform("viewPos", cameraPostion);
-        shader->setUniform("light.position", {2,2,2});
-        shader->setUniform("light.base.color", {1,1,1});
-        shader->setUniform("light.base.ambI", .6f);
-        shader->setUniform("light.base.difI", 1.0f);
+
+        // Set lights
+        int numLights = 2;
+        shader->setUniform("numDirL", numLights);
+
+        // Light 1
+        shader->setUniform("DLIGHTS[0].direction", glm::vec3(2, 2, 2));
+        shader->setUniform("DLIGHTS[0].base.color", glm::vec3(1, 1, 1));
+        shader->setUniform("DLIGHTS[0].base.ambI", 0.2f);
+        shader->setUniform("DLIGHTS[0].base.difI", 1.0f);
+
+        // Light 2
+        shader->setUniform("DLIGHTS[1].direction", glm::vec3(-2, 3, -2));
+        shader->setUniform("DLIGHTS[1].base.color", glm::vec3(1, 0, 0));
+        shader->setUniform("DLIGHTS[1].base.ambI", 0.1f);
+        shader->setUniform("DLIGHTS[1].base.difI", 0.8f);
         for ( auto& model : models )
             model->render(*this);
     }

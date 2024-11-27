@@ -13,17 +13,17 @@ struct BaseLight {
   float difI;
 };
 
-//struct DirectionalLight {
-//  BaseLight base;
-//  vec3 direction;
-//};
+struct DirectionalLight {
+  BaseLight base;
+  vec3 direction;
+};
 
 struct PointLight {
   BaseLight base;
   vec3 position;
-//  float constant;
-//  float linear;
-//  float quadratic;
+  float constant;
+  float linear;
+  float quadratic;
 };
 // position of the camera
 uniform vec3 viewPos;
@@ -36,7 +36,13 @@ uniform sampler2D texture_diffuse1;
 uniform Material material;
 
 //Lights
-uniform PointLight light;
+#define MAX_pointLights 4
+uniform PointLight PLIGHTS[MAX_pointLights];
+uniform int numPointL;
+
+#define MAX_dirLights 10
+uniform DirectionalLight DLIGHTS[MAX_dirLights];
+uniform int numDirL;
 
 // The vertex shader will feed this input
 in vec2 texCoord;
@@ -45,10 +51,11 @@ in vec3 fragPos;
 out vec4 FragmentColor;
 
 
-vec3 DirectLight(vec3 objDiffuse) {
+vec3 DirCalc(DirectionalLight light, vec3 objDiffuse) {
     // Normalize vectors
     vec3 norm = normalize(normal);
-    vec3 lightDir = normalize(light.position - fragPos);
+    // TODO: this should be a vector not a coordinate
+    vec3 lightDir = normalize(light.direction);
 
     // Diffuse component
     float diff = max(dot(norm, lightDir), 0.0);
@@ -68,10 +75,16 @@ vec3 DirectLight(vec3 objDiffuse) {
 }
 void main() {
 
-  vec3 object_color = material.diffuse;
-  if (using_textures) {
+    vec3 object_color = material.diffuse;
+    if (using_textures) {
       object_color = texture(texture_diffuse1, texCoord).rgb;
-  }
-    vec3 light = DirectLight(object_color);
-  FragmentColor = vec4(light * object_color ,1);
+    }
+    vec3 light = vec3(0.0);
+    for (int i = 0; i < numDirL; i++) {
+        light += DirCalc(DLIGHTS[i], object_color);
+    }
+    for (int i = 0; i < numPointL; i++) {
+    }
+
+    FragmentColor = vec4(light * object_color ,1);
 }
