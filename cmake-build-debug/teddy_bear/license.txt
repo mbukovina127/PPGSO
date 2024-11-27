@@ -1,0 +1,11 @@
+Model Information:
+* title:	teddy_bear
+* source:	https://sketchfab.com/3d-models/teddy-bear-459ce5b99da947438d3ea11d7c0d4225
+* author:	colinethille (https://sketchfab.com/colinethille)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "teddy_bear" (https://sketchfab.com/3d-models/teddy-bear-459ce5b99da947438d3ea11d7c0d4225) by colinethille (https://sketchfab.com/colinethille) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libppgso.a CMakeFiles/ppgso.dir/ppgso/Mesh_Assimp.cpp.o CMakeFiles/ppgso.dir/ppgso/tiny_obj_loader.cpp.o CMakeFiles/ppgso.dir/ppgso/shader.cpp.o CMakeFiles/ppgso.dir/ppgso/image.cpp.o CMakeFiles/ppgso.dir/ppgso/image_bmp.cpp.o CMakeFiles/ppgso.dir/ppgso/image_raw.cpp.o CMakeFiles/ppgso.dir/ppgso/texture.cpp.o CMakeFiles/ppgso.dir/ppgso/window.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libppgso.a
