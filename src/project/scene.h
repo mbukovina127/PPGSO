@@ -44,20 +44,43 @@ public:
         shader->setUniform("viewPos", cameraPostion);
 
         // Set lights
-        int numLights = 2;
-        shader->setUniform("numDirL", numLights);
+        int numofdirlights = 2;
+        shader->setUniform("numDirL", numofdirlights);
 
         // Light 1
         shader->setUniform("DLIGHTS[0].direction", glm::vec3(2, 2, 2));
         shader->setUniform("DLIGHTS[0].base.color", glm::vec3(1, 1, 1));
-        shader->setUniform("DLIGHTS[0].base.ambI", 0.2f);
-        shader->setUniform("DLIGHTS[0].base.difI", 1.0f);
+        shader->setUniform("DLIGHTS[0].base.ambI", 0.1f);
+        shader->setUniform("DLIGHTS[0].base.difI", 0.2f);
 
         // Light 2
         shader->setUniform("DLIGHTS[1].direction", glm::vec3(-2, 3, -2));
         shader->setUniform("DLIGHTS[1].base.color", glm::vec3(1, 0, 0));
-        shader->setUniform("DLIGHTS[1].base.ambI", 0.1f);
-        shader->setUniform("DLIGHTS[1].base.difI", 0.8f);
+        shader->setUniform("DLIGHTS[1].base.ambI", 0.05f);
+        shader->setUniform("DLIGHTS[1].base.difI", 0.2f);
+
+
+        int numofpointlights = 2;
+        shader->setUniform("numPointL", numofpointlights);
+
+        //p light 1
+        shader->setUniform("PLIGHTS[0].position", glm::vec3(2, 2, 2));
+        shader->setUniform("PLIGHTS[0].base.color", glm::vec3(1, 1, 1));
+        shader->setUniform("PLIGHTS[0].base.ambI", 0.1f);
+        shader->setUniform("PLIGHTS[0].base.difI", 0.9f);
+        shader->setUniform("PLIGHTS[0].constant", 0.1f);
+        shader->setUniform("PLIGHTS[0].linear", 0.09f);
+        shader->setUniform("PLIGHTS[0].quadratic", 0.032f);
+
+        //p light 2
+        shader->setUniform("PLIGHTS[1].position", glm::vec3(-0.5, 1, 0));
+        shader->setUniform("PLIGHTS[1].base.color", glm::vec3(1, 0.8f, 0.8f));
+        shader->setUniform("PLIGHTS[1].base.ambI", 0.1f);
+        shader->setUniform("PLIGHTS[1].base.difI", 0.8f);
+        shader->setUniform("PLIGHTS[1].constant", 0.1f);
+        shader->setUniform("PLIGHTS[1].linear", 0.09f);
+        shader->setUniform("PLIGHTS[1].quadratic", 0.032f);
+
         for ( auto& model : models )
             model->render(*this);
     }
