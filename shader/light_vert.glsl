@@ -15,11 +15,11 @@ out vec2 texCoord;
 out vec3 normal;
 
 // fragment posititon
-out vec3 fragPosition;
+out vec3 fragPos;
 
 void main() {
   // Copy the input to the fragment shader
-  fragPosition = vec3(ModelMatrix * vec4(Position, 1.0));
+  fragPos = vec3(ModelMatrix * vec4(Position, 1.0));
   texCoord = TexCoord;
 
   // Normal in world coordinates updated for scaling / lighting

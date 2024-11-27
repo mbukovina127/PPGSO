@@ -45,17 +45,17 @@ private:
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
     auto room = std::make_unique<Room>("../data/room/room.obj");
-    auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
+    // auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
     //positioning
-    backpack->scale = {0.5, 0.5, 0.5};
-    chair->position = {1,-1,1};
-    // room->addChild(std::move(chair));
+    chair->position.x = 5;
+    chair->scale = glm::vec3{3};
+    backpack->addChild(std::move(chair));
     // room->addChild(std::move(backpack));
     // room->addChild(std::move(lamp));
 
     //ADDING THEM TO THE SCENE
-    // scene.models.push_back(std::move(room));
-    scene.models.push_back(std::move(chair));
+    scene.models.push_back(std::move(room));
+    scene.models.push_back(std::move(backpack));
   }
 
 public:

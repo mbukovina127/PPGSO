@@ -7,11 +7,11 @@ struct Material {
   float shininess;
 };
 
-//struct BaseLight {
-//  vec3 color;
-//  float ambientIntensity;
-//  float diffuseIntensity;
-//};
+struct BaseLight {
+  vec3 color;
+  float ambI;
+  float difI;
+};
 
 //struct DirectionalLight {
 //  BaseLight base;
@@ -19,8 +19,7 @@ struct Material {
 //};
 
 struct PointLight {
-//  BaseLight base;
-  vec3 color;
+  BaseLight base;
   vec3 position;
 //  float constant;
 //  float linear;
@@ -41,40 +40,38 @@ uniform PointLight light;
 
 // The vertex shader will feed this input
 in vec2 texCoord;
-
-// Wordspace normal passed from vertex shader
 in vec3 normal;
-
-//
-in vec3 fragmentPosition;
-
-// The final color
+in vec3 fragPos;
 out vec4 FragmentColor;
 
+
+vec3 DirectLight(vec3 objDiffuse) {
+    // Normalize vectors
+    vec3 norm = normalize(normal);
+    vec3 lightDir = normalize(light.position - fragPos);
+
+    // Diffuse component
+    float diff = max(dot(norm, lightDir), 0.0);
+
+    // Specular component
+    vec3 viewDir = normalize(viewPos - fragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+
+    // Ambient component
+    vec3 ambient = light.base.ambI * material.ambient;
+    vec3 diffuse = light.base.difI * diff * objDiffuse;
+    vec3 specular = spec * material.specular;
+
+    // Combine all lighting contributions
+    return (ambient + diffuse + specular) * light.base.color;
+}
 void main() {
 
-  vec3 object_color = vec3(material.diffuse);
-//  if (using_textures) {
-//    object_color = texture(texture_diffuse1, texCoord);
-//  } else {
-//  }
-
-  vec3 ambient = material.ambient * light.color;
-
-  // diffuse
-  vec3 norm = normalize(normal);
-  vec3 lightDir = normalize(light.position - fragmentPosition);
-  float diff = max(dot(norm, lightDir), 0.0);
-  vec3 diffuse = diff * light.color;
-
-  // specular
-  vec3 viewDir = normalize(viewPos - fragmentPosition);
-  vec3 reflectDir = reflect(-lightDir, norm);
-  vec3 specular = material.specular * material.shininess * light.color;
-
-  vec3 result = (ambient + diffuse + specular) * object_color;
-  FragmentColor = vec4(result,1);
-//  //this will probably fuck things up
-//    vec4 result = vec4(ambient + diffuse + specular, 1) * object_color;
-//    FragmentColor = result;
+  vec3 object_color = material.diffuse;
+  if (using_textures) {
+      object_color = texture(texture_diffuse1, texCoord).rgb;
+  }
+    vec3 light = DirectLight(object_color);
+  FragmentColor = vec4(light * object_color ,1);
 }

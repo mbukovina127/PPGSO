@@ -42,8 +42,10 @@ public:
         shader->setUniform("ViewMatrix", camera->viewMatrix);
         // need to set camera position / light position / color /
         shader->setUniform("viewPos", cameraPostion);
-        shader->setUniform("light.color", {1,1,1});
-        shader->setUniform("light.position", {1,1,1});
+        shader->setUniform("light.position", {2,2,2});
+        shader->setUniform("light.base.color", {1,1,1});
+        shader->setUniform("light.base.ambI", .6f);
+        shader->setUniform("light.base.difI", 1.0f);
         for ( auto& model : models )
             model->render(*this);
     }
