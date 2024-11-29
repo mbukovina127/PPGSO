@@ -12,7 +12,7 @@
 #include <shaders/depth_vert_glsl.h>
 #include <shaders/depth_frag_glsl.h>
 
-const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+const unsigned int SHADOW_WIDTH = 2048, SHADOW_HEIGHT = 2048;
 
 class Scene {
 public:
@@ -23,7 +23,7 @@ public:
     GLuint depthMapFBO;
     GLuint depthMap;
 
-    glm::vec3 light1_direction = {2, 2, -3};
+    glm::vec3 light1_direction = {0, 2, -3};
 
     void setUpDepthMap() {
 
