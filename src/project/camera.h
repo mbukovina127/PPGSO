@@ -6,8 +6,8 @@
 #define CAMERA_H
 #include <ppgso.h>
 
-glm::vec3 cameraPostion{2,0,2};
-glm::vec3 cameraFront{0,0,0};
+glm::vec3 cameraPostion{0,0,0};
+glm::vec3 cameraFront{0,0,-1};
 glm::vec3 cameraUp{0,1,0};
 bool firstMouse = true;
 float yaw   = -90.0f;	// yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.

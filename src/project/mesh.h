@@ -76,7 +76,8 @@ public:
 
         for(unsigned int i = 0; i < textures.size(); i++)
         {
-            glActiveTexture(GL_TEXTURE0 + i); // active proper texture unit before binding
+            // !! ofsetting textures by 6 to make space for shadow maps
+            glActiveTexture(GL_TEXTURE6 + i); // active proper texture unit before binding
             // retrieve texture number (the N in diffuse_textureN)
             string number;
             string name = textures[i].type;
@@ -94,23 +95,31 @@ public:
             // now set the sampler to the correct texture unit
             auto loc = glGetUniformLocation(shader.getProgram(), (name + number).c_str());
             if (loc != -1) shader.setUniform("using_textures", 1);
-            glUniform1i(loc, i);
+            glUniform1i(loc, 6 + i);
             // and finally bind the texture
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }
 
-
+        // TODO: possible failure point
         // add material to the mesh / shader
-        shader.setUniform("material_diffuse", material.diffuse);
+        shader.setUniform("material.diffuse",  material.diffuse);
+        shader.setUniform("material.ambient",  material.ambient);
+        shader.setUniform("material.specular", material.specular);
+        shader.setUniform("material.shininess", material.shine);
         // draw mesh
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
 
         // always good practice to set everything back to defaults once configured.
-        glActiveTexture(GL_TEXTURE0);
+        glActiveTexture(GL_TEXTURE6);
     }
 
+    void renderDepth(ppgso::Shader &shader) {
+        glBindVertexArray(VAO);
+        glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+    }
 private:
     // render data
     unsigned int VBO, EBO;
