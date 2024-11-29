@@ -1,20 +1,21 @@
 //
-// Created by marko on 17. 11. 2024.
+// Created by Iveta Leskova on 29/11/2024.
 //
 
-#ifndef CHAIR_H
-#define CHAIR_H
-#include "../scene.h"
-#include "../model.h"
-#include <ppgso/shader.h>
+#ifndef PLANE_H
+#define PLANE_H
 
-class Chair : public Model {
+#include "src/project/model.h"
+#include "src/project/scene.h"
+
+
+class Plane : public Model {
 public:
-    Chair(string const &path, bool gamma = false) : Model(path, gamma) {}
+    Plane(string const &path, bool gamma = false) : Model(path, gamma) {}
     float fulltime = 0;
 
     bool update(Scene &scene, float dt) override {
-        interpolateKeyframes(dt);  // proceduralne animovanie???
+        interpolateKeyframes(dt);  // Update transformations based on keyframes
 
 
         for (auto &child : children) {
@@ -40,5 +41,4 @@ public:
     }
 };
 
-
-#endif //CHAIR_H
+#endif //PLANE_H

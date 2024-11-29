@@ -29,26 +29,14 @@ class SceneWindow : public ppgso::Window {
 private:
   Scene scene;
 
-  /*!
-   * Reset and initialize the game scene
-   * Creating unique smart pointers to objects that are stored in the scene object list
-   */
-  void initScene() {
-    scene.models.clear();
-    // Create a camera
-    scene.camera = std::make_unique<Camera>();
-    glfwSetCursorPosCallback(window, mouse_callback);
-    glfwSetScrollCallback(window, scroll_callback);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-
-    //LODING OBJECTS
+  void loadObjects() {
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
     auto room = std::make_unique<Room>("../data/room2/room.obj");
     auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
     auto laptop = std::make_unique<Lamp>("../data/laptop4/laptop.obj");
     auto roomba = std::make_unique<Chair>("../data/roomba/roomba.obj");
+    auto plane = std::make_unique<Chair>("../data/plane/plane.obj");
     //positioning
     backpack->scale = {0.2, 0.2, 0.2};
     backpack->position = {0.0, 0.85, 0.0};
@@ -74,6 +62,11 @@ private:
     roomba->keyframes.push_back(Keyframe(44.0f, {1.38, 0, -1}, {0, 0, glm::radians(-90.0f)}, {1.2, 1.2, 1.2}));
     roomba->keyframes.push_back(Keyframe(50.0f, {2.76, 0, -1}, {0, 0, glm::radians(-90.0f)}, {1.2, 1.2, 1.2}));
 
+    plane->keyframes.push_back(Keyframe(0.0f, {1.36, 2.09, 2.68}, {0, 0, 0}, {1, 1, 1}));
+    plane->keyframes.push_back(Keyframe(10.0f, {1.36, 2.09, 2.68}, {0, 0, 0}, {1, 1, 1}));
+    plane->keyframes.push_back(Keyframe(14.0f, {0.93, 1.59, -0.05}, {0, glm::radians(15.0f), 0}, {1, 1, 1}));
+    plane->keyframes.push_back(Keyframe(17.0f, {0.35, 1.05, -1.8}, {0, glm::radians(20.0f), glm::radians(15.0f)}, {1, 1, 1}));
+
     room->addChild(std::move(lamp));
     chair->addChild(std::move(backpack));
     room->addChild(std::move(chair));
@@ -81,6 +74,23 @@ private:
     room->addChild(std::move(roomba));
     //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));
+    scene.models.push_back(std::move(plane));
+  }
+  /*!
+   * Reset and initialize the game scene
+   * Creating unique smart pointers to objects that are stored in the scene object list
+   */
+  void initScene() {
+    scene.models.clear();
+    // Create a camera
+    scene.camera = std::make_unique<Camera>();
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+
+    //LODING OBJECTS
+    loadObjects();
   }
 
 public:
