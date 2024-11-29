@@ -1,9 +1,0 @@
-/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/CMakeFiles/shaders.dir
-/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/CMakeFiles/ppgso.dir
-/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/CMakeFiles/main.dir
-/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/CMakeFiles/list_install_components.dir
-/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/CMakeFiles/install.dir
-/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/CMakeFiles/install/local.dir
-/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/cmake-build-debug/CMakeFiles/install/strip.dir
