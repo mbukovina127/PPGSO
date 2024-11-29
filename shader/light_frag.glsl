@@ -137,7 +137,7 @@ void main() {
         light += DirCalc(DLIGHTS[i], object_color);
     }
     for (int i = 0; i < numPointL; i++) {
-//        light += PointCalc(PLIGHTS[i], object_color);
+        light += PointCalc(PLIGHTS[i], object_color);
     }
 
     FragmentColor = vec4(light * object_color ,1);

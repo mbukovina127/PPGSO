@@ -186,9 +186,9 @@ public:
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Shadow map debugging
+    // // Shadow map debugging
     // debugDepthQuad.use();
-    // debugDepthQuad.setUniform("near_plane", 1.f);
+    // debugDepthQuad.setUniform("near_plane", .1f);
     // debugDepthQuad.setUniform("far_plane", 20.f);
     // debugDepthQuad.setUniform("depthMap", 0);
     // glActiveTexture(GL_TEXTURE0);
