@@ -171,7 +171,7 @@ add_executable(main
         src/project/models/room.h
         src/project/models/lamp.h
         src/project/models/laptop.h
-        src/project/axis.h
+        src/project/models/roomba.h
 )
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)

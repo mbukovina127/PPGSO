@@ -1008,7 +1008,6 @@ CMakeFiles/main.dir/src/project/apartman.cpp.o: /Users/ivetaleskova/Desktop/FIIT
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/window.h \
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/ppgso.h \
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/shader.h \
-  /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/axis.h \
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/camera.h \
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/mesh.h \
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/camera.h \
@@ -2581,8 +2580,6 @@ CMakeFiles/main.dir/src/project/imgloader.cpp.o: /Users/ivetaleskova/Desktop/FII
 /opt/homebrew/include/glm/gtc/epsilon.hpp:
 
 /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/camera.h:
-
-/Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/axis.h:
 
 /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/texture.h:
 

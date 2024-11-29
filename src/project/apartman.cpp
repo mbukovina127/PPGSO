@@ -11,7 +11,6 @@
 
 #include <../ppgso/ppgso.h>
 
-#include "axis.h"
 #include "models/chair.h"
 #include "scene.h"
 #include "camera.h"
@@ -42,31 +41,46 @@ private:
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    // Add colorful axes
-    auto axes = std::make_unique<Axis>();
-
 
     //LODING OBJECTS
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
     auto room = std::make_unique<Room>("../data/room2/room.obj");
     auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
-    auto laptop = std::make_unique<Lamp>("../data/laptop/laptop.obj");
+    auto laptop = std::make_unique<Lamp>("../data/laptop4/laptop.obj");
+    auto roomba = std::make_unique<Chair>("../data/roomba/roomba.obj");
     //positioning
     backpack->scale = {0.2, 0.2, 0.2};
     backpack->position = {0.0, 0.85, 0.0};
     backpack->rotation = {-0.3, 0.0, 0.0};
-    chair->position = {0.2,0,-0.5};
-    chair->scale = {1.2, 1.2, 1.2};
-    laptop->position = {0.4, 0.1, 0};
+    laptop->position = {-1.04, 0.95, -0.54};
+    laptop->rotation = {0, 0, 0}; //otočiť
+    //roomba->position = {-0.01, 0, 1.36};
+
+    //animation
+    chair->keyframes.push_back(Keyframe(0.0f, {0.2,0,-0.5}, {0, 0, glm::radians(-30.0f)}, {1.2, 1.2, 1.2}));
+    chair->keyframes.push_back(Keyframe(10.0f, {0.2,0,-0.5}, {0, 0, glm::radians(-30.0f)}, {1.2, 1.2, 1.2}));
+    chair->keyframes.push_back(Keyframe(20.0f, {0.2,0,-0.5}, {0, 0, glm::radians(30.0f)}, {1.2, 1.2, 1.2}));
+
+    roomba->keyframes.push_back(Keyframe(0.0f, {-0.01, 0, 1.36}, {0, 0, glm::radians(90.0f)}, {1.2, 1.2, 1.2}));
+    roomba->keyframes.push_back(Keyframe(10.0f, {-0.01, 0, 1.36}, {0, 0, glm::radians(90.0f)}, {1.2, 1.2, 1.2}));
+    roomba->keyframes.push_back(Keyframe(15.0f, {-0.94, 0, 1.36}, {0, 0, glm::radians(90.0f)}, {1.2, 1.2, 1.2}));
+    roomba->keyframes.push_back(Keyframe(17.0f, {-0.94, 0, 1.36}, {0, 0, glm::radians(0.0f)}, {1.2, 1.2, 1.2}));
+    roomba->keyframes.push_back(Keyframe(21.0f, {-0.94, 0, 0.5}, {0, 0, glm::radians(0.0f)}, {1.2, 1.2, 1.2}));
+    roomba->keyframes.push_back(Keyframe(23.0f, {-0.94, 0, 0.5}, {0, 0, glm::radians(-90.0f)}, {1.2, 1.2, 1.2}));
+    roomba->keyframes.push_back(Keyframe(33.0f, {1.38, 0, 0.5}, {0, 0, glm::radians(-90.0f)}, {1.2, 1.2, 1.2}));
+    roomba->keyframes.push_back(Keyframe(35.0f, {1.38, 0, 0.5}, {0, 0, glm::radians(0.0f)}, {1.2, 1.2, 1.2}));
+    roomba->keyframes.push_back(Keyframe(42.0f, {1.38, 0, -1}, {0, 0, glm::radians(0.0f)}, {1.2, 1.2, 1.2}));
+    roomba->keyframes.push_back(Keyframe(44.0f, {1.38, 0, -1}, {0, 0, glm::radians(-90.0f)}, {1.2, 1.2, 1.2}));
+    roomba->keyframes.push_back(Keyframe(50.0f, {2.76, 0, -1}, {0, 0, glm::radians(-90.0f)}, {1.2, 1.2, 1.2}));
 
     room->addChild(std::move(lamp));
     chair->addChild(std::move(backpack));
     room->addChild(std::move(chair));
     room->addChild(std::move(laptop));
+    room->addChild(std::move(roomba));
     //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));
-    scene.models.push_back(std::move(axes));
   }
 
 public:
@@ -102,6 +116,7 @@ public:
     // process input
     processInput(this->window, dt);
 
+    std::cout << cameraPostion.x << " " << cameraPostion.y << " " << cameraPostion.z << std::endl;
     // Set gray background
     glClearColor(.5f, .5f, .5f, 1);
     // Clear depth and color buffers

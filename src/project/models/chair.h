@@ -14,11 +14,8 @@ public:
     float fulltime = 0;
 
     bool update(Scene &scene, float dt) override {
-        fulltime += dt;
+        interpolateKeyframes(dt);  // Update transformations based on keyframes
 
-        if (fulltime > 10 && fulltime < 20) {
-            rotation.z += dt/5;
-        }
 
         for (auto &child : children) {
             child->update(scene, dt);

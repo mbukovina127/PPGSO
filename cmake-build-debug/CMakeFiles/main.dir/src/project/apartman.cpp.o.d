@@ -1311,11 +1311,10 @@ CMakeFiles/main.dir/src/project/apartman.cpp.o: \
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/../ppgso/image_raw.h \
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/../ppgso/window.h \
   /opt/homebrew/include/GLFW/glfw3.h \
-  /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/axis.h \
-  /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/ppgso.h \
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/models/chair.h \
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/models/../scene.h \
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/models/../camera.h \
+  /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/ppgso/ppgso.h \
   /Users/ivetaleskova/Desktop/FIIT/3.semester/PPGSO/projekt/ppgso-projekt-1800-leskova_bukovina-apartman/src/project/models/../model.h \
   /opt/homebrew/include/glm/gtx/euler_angles.inl \
   /opt/homebrew/include/assimp/Importer.hpp \

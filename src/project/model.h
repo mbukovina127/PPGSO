@@ -23,6 +23,16 @@
 class Scene;
 using namespace std;
 
+struct Keyframe {
+    float time;  // Time of the keyframe
+    glm::vec3 position;
+    glm::vec3 rotation;
+    glm::vec3 scale;
+
+    Keyframe(float t, glm::vec3 pos, glm::vec3 rot, glm::vec3 scl)
+        : time(t), position(pos), rotation(rot), scale(scl) {}
+};
+
 class Model
 {
 public:
@@ -39,6 +49,34 @@ public:
 
     Model* parent = nullptr;
     std::vector<std::unique_ptr<Model>> children;
+
+    std::vector<Keyframe> keyframes;  // Store keyframes for animation
+    float animationTime = 0.0f;      // Track the animation time
+
+    void interpolateKeyframes(float dt) {
+        animationTime += dt;
+
+        if (keyframes.size() < 2) return;
+
+        // Find the current keyframe pair
+        Keyframe* prev = nullptr;
+        Keyframe* next = nullptr;
+        for (size_t i = 0; i < keyframes.size() - 1; ++i) {
+            if (animationTime >= keyframes[i].time && animationTime <= keyframes[i + 1].time) {
+                prev = &keyframes[i];
+                next = &keyframes[i + 1];
+                break;
+            }
+        }
+
+        if (!prev || !next) return;
+
+        // Interpolate based on time
+        float t = (animationTime - prev->time) / (next->time - prev->time);
+        position = glm::mix(prev->position, next->position, t);
+        rotation = glm::mix(prev->rotation, next->rotation, t);
+        scale = glm::mix(prev->scale, next->scale, t);
+    }
 
     // constructor, expects a filepath to a 3D model.
     Model(string const &path, bool gamma = false) : gammaCorrection(gamma)
