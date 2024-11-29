@@ -56,6 +56,12 @@ private:
     //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));
     scene.models.push_back(std::move(backpack));
+
+    //Stting up lights
+    scene.setUpLights();
+
+    //SetUpShadowMap();
+
   }
 
 public:

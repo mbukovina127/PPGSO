@@ -69,8 +69,10 @@ vec3 DirCalc(DirectionalLight light, vec3 objDiffuse) {
     vec3 diffuse = light.base.difI * diff * objDiffuse;
     vec3 specular = spec * material.specular;
 
-    // Combine all lighting contributions
-    return (ambient + diffuse + specular) * light.base.color;
+    float shadow = 0;
+    return (ambient + (1.0 - shadow) * (diffuse + specular)) * light.base.color;
+//    // Combine all lighting contributions
+//    return (ambient + diffuse + specular) * light.base.color;
 }
 
 vec3 PointCalc(PointLight light, vec3 objDiffuse) {
@@ -108,10 +110,10 @@ void main() {
     }
     vec3 light = vec3(0.0);
     for (int i = 0; i < numDirL; i++) {
-//        light += DirCalc(DLIGHTS[i], object_color);
+        light += DirCalc(DLIGHTS[i], object_color);
     }
     for (int i = 0; i < numPointL; i++) {
-        light += PointCalc(PLIGHTS[i], object_color);
+//        light += PointCalc(PLIGHTS[i], object_color);
     }
 
     FragmentColor = vec4(light * object_color ,1);
