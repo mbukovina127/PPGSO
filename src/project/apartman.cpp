@@ -37,13 +37,17 @@ private:
     auto laptop = std::make_unique<Lamp>("../data/laptop4/laptop.obj");
     auto roomba = std::make_unique<Chair>("../data/roomba/roomba.obj");
     auto plane = std::make_unique<Chair>("../data/plane/plane.obj");
+    auto book = std::make_unique<Chair>("../data/book/book.obj");
+    auto obal = std::make_unique<Chair>("../data/book/obal.obj");
     //positioning
     backpack->scale = {0.2, 0.2, 0.2};
     backpack->position = {0.0, 0.85, 0.0};
     backpack->rotation = {-0.3, 0.0, 0.0};
     laptop->position = {-1.04, 0.95, -0.54};
     laptop->rotation = {0, 0, 0}; //otočiť
-    //roomba->position = {-0.01, 0, 1.36};
+    book->position = {-0.98, 0.97, -0.82};
+    book->scale = {0.25, 0.25, 0.25};
+    book->rotation = {0, 0, glm::radians(160.0f)};
 
     //animation
     chair->keyframes.push_back(Keyframe(0.0f, {0.2,0,-0.5}, {0, 0, glm::radians(-30.0f)}, {1.2, 1.2, 1.2}));
@@ -67,11 +71,18 @@ private:
     plane->keyframes.push_back(Keyframe(14.0f, {0.93, 1.59, -0.05}, {0, glm::radians(15.0f), 0}, {1, 1, 1}));
     plane->keyframes.push_back(Keyframe(17.0f, {0.35, 1.05, -1.8}, {0, glm::radians(20.0f), glm::radians(15.0f)}, {1, 1, 1}));
 
+    obal->keyframes.push_back(Keyframe(0.0f, {0.0, 0.06, -0.36}, {0, 0, 0}, {1, 1, 1}));
+    obal->keyframes.push_back(Keyframe(5.0f, {0.0, 0.06, -0.36}, {0, 0, 0}, {1, 1, 1}));
+    obal->keyframes.push_back(Keyframe(6.0f, {0.0, 0.06, -0.36}, {glm::radians(-20.0f), 0, 0}, {1, 1, 1}));
+    obal->keyframes.push_back(Keyframe(7.0f, {0.0, 0.06, -0.36}, {0, 0, 0}, {1, 1, 1}));
+
     room->addChild(std::move(lamp));
     chair->addChild(std::move(backpack));
     room->addChild(std::move(chair));
     room->addChild(std::move(laptop));
     room->addChild(std::move(roomba));
+    book->addChild(std::move(obal));
+    room->addChild(std::move(book));
     //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));
     scene.models.push_back(std::move(plane));
