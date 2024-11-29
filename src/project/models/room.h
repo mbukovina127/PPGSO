@@ -35,5 +35,15 @@ public:
             child->render(scene);
         }
     }
+
+    void renderDepth(ppgso::Shader &shader) override {
+        generateModelMatrix();
+        shader.setUniform("model", modelMatrix);
+
+        for ( auto& mesh : meshes )
+            mesh.renderDepth(shader);
+        for ( auto& child : children )
+            child->renderDepth(shader);
+    }
 };
 #endif //ROOM_H

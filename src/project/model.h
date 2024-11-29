@@ -60,12 +60,7 @@ public:
     // draws the model, and thus all its meshes
     virtual void render(Scene &scene) = 0;
 
-    void renderDepth(ppgso::Shader &shader) {
-        generateModelMatrix();
-        shader.setUniform("model", modelMatrix);
-        for ( auto& mesh : meshes )
-            mesh.renderDepth(shader);
-    }
+    virtual void renderDepth(ppgso::Shader &shader) = 0;
 
     void generateModelMatrix() {
         auto parentMatrix = parent ? parent->modelMatrix : glm::mat4(1.0f);

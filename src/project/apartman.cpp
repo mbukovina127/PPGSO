@@ -17,17 +17,47 @@
 #include "models/lamp.h"
 #include "models/room.h"
 #include "models/test_backpack.h"
-
+#include <shaders/ddebug_vert_glsl.h>
+#include <shaders/ddebug_frag_glsl.h>
 
 const unsigned int WIDTH = 1280;
 const unsigned int HEIGHT = 720;
 
+unsigned int quadVAO = 0;
+unsigned int quadVBO;
+void renderQuad()
+{
+  if (quadVAO == 0)
+  {
+    float quadVertices[] = {
+      // positions        // texture Coords
+      -1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
+      -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+       1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+       1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+  };
+    // setup plane VAO
+    glGenVertexArrays(1, &quadVAO);
+    glGenBuffers(1, &quadVBO);
+    glBindVertexArray(quadVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+  }
+  glBindVertexArray(quadVAO);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  glBindVertexArray(0);
+}
 /*!
  * Custom windows for our simple game
  */
 class SceneWindow : public ppgso::Window {
 private:
   Scene scene;
+  ppgso::Shader debugDepthQuad;
 
   /*!
    * Reset and initialize the game scene
@@ -35,12 +65,15 @@ private:
    */
   void initScene() {
     scene.models.clear();
-    // Create a camera
-    scene.camera = std::make_unique<Camera>();
+    scene.camera = std::make_unique<Camera>(); // Create a camera
+    //inputs
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
+    //Lights
+    scene.setUpLights();
+    //Shadows
+    scene.setUpDepthMap();
     //LODING OBJECTS
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
@@ -49,19 +82,15 @@ private:
     //positioning
     chair->position.x = 5;
     chair->scale = glm::vec3{3};
-    backpack->addChild(std::move(chair));
     backpack->position = {0,1,-2};
+    backpack->scale = {.5f,.5f,.5f};
     // room->addChild(std::move(backpack));
     // room->addChild(std::move(lamp));
 
     //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));
+    scene.models.push_back(std::move(chair));
     scene.models.push_back(std::move(backpack));
-
-    //Stting up lights
-    scene.setUpLights();
-
-    //SetUpShadowMap();
 
   }
 
@@ -69,7 +98,7 @@ public:
   /*!
    * Construct custom game window
    */
-  SceneWindow() : Window{"apartman", WIDTH, HEIGHT} {
+  SceneWindow() : Window{"apartman", WIDTH, HEIGHT}, debugDepthQuad{ddebug_vert_glsl, ddebug_frag_glsl} {
     //hideCursor();
     // glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
 
@@ -98,19 +127,28 @@ public:
     // process input
     processInput(this->window, dt);
 
+
+    //Shadow Pass
+    scene.shadowPass();
+
+    glViewport(0, 0, WIDTH, HEIGHT);
     // Set gray background
     glClearColor(.1f, .1f, .1f, 1);
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    // Shadow map debugging
+    // debugDepthQuad.use();
+    // debugDepthQuad.setUniform("near_plane", 1.f);
+    // debugDepthQuad.setUniform("far_plane", 20.f);
+    // debugDepthQuad.setUniform("depthMap", 0);
+    // glActiveTexture(GL_TEXTURE0);
+    // glBindTexture(GL_TEXTURE_2D, scene.depthMap);
+    // renderQuad();
 
     scene.camera->update();
-
     scene.update(dt);
     scene.render();
-    // Update and render all objects
-    // scene.update(dt);
-    // scene.render();
   }
 
   void processInput(GLFWwindow *window, float dt)

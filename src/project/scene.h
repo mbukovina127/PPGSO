@@ -52,29 +52,33 @@ public:
 
     }
 
-    void ConfigureShaderAndMatrices(glm::vec3 light_position) {
-        float near_plane = 1.0f, far_plane = 7.5f;
-        glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
-        glm::mat4 lightView = glm::lookAt(-light_position * 5.f, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+    auto getlightSpaceMatrix(glm::vec3 light_position) {
+        float near_plane = 1.0f, far_plane = 20.0f;
+        glm::mat4 lightProjection = glm::ortho(-20.0f, 20.0f, -20.0f, 20.0f, near_plane, far_plane);
+        glm::mat4 lightView = glm::lookAt(light_position * 2.f, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
         glm::mat4 lSpaceMatrix = lightProjection * lightView;
         depthshader.setUniform("lSpaceMatrix", lSpaceMatrix);
+        return lSpaceMatrix;
 
     }
 
     void shadowPass() {
+        depthshader.use();
+
         glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
         glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-        glClear(GL_DEPTH_BUFFER_BIT);
-        ConfigureShaderAndMatrices(light1_direction);
+            // glCullFace(GL_FRONT);
+            glClear(GL_DEPTH_BUFFER_BIT);
+            getlightSpaceMatrix(light1_direction);
         // RenderScene()
-        for ( auto& model : models )
-            model->renderDepth(depthshader);
+            for ( auto& model : models ) { model->renderDepth(depthshader); }
         // please work
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
+        // glCullFace(GL_BACK);
     }
 
     void setUpLights() {
+        shader.use();
         // Set lights
         int numofdirlights = 1;
         shader.setUniform("numDirL", numofdirlights);
@@ -131,11 +135,14 @@ public:
 
 
     void render() {
-
         shader.use();
         shader.setUniform("ProjectionMatrix", camera->projectionMatrix);
         shader.setUniform("ViewMatrix", camera->viewMatrix);
         shader.setUniform("viewPos", cameraPostion);
+        shader.setUniform("lSpaceMatrix", getlightSpaceMatrix(light1_direction));
+        shader.setUniform("shadows", 0);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, depthMap);
 
         for ( auto& model : models )
             model->render(*this);

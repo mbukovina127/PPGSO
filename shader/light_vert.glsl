@@ -7,7 +7,7 @@ layout(location = 2) in vec2 TexCoord;
 uniform mat4 ProjectionMatrix;
 uniform mat4 ViewMatrix;
 uniform mat4 ModelMatrix;
-
+uniform mat4 lSpaceMatrix;
 // This will be passed to the fragment shader
 out vec2 texCoord;
 
@@ -17,6 +17,8 @@ out vec3 normal;
 // fragment posititon
 out vec3 fragPos;
 
+out vec4 fragPosLSpace;
+
 void main() {
   // Copy the input to the fragment shader
   fragPos = vec3(ModelMatrix * vec4(Position, 1.0));
@@ -24,6 +26,8 @@ void main() {
 
   // Normal in world coordinates updated for scaling / lighting
   normal = mat3(transpose(inverse(ModelMatrix))) * Normal;
+
+  fragPosLSpace = lSpaceMatrix * vec4(fragPos, 1.0);
 
   // Calculate the final position on screen
   gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * vec4(Position, 1.0);
