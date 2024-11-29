@@ -50,6 +50,7 @@ private:
     chair->position.x = 5;
     chair->scale = glm::vec3{3};
     backpack->addChild(std::move(chair));
+    backpack->position = {0,1,-2};
     // room->addChild(std::move(backpack));
     // room->addChild(std::move(lamp));
 
@@ -98,7 +99,7 @@ public:
     processInput(this->window, dt);
 
     // Set gray background
-    glClearColor(.5f, .5f, .5f, 1);
+    glClearColor(.1f, .1f, .1f, 1);
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

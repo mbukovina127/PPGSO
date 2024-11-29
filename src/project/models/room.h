@@ -25,11 +25,11 @@ public:
         // Generate the model matrix from position, rotation, and scale
         generateModelMatrix();
         // Pass the model matrix to the shader
-        scene.shader->setUniform("ModelMatrix", modelMatrix);
+        scene.shader.setUniform("ModelMatrix", modelMatrix);
 
         // Render each mesh
         for (auto &mesh : meshes) {
-            mesh.render(*scene.shader);
+            mesh.render(scene.shader);
         }
         for (auto &child : children) {
             child->render(scene);

@@ -60,22 +60,12 @@ public:
     // draws the model, and thus all its meshes
     virtual void render(Scene &scene) = 0;
 
-    // glm::vec3 getPosition(const Model &node) {
-    //     if (node.parent == nullptr)
-    //         return node.position;
-    //     return node.position + getPosition(*node.parent);
-    // }
-    // glm::vec3 getRotation(const Model &node) {
-    //     if (node.parent == nullptr)
-    //         return node.rotation;
-    //     return node.rotation + getRotation(*node.parent);
-    // }
-    // glm::vec3 getScale(const Model &node) {
-    //     if (node.parent == nullptr)
-    //         return node.scale;
-    //     return node.scale + getScale(*node.parent);
-    // }
-
+    void renderDepth(ppgso::Shader &shader) {
+        generateModelMatrix();
+        shader.setUniform("model", modelMatrix);
+        for ( auto& mesh : meshes )
+            mesh.renderDepth(shader);
+    }
 
     void generateModelMatrix() {
         auto parentMatrix = parent ? parent->modelMatrix : glm::mat4(1.0f);
