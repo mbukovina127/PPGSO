@@ -6,7 +6,7 @@
 #define CAMERA_H
 #include <ppgso.h>
 
-glm::vec3 cameraPostion{0,0,0};
+glm::vec3 cameraPostion{0,1,0};
 glm::vec3 cameraFront{0,0,-1};
 glm::vec3 cameraUp{0,1,0};
 bool firstMouse = true;

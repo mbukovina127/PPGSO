@@ -63,13 +63,13 @@ public:
             {
                 {{1,1,1}, .2f, 1.f}, {-2, 3, -4}
             },
-            {
-                {{1,0.4,0.4}, .0f, .8f}, {4, 5, -4}
-            }
+            // {
+            //     {{1,0.4,0.4}, .0f, .8f}, {4, 5, -4}
+            // }
         };
         pointLights = {
             {
-                {{1,1,1}, 0, .2f}, {0,1,0}, {25.0}, {0.0}, {0.15}, {0.032}
+                {{1,1,1}, 0, .6f}, {0,1,0}, {25.0}, {0.0}, {0.15}, {0.032}
             }
         };
         shader.use();
@@ -86,6 +86,7 @@ public:
             shader.setUniform("PLIGHTS[" + std::to_string(i) + "].base.ambI", pointLights[i].base.ambI);
             shader.setUniform("PLIGHTS[" + std::to_string(i) + "].base.difI", pointLights[i].base.difI);
             shader.setUniform("PLIGHTS[" + std::to_string(i) + "].position", pointLights[i].position);
+            shader.setUniform("PLIGHTS[" + std::to_string(i) + "].far_plane", pointLights[i].far_plane);
             shader.setUniform("PLIGHTS[" + std::to_string(i) + "].constant", pointLights[i].constant);
             shader.setUniform("PLIGHTS[" + std::to_string(i) + "].linear", pointLights[i].linear);
             shader.setUniform("PLIGHTS[" + std::to_string(i) + "].quadratic", pointLights[i].quadratic);
@@ -259,6 +260,10 @@ public:
             shader.setUniform("shadows[" + std::to_string(i) + "]", i);
             shader.setUniform("lSpaceMatrices[" + std::to_string(i) + "]", lSpaceMatrices[i]);
         }
+        shader.setUniform("cubeShadows", (GLint)directionalLights.size());
+        // adding texture for cubemap
+        glActiveTexture(GL_TEXTURE0 + directionalLights.size());
+        glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
 
         // shader.setUniform("lSpaceMatrix", getlightSpaceMatrix(light1_direction));
         // shader.setUniform("shadows", 0);
