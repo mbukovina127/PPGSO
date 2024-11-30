@@ -99,6 +99,7 @@ set(PPGSO_SHADER_SRC
         shader/light_vert.glsl shader/light_frag.glsl
         shader/depth_vert.glsl shader/depth_frag.glsl
         shader/ddebug_vert.glsl shader/ddebug_frag.glsl
+        shader/cubemap_vert.glsl shader/cubemap_frag.glsl shader/cubemap_geo.glsl
         )
 add_resources(shaders ${PPGSO_SHADER_SRC})
 
@@ -176,6 +177,7 @@ add_executable(main
         src/project/models/laptop.h
         src/project/models/roomba.h
         src/project/models/plane.h
+        src/project/shader/gshader.h
 )
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)

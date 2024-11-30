@@ -18,7 +18,7 @@ namespace ppgso {
      * @param vertex_shader_code - String containing the source of the vertex shader.
      * @param fragment_shader_code - String containing the source of the fragment shader.
      */
-    Shader(const std::string &vertex_shader_code, const std::string &fragment_shader_code);
+    Shader(const std::string &vertex_shader_code, const std::string &fragment_shader_code, const std::string &geometry_shader_code);
 
     ~Shader();
 

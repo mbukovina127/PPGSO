@@ -9,10 +9,11 @@
 #include "shader.h"
 
 
-ppgso::Shader::Shader(const std::string &vertex_shader_code, const std::string &fragment_shader_code) {
+ppgso::Shader::Shader(const std::string &vertex_shader_code, const std::string &fragment_shader_code, const std::string &geometry_shader_code = "") {
   // Create shaders
   auto vertex_shader_id = glCreateShader(GL_VERTEX_SHADER);
   auto fragment_shader_id = glCreateShader(GL_FRAGMENT_SHADER);
+  GLuint geometry_shader_id = 0; // Default value if no geometry shader is provided
   auto result = GL_FALSE;
   auto info_length = 0;
 
@@ -52,10 +53,33 @@ ppgso::Shader::Shader(const std::string &vertex_shader_code, const std::string &
     throw std::runtime_error(msg.str());
   }
 
+  // Compile geometry shader if provided
+  if (!geometry_shader_code.empty()) {
+    geometry_shader_id = glCreateShader(GL_GEOMETRY_SHADER);
+    auto geometry_shader_code_ptr = geometry_shader_code.c_str();
+    glShaderSource(geometry_shader_id, 1, &geometry_shader_code_ptr, nullptr);
+    glCompileShader(geometry_shader_id);
+
+    // Check geometry shader log
+    glGetShaderiv(geometry_shader_id, GL_COMPILE_STATUS, &result);
+    if (result == GL_FALSE) {
+      glGetShaderiv(geometry_shader_id, GL_INFO_LOG_LENGTH, &info_length);
+      std::string geometry_shader_log((unsigned long)info_length, ' ');
+      glGetShaderInfoLog(geometry_shader_id, info_length, nullptr, &geometry_shader_log[0]);
+      std::stringstream msg;
+      msg << "Error Compiling Geometry Shader ..." << std::endl;
+      msg << geometry_shader_log;
+      throw std::runtime_error(msg.str());
+    }
+  }
+
   // Create and link the program
   auto program_id = glCreateProgram();
   glAttachShader(program_id, vertex_shader_id);
   glAttachShader(program_id, fragment_shader_id);
+  if (geometry_shader_id) {
+    glAttachShader(program_id, geometry_shader_id);
+  }
   glBindFragDataLocation(program_id, 0, "FragmentColor");
   glLinkProgram(program_id);
 
@@ -70,8 +94,13 @@ ppgso::Shader::Shader(const std::string &vertex_shader_code, const std::string &
     msg << program_log;
     throw std::runtime_error(msg.str());
   }
+
+  // Clean up
   glDeleteShader(vertex_shader_id);
   glDeleteShader(fragment_shader_id);
+  if (geometry_shader_id) {
+    glDeleteShader(geometry_shader_id);
+  }
 
   program = program_id;
   use();

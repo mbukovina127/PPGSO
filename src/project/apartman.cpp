@@ -137,6 +137,8 @@ private:
     scene.setUpLights();
     //Shadows
     scene.setUpDepthMap();
+    scene.setUpDepthMap();
+    scene.computeDepthCubemapMatrix(scene.pointLights[0].position, scene.pointLights[0].far_plane);
 
     //LODING OBJECTS
     loadObjects();
@@ -146,7 +148,7 @@ public:
   /*!
    * Construct custom game window
    */
-  SceneWindow() : Window{"apartman", WIDTH, HEIGHT}, debugDepthQuad{ddebug_vert_glsl, ddebug_frag_glsl} {
+  SceneWindow() : Window{"apartman", WIDTH, HEIGHT}, debugDepthQuad{ddebug_vert_glsl, ddebug_frag_glsl, ""} {
     //hideCursor();
     // glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
 
@@ -178,6 +180,7 @@ public:
 
     //Shadow Pass
     scene.shadowPass();
+    scene.cubemapPass();
 
     glViewport(0, 0, WIDTH, HEIGHT);
     std::cout << cameraPostion.x << " " << cameraPostion.y << " " << cameraPostion.z << std::endl;
@@ -187,17 +190,17 @@ public:
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Shadow map debugging
-    // debugDepthQuad.use();
-    // debugDepthQuad.setUniform("near_plane", .1f);
-    // debugDepthQuad.setUniform("far_plane", 20.f);
-    // debugDepthQuad.setUniform("depthMap", 0);
-    // glActiveTexture(GL_TEXTURE0);
-    // glBindTexture(GL_TEXTURE_2D, scene.depthMapTex_dir[0]);
-    // renderQuad();
+    debugDepthQuad.use();
+    debugDepthQuad.setUniform("near_plane", .1f);
+    debugDepthQuad.setUniform("far_plane", 20.f);
+    debugDepthQuad.setUniform("depthMap", 0);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, scene.depthCubemap);
+    renderQuad();
 
-    scene.camera->update();
-    scene.update(dt);
-    scene.render();
+    // scene.camera->update();
+    // scene.update(dt);
+    // scene.render();
   }
 
   void processInput(GLFWwindow *window, float dt)
