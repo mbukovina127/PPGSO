@@ -182,17 +182,17 @@ public:
     glViewport(0, 0, WIDTH, HEIGHT);
     std::cout << cameraPostion.x << " " << cameraPostion.y << " " << cameraPostion.z << std::endl;
     // Set gray background
-    glClearColor(.1f, .1f, .1f, 1);
+    glClearColor(.5f, .4f, .4f, 1);
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // // Shadow map debugging
+    // Shadow map debugging
     // debugDepthQuad.use();
     // debugDepthQuad.setUniform("near_plane", .1f);
     // debugDepthQuad.setUniform("far_plane", 20.f);
     // debugDepthQuad.setUniform("depthMap", 0);
     // glActiveTexture(GL_TEXTURE0);
-    // glBindTexture(GL_TEXTURE_2D, scene.depthMap);
+    // glBindTexture(GL_TEXTURE_2D, scene.depthMapTex_dir[0]);
     // renderQuad();
 
     scene.camera->update();

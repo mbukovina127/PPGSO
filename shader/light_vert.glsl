@@ -4,10 +4,11 @@ layout(location = 0) in vec3 Position;
 layout(location = 1) in vec3 Normal;
 layout(location = 2) in vec2 TexCoord;
 // Matrices as program attributes
+#define MAX_SHADOWS 20
 uniform mat4 ProjectionMatrix;
 uniform mat4 ViewMatrix;
 uniform mat4 ModelMatrix;
-uniform mat4 lSpaceMatrix;
+uniform mat4 lSpaceMatrices[MAX_SHADOWS];
 // This will be passed to the fragment shader
 out vec2 texCoord;
 
@@ -17,7 +18,7 @@ out vec3 normal;
 // fragment posititon
 out vec3 fragPos;
 
-out vec4 fragPosLSpace;
+out vec4 fragPosLSpace[MAX_SHADOWS];
 
 void main() {
   // Copy the input to the fragment shader
@@ -26,8 +27,9 @@ void main() {
 
   // Normal in world coordinates updated for scaling / lighting
   normal = mat3(transpose(inverse(ModelMatrix))) * Normal;
-
-  fragPosLSpace = lSpaceMatrix * vec4(fragPos, 1.0);
+  for (int i = 0; i < MAX_SHADOWS; ++i) {
+    fragPosLSpace[i] = lSpaceMatrices[i] * vec4(fragPos, 1.0);
+  }
 
   // Calculate the final position on screen
   gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * vec4(Position, 1.0);

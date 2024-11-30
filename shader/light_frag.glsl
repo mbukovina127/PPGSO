@@ -45,20 +45,23 @@ uniform DirectionalLight DLIGHTS[MAX_dirLights];
 uniform int numDirL;
 
 //Shadows
-uniform sampler2D shadows;
+uniform sampler2D shadows[MAX_dirLights + MAX_pointLights];
+
 
 
 // The vertex shader will feed this input
 in vec2 texCoord;
 in vec3 normal;
 in vec3 fragPos;
-in vec4 fragPosLSpace;
+in vec4 fragPosLSpace[20];
 
 out vec4 FragmentColor;
 
 float ShadowCalc(sampler2D shadowMap, vec4 fpLightSpace, vec3 ldirection) {
     vec3 projCoords = fpLightSpace.xyz / fpLightSpace.w;
     projCoords = projCoords * 0.5 + 0.5;
+    if (projCoords.z > 1.0) return 0.0;
+
     float closestDepth = texture(shadowMap, projCoords.xy).r;
     float currentDepth = projCoords.z;
     float bias = max(0.01 * (1.0 - dot(normal, ldirection)), 0.005);
@@ -75,8 +78,10 @@ float ShadowCalc(sampler2D shadowMap, vec4 fpLightSpace, vec3 ldirection) {
     shadow /= 9.0;
     return shadow;
 }
-vec3 DirCalc(DirectionalLight light, vec3 objDiffuse) {
+vec3 DirCalc(int index, vec3 objDiffuse) {
     // Normalize vectors
+    DirectionalLight light = DLIGHTS[index];
+
     vec3 norm = normalize(normal);
     vec3 lightDir = normalize(light.direction);
 
@@ -93,7 +98,7 @@ vec3 DirCalc(DirectionalLight light, vec3 objDiffuse) {
     vec3 diffuse = light.base.difI * diff * objDiffuse;
     vec3 specular = spec * material.specular;
 
-    float shadow = ShadowCalc(shadows, fragPosLSpace, light.direction);
+    float shadow = ShadowCalc(shadows[index], fragPosLSpace[index], light.direction);
     return (ambient + (1.0 - shadow) * (diffuse + specular)) * light.base.color;
 //    // Combine all lighting contributions
 //    return (ambient + diffuse + specular) * light.base.color;
@@ -134,7 +139,7 @@ void main() {
     }
     vec3 light = vec3(0.0);
     for (int i = 0; i < numDirL; i++) {
-        light += DirCalc(DLIGHTS[i], object_color);
+        light += DirCalc(i, object_color);
     }
     for (int i = 0; i < numPointL; i++) {
         light += PointCalc(PLIGHTS[i], object_color);
