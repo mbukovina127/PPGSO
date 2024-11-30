@@ -53,10 +53,15 @@ public:
     void setUpLights() {
         directionalLights = {
             {
-                {{1,0.4,0.4}, .1f, 1.f}, {-2, 5, -4}
+                {{1,1,1}, .2f, 1.f}, {-2, 3, -4}
             },
             {
-                {{0.4,1,0.4}, .1f, 1.f}, {4, 5, -4}
+                {{1,0.4,0.4}, .0f, .8f}, {4, 5, -4}
+            }
+        };
+        pointLights = {
+            {
+                {{1,1,1}, 0, .2f}, {0,1,0}, {0.0}, {0.15}, {0.032}
             }
         };
         shader.use();
@@ -67,33 +72,28 @@ public:
             shader.setUniform("DLIGHTS[" + std::to_string(i) + "].base.difI", directionalLights[i].base.difI);
         }
         shader.setUniform("numDirL", (GLint)directionalLights.size());
-        // Set lights
-        // int numofdirlights = 1;
-        // shader.setUniform("numDirL", numofdirlights);
-        // // Light 1
-        // shader.setUniform("DLIGHTS[0].direction", light1_direction);
-        // shader.setUniform("DLIGHTS[0].base.color", glm::vec3(1, 1, 1));
-        // shader.setUniform("DLIGHTS[0].base.ambI", 0.1f);
-        // shader.setUniform("DLIGHTS[0].base.difI", 1.0f);
 
-        // // Light 2
-        // shader.setUniform("DLIGHTS[1].direction", glm::vec3(-2, 3, -2));
-        // shader.setUniform("DLIGHTS[1].base.color", glm::vec3(1, 0, 0));
-        // shader.setUniform("DLIGHTS[1].base.ambI", 0.05f);
-        // shader.setUniform("DLIGHTS[1].base.difI", 0.2f);
-        //
+        for (int i = 0; i < pointLights.size(); i++) {
+            shader.setUniform("PLIGHTS[" + std::to_string(i) + "].base.color", pointLights[i].base.color);
+            shader.setUniform("PLIGHTS[" + std::to_string(i) + "].base.ambI", pointLights[i].base.ambI);
+            shader.setUniform("PLIGHTS[" + std::to_string(i) + "].base.difI", pointLights[i].base.difI);
+            shader.setUniform("PLIGHTS[" + std::to_string(i) + "].position", pointLights[i].position);
+            shader.setUniform("PLIGHTS[" + std::to_string(i) + "].constant", pointLights[i].constant);
+            shader.setUniform("PLIGHTS[" + std::to_string(i) + "].linear", pointLights[i].linear);
+            shader.setUniform("PLIGHTS[" + std::to_string(i) + "].quadratic", pointLights[i].quadratic);
+        }
+        shader.setUniform("numPointL", (GLint)pointLights.size());
         //
         // int numofpointlights = 1;
-        // shader.setUniform("numPointL", numofpointlights);
         //
         // // p light 1
-        // shader.setUniform("PLIGHTS[0].position", glm::vec3(0, 2, 0));
-        // shader.setUniform("PLIGHTS[0].base.color", glm::vec3(1, 0.9, 0.9));
-        // shader.setUniform("PLIGHTS[0].base.ambI", 0.05f);
-        // shader.setUniform("PLIGHTS[0].base.difI", 0.5f);
         // shader.setUniform("PLIGHTS[0].constant", 0.0f);
         // shader.setUniform("PLIGHTS[0].linear", 0.15f);
         // shader.setUniform("PLIGHTS[0].quadratic", 0.032f);
+        //
+        //
+        //
+        //
 
         // //p light 2
         // shader.setUniform("PLIGHTS[1].position", glm::vec3(-0.5, 1, 0));
@@ -106,6 +106,7 @@ public:
     }
 
     void setUpDepthMap() {
+        // Directional Lights
         depthMapFBOS_dir.resize(directionalLights.size());
         depthMapTex_dir.resize(directionalLights.size());
 
@@ -130,30 +131,11 @@ public:
             if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
                 std::cerr << "Framebuffer " << i << " is not complete!" << std::endl;
         }
+        // Point Lights
+        
 
-        // // The framebuffer, which regroups 0, 1, or more textures, and 0 or 1 depth buffer.
-        // glGenFramebuffers(1, &depthMapFBO);
-        // glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-        //
-        // glGenTextures(1, &depthMap);
-        // glBindTexture(GL_TEXTURE_2D, depthMap);
-        // glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-        // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        //
-        // glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
-        //
-        // glDrawBuffer(GL_NONE);
-        // glReadBuffer(GL_NONE);
-        // // Always check that our framebuffer is ok
-        // if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-        //     cerr << "Framebuffer is not complete!" << endl;
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-
     }
 
     void computeLightSpaceMatrices() {
@@ -183,12 +165,7 @@ public:
         computeLightSpaceMatrices();
 
         glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
-        // //SINGLE
-        // glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-        //     glClear(GL_DEPTH_BUFFER_BIT);
-        //     getlightSpaceMatrix(light1_direction);
-        //     for ( auto& model : models ) { model->renderDepth(depthshader); }
-        //MULTIPLE
+
         for (int i = 0; i < depthMapFBOS_dir.size(); ++i) {
             glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBOS_dir[i]);
             glClear(GL_DEPTH_BUFFER_BIT);
