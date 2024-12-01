@@ -67,15 +67,15 @@ float calcDirShadow(int index, vec4 fpLightSpace, vec3 ldirection) {
     float currentDepth = projCoords.z;
     float bias = max(0.01 * (1.0 - dot(normal, ldirection)), 0.005);
     float shadow = 0.0;
-//    vec2 texelSize = 1.0 / textureSize(dirShadows, 0).xy;
-//    for (int x = -1; x <= 1; ++x) {
-//        for (int y = -1; y <= 1; ++y) {
-//            float pcfDepth = texture(dirShadows, vec3(projCoords.xy + vec2(x, y) * texelSize, index)).r;
-//            shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
-//        }
-//    }
-//    shadow /= 9.0;
-    return currentDepth - bias > closestDepth ? 1.0 : 0.0;
+    vec2 texelSize = 1.0 / textureSize(dirShadows, 0).xy;
+    for (int x = -1; x <= 1; ++x) {
+        for (int y = -1; y <= 1; ++y) {
+            float pcfDepth = texture(dirShadows, vec3(projCoords.xy + vec2(x, y) * texelSize, index)).r;
+            shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;
+        }
+    }
+    shadow /= 9.0;
+    return shadow;
 }
 
 vec3 DirCalc(int index, vec3 objDiffuse) {
@@ -115,7 +115,7 @@ float calcPointShadow(vec3 fragPosition, int index) {
 }
 
 vec3 PointCalc(int index, vec3 objDiffuse) {
-    PointLight light = PLIGHTS[index];
+    PointLight light = PLIGHTS[0];
 
     vec3 norm = normalize(normal);
     vec3 lightDir = normalize(light.position - fragPos);
@@ -135,7 +135,7 @@ vec3 PointCalc(int index, vec3 objDiffuse) {
     diffuse *= attenuation;
     specular *= attenuation;
 
-    float shadow = calcPointShadow(fragPos, index);
+    float shadow = calcPointShadow(fragPos, 0);
     return (ambient + (1.0 - shadow) * (diffuse + specular)) * light.base.color;
 }
 

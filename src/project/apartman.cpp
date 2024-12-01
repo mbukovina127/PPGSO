@@ -137,7 +137,6 @@ private:
     scene.setUpLights();
     //Shadows
     scene.setUpDepthMap();
-    scene.setUpDepthMap();
     scene.computeDepthCubemapMatrix(scene.pointLights[0].position, scene.pointLights[0].far_plane);
 
     //LODING OBJECTS
@@ -189,7 +188,7 @@ public:
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Shadow map debugging
+    // // Shadow map debugging
     // debugDepthQuad.use();
     // debugDepthQuad.setUniform("near_plane", .1f);
     // debugDepthQuad.setUniform("far_plane", 20.f);

@@ -228,6 +228,7 @@ public:
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     }
+
     void shadowPass() {
         depthshader.use();
 
@@ -270,6 +271,8 @@ public:
         shader.setUniform("ViewMatrix", camera->viewMatrix);
         shader.setUniform("viewPos", cameraPostion);
         shader.setUniform("dirShadows", 0);
+        for (int i = 0; i < directionalLights.size(); i++)
+            shader.setUniform("lSpaceMatrices[" + std::to_string(i) + "]", lSpaceMatrices[i]);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D_ARRAY, depthMapTex_dir_ARRAY);
 
