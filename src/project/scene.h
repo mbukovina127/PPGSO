@@ -14,8 +14,6 @@
 #include <shaders/cubemap_frag_glsl.h>
 #include <shaders/cubemap_geo_glsl.h>
 
-#include "shader/gshader.h"
-
 const unsigned int SHADOW_WIDTH = 2048, SHADOW_HEIGHT = 2048;
 
 struct BaseLight {
@@ -43,7 +41,6 @@ public:
     ppgso::Shader shader = ppgso::Shader(light_vert_glsl, light_frag_glsl, "");
     ppgso::Shader depthshader = ppgso::Shader(depth_vert_glsl, depth_frag_glsl, "");
     ppgso::Shader cubemap_shader = ppgso::Shader(cubemap_vert_glsl, cubemap_frag_glsl, cubemap_geo_glsl);
-    // cubeShader cubemap_shader = cubeShader("../shader/cubemap_vert.glsl", "../shader/cubemap_frag.glsl", "../shader/cubemap_geo.glsl");
     std::unique_ptr<Camera> camera;
     std::vector<std::unique_ptr<Model>> models;
     //lights
@@ -164,11 +161,11 @@ public:
 
         for (size_t i = 0; i < pointLights.size(); ++i) {
             glBindFramebuffer(GL_FRAMEBUFFER, depthCubemapFBOs_ARRAY[i]);
-            glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthCubemap_ARRAY, 0, i);
+            for (int f = 0; f < 6; f++)
+                glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthCubemap_ARRAY, 0, i * 6 + f);
 
             glDrawBuffer(GL_NONE);
             glReadBuffer(GL_NONE);
-
             if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
                 std::cerr << "Framebuffer for point light " << i << " is not complete!" << std::endl;
             }
@@ -275,15 +272,9 @@ public:
             shader.setUniform("lSpaceMatrices[" + std::to_string(i) + "]", lSpaceMatrices[i]);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D_ARRAY, depthMapTex_dir_ARRAY);
-
-        // shader.setUniform("cubeShadows", 1);
-        // glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, depthCubemap_ARRAY);
-        // adding texture for cubemap
-        // glActiveTexture(GL_TEXTURE0 + directionalLights.size());
-        // glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
-
-        // shader.setUniform("lSpaceMatrix", getlightSpaceMatrix(light1_direction));
-        // shader.setUniform("shadows", 0);
+        shader.setUniform("pointShadows", 1);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, depthCubemap_ARRAY);
 
         for ( auto& model : models )
             model->render(*this);
