@@ -92,7 +92,7 @@ public:
             shader.setUniform("PLIGHTS[" + std::to_string(i) + "].quadratic", pointLights[i].quadratic);
         }
         shader.setUniform("numPointL", (GLint)pointLights.size());
-        //
+        cout << pointLights.size() << '\n';
         // int numofpointlights = 1;
         //
         // // p light 1
@@ -260,7 +260,7 @@ public:
             shader.setUniform("shadows[" + std::to_string(i) + "]", i);
             shader.setUniform("lSpaceMatrices[" + std::to_string(i) + "]", lSpaceMatrices[i]);
         }
-        shader.setUniform("cubeShadows", (GLint)directionalLights.size());
+        shader.setUniform("cubeShadows[0]", (GLint)directionalLights.size());
         // adding texture for cubemap
         glActiveTexture(GL_TEXTURE0 + directionalLights.size());
         glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
