@@ -106,7 +106,7 @@ float calcPointShadow(int index) {
     vec3 fragToLight = fragPos - PLIGHTS[index].position;
 
     // Sample from the layer corresponding to the point light index
-    float closestDepth = texture(cubeShadows, vec4(normalize(fragToLight), 0)).r;
+    float closestDepth = texture(cubeShadows, vec4(fragToLight, index)).r;
     closestDepth *= PLIGHTS[index].far_plane;
 
     float currentDepth = length(fragToLight);
@@ -115,7 +115,7 @@ float calcPointShadow(int index) {
 }
 
 vec3 PointCalc(int index, vec3 objDiffuse) {
-    PointLight light = PLIGHTS[0];
+    PointLight light = PLIGHTS[index];
 
     vec3 norm = normalize(normal);
     vec3 lightDir = normalize(light.position - fragPos);
@@ -135,7 +135,6 @@ vec3 PointCalc(int index, vec3 objDiffuse) {
     diffuse *= attenuation;
     specular *= attenuation;
 
-//    float shadow = calcPointShadow(fragPos, index);
     float shadow = calcPointShadow(index);
     return (ambient + (1.0 - shadow) * (diffuse + specular)) * light.base.color;
 }
@@ -148,13 +147,13 @@ void main() {
     }
 
     vec3 light = vec3(0.0);
-    for (int i = 0; i < numDirL; i++) {
-        light += DirCalc(i, object_color);
-    }
     for (int i = 0; i < numPointL; i++) {
         light += PointCalc(i, object_color);
     }
 
+    for (int i = 0; i < numDirL; i++) {
+        light += DirCalc(i, object_color);
+    }
 //    vec3 fragToLight = fragPos - PLIGHTS[0].position;
 
     // Sample from the layer corresponding to the point light index
