@@ -161,9 +161,7 @@ public:
 
         for (size_t i = 0; i < pointLights.size(); ++i) {
             glBindFramebuffer(GL_FRAMEBUFFER, depthCubemapFBOs_ARRAY[i]);
-            for (int f = 0; f < 6; f++)
-                glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthCubemap_ARRAY, 0, i * 6 + f);
-
+            glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthCubemap_ARRAY, 0);
             glDrawBuffer(GL_NONE);
             glReadBuffer(GL_NONE);
             if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
@@ -214,6 +212,7 @@ public:
             glClear(GL_DEPTH_BUFFER_BIT);
             cubemap_shader.setUniform("lightPos", pointLights[u].position);
             cubemap_shader.setUniform("far_plane", pointLights[u].far_plane);
+            cubemap_shader.setUniform("layer", u);
             for (int i = 0; i < 6; i++) {
                 // TODO: can add compute of matrices here
                 cubemap_shader.setUniform("shadowMatrices[" + std::to_string(i) + "]", shadowTransforms[u * 6 + i]);
