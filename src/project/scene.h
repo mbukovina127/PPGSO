@@ -50,11 +50,12 @@ public:
     std::vector<DirectionalLight> directionalLights;
     std::vector<PointLight> pointLights;
     //shadow maps
-    std::vector<GLuint> depthMapFBOS_dir;
-    std::vector<GLuint> depthMapTex_dir;
+    std::vector<GLuint> depthMapFBOs_dir;
+    GLuint depthMapTex_dir_ARRAY;
     std::vector<glm::mat4> lSpaceMatrices;
-    GLuint depthMapFBO;
-    GLuint depthCubemap;
+
+    std::vector<GLuint> depthCubemapFBOs_ARRAY;
+    GLuint depthCubemap_ARRAY;
     std::vector<glm::mat4> shadowTransforms;
 
 
@@ -63,9 +64,9 @@ public:
             {
                 {{1,1,1}, .2f, 1.f}, {-2, 3, -4}
             },
-            // {
-            //     {{1,0.4,0.4}, .0f, .8f}, {4, 5, -4}
-            // }
+            {
+                {{1,0.4,0.4}, .0f, .8f}, {4, 5, -4}
+            }
         };
         pointLights = {
             {
@@ -116,49 +117,62 @@ public:
 
     void setUpDepthMap() {
         // Directional Lights
-        depthMapFBOS_dir.resize(directionalLights.size());
-        depthMapTex_dir.resize(directionalLights.size());
+        // Generate a single GL_TEXTURE_2D_ARRAY for shadow maps
+        glGenTextures(1, &depthMapTex_dir_ARRAY);
+        glBindTexture(GL_TEXTURE_2D_ARRAY, depthMapTex_dir_ARRAY);
 
-        glGenFramebuffers(directionalLights.size(), depthMapFBOS_dir.data());
-        glGenTextures(directionalLights.size(), depthMapTex_dir.data());
+        // Allocate storage for all layers (one for each directional light)
+        unsigned int numLayers = directionalLights.size();
+        glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, numLayers, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
 
-        for (int i = 0; i < directionalLights.size(); i++) {
-            glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBOS_dir[i]);
-            glGenTextures(1, &depthMapTex_dir[i]);
-            glBindTexture(GL_TEXTURE_2D, depthMapTex_dir[i]);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        // Set texture parameters
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMapTex_dir[i], 0);
+        // Generate and configure framebuffers for each layer
+        depthMapFBOs_dir.resize(numLayers);
+        glGenFramebuffers(numLayers, depthMapFBOs_dir.data());
+
+        for (size_t i = 0; i < numLayers; ++i) {
+            glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBOs_dir[i]);
+            glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthMapTex_dir_ARRAY, 0, i);
 
             glDrawBuffer(GL_NONE);
             glReadBuffer(GL_NONE);
 
-            if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+            if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
                 std::cerr << "Framebuffer " << i << " is not complete!" << std::endl;
+            }
         }
         // Point Lights
-        glGenFramebuffers(1, &depthMapFBO);
-        // attach depth texture as FBO's depth buffer
-        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
         // create depth cubemap texture
-        glGenTextures(1, &depthCubemap);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
-        for (unsigned int i = 0; i < 6; ++i)
-            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-        glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthCubemap, 0);
-        glDrawBuffer(GL_NONE);
-        glReadBuffer(GL_NONE);
-        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-            std::cerr << "Framebuffer is not complete!" << std::endl;
+        numLayers = pointLights.size() * 6;
+        glGenTextures(1, &depthCubemap_ARRAY);
+        glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, depthCubemap_ARRAY);
+        glTexImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, numLayers, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+
+        depthCubemapFBOs_ARRAY.resize(pointLights.size());
+        glGenFramebuffers(pointLights.size(), depthCubemapFBOs_ARRAY.data());
+
+        for (size_t i = 0; i < pointLights.size(); ++i) {
+            glBindFramebuffer(GL_FRAMEBUFFER, depthCubemapFBOs_ARRAY[i]);
+            glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthCubemap_ARRAY, 0, i);
+
+            glDrawBuffer(GL_NONE);
+            glReadBuffer(GL_NONE);
+
+            if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+                std::cerr << "Framebuffer for point light " << i << " is not complete!" << std::endl;
+            }
+        }
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
@@ -198,17 +212,19 @@ public:
     void cubemapPass() {
         cubemap_shader.use();
         glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
-        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+        for (int u = 0; u < pointLights.size(); ++u) {
+            glBindFramebuffer(GL_FRAMEBUFFER, depthCubemapFBOs_ARRAY[u]);
             glClear(GL_DEPTH_BUFFER_BIT);
-            cubemap_shader.setUniform("lightPos", pointLights[0].position);
-            cubemap_shader.setUniform("far_plane", pointLights[0].far_plane);
+            cubemap_shader.setUniform("lightPos", pointLights[u].position);
+            cubemap_shader.setUniform("far_plane", pointLights[u].far_plane);
             for (int i = 0; i < 6; i++) {
                 // TODO: can add compute of matrices here
-                cubemap_shader.setUniform("shadowMatrices[" + std::to_string(i) + "]", shadowTransforms[i]);
+                cubemap_shader.setUniform("shadowMatrices[" + std::to_string(i) + "]", shadowTransforms[u * 6 + i]);
             }
             for (auto& model : models) {
                 model->renderDepth(cubemap_shader);
             }
+        }
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     }
@@ -219,8 +235,8 @@ public:
 
         glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
 
-        for (int i = 0; i < depthMapFBOS_dir.size(); ++i) {
-            glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBOS_dir[i]);
+        for (int i = 0; i < depthMapFBOs_dir.size(); ++i) {
+            glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBOs_dir[i]);
             glClear(GL_DEPTH_BUFFER_BIT);
 
             depthshader.setUniform("lSpaceMatrix", lSpaceMatrices[i]);
@@ -253,17 +269,15 @@ public:
         shader.setUniform("ProjectionMatrix", camera->projectionMatrix);
         shader.setUniform("ViewMatrix", camera->viewMatrix);
         shader.setUniform("viewPos", cameraPostion);
-        // shader.setUniform("")
-        for (int i = 0; i < directionalLights.size(); i++) {
-            glActiveTexture(GL_TEXTURE0 + i);
-            glBindTexture(GL_TEXTURE_2D, depthMapTex_dir[i]);
-            shader.setUniform("shadows[" + std::to_string(i) + "]", i);
-            shader.setUniform("lSpaceMatrices[" + std::to_string(i) + "]", lSpaceMatrices[i]);
-        }
-        shader.setUniform("cubeShadows[0]", (GLint)directionalLights.size());
+        shader.setUniform("dirShadows", 0);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D_ARRAY, depthMapTex_dir_ARRAY);
+
+        // shader.setUniform("cubeShadows", 1);
+        // glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, depthCubemap_ARRAY);
         // adding texture for cubemap
-        glActiveTexture(GL_TEXTURE0 + directionalLights.size());
-        glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
+        // glActiveTexture(GL_TEXTURE0 + directionalLights.size());
+        // glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
 
         // shader.setUniform("lSpaceMatrix", getlightSpaceMatrix(light1_direction));
         // shader.setUniform("shadows", 0);

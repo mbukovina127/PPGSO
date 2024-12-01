@@ -195,7 +195,7 @@ public:
     // debugDepthQuad.setUniform("far_plane", 20.f);
     // debugDepthQuad.setUniform("depthMap", 0);
     // glActiveTexture(GL_TEXTURE0);
-    // glBindTexture(GL_TEXTURE_2D, scene.depthMapTex_dir[0]);
+    // glBindTexture(GL_TEXTURE_2D_ARRAY, scene.depthMapTex_dir_ARRAY);
     // renderQuad();
 
     scene.camera->update();
