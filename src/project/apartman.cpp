@@ -67,7 +67,7 @@ private:
     //LODING OBJECTS
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
-    auto room = std::make_unique<Room>("../data/room2/room.obj");
+    auto room = std::make_unique<Room>("../data/room4/room.obj");
     auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
     auto laptop = std::make_unique<Lamp>("../data/laptop4/laptop.obj");
     auto roomba = std::make_unique<Chair>("../data/roomba/roomba.obj");

@@ -151,9 +151,9 @@ void main() {
         light += PointCalc(i, object_color);
     }
 
-    for (int i = 0; i < numDirL; i++) {
-        light += DirCalc(i, object_color);
-    }
+    //for (int i = 0; i < numDirL; i++) {
+        //light += DirCalc(i, object_color);
+    //}
 //    vec3 fragToLight = fragPos - PLIGHTS[0].position;
 
     // Sample from the layer corresponding to the point light index
