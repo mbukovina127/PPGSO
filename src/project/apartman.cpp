@@ -139,6 +139,7 @@ private:
     scene.setUpDepthMap();
     scene.setUpDepthMap();
     scene.computeDepthCubemapMatrix(scene.pointLights[0].position, scene.pointLights[0].far_plane);
+    scene.computeDepthCubemapMatrix(scene.pointLights[1].position, scene.pointLights[1].far_plane);
 
     //LODING OBJECTS
     loadObjects();

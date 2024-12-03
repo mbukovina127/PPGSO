@@ -104,16 +104,16 @@ vec3 DirCalc(int index, vec3 objDiffuse) {
 //    // Combine all lighting contributions
 //    return (ambient + diffuse + specular) * light.base.color;
 }
-float calcPointShadow(vec3 fragPosition, vec3 lightPos, float far_plane) {
+float calcPointShadow(vec3 fragPosition, vec3 lightPos, float far_plane, int index) {
     vec3 fragToLight = fragPosition - lightPos;
-    float closestDepth = texture(cubeShadows[1], fragToLight).r;
+    float closestDepth = texture(cubeShadows[index], fragToLight).r;
     closestDepth *= far_plane;
 
     float currentDepth = length(fragToLight);
     float bias = 0.05;
     return currentDepth -  bias > closestDepth ? 1.0 : 0.0;
 }
-vec3 PointCalc(PointLight light, vec3 objDiffuse) {
+vec3 PointCalc(PointLight light, vec3 objDiffuse, int index) {
     // Normalize vectors
     vec3 norm = normalize(normal);
     vec3 lightDir = normalize(light.position);
@@ -137,7 +137,7 @@ vec3 PointCalc(PointLight light, vec3 objDiffuse) {
     ambient *= attenuation;
     diffuse *= attenuation;
     specular *= attenuation;
-    float shadow = calcPointShadow(fragPos, light.position, light.far_plane);
+    float shadow = calcPointShadow(fragPos, light.position, light.far_plane, index);
     return (ambient + (1.0 - shadow) * (diffuse + specular)) * light.base.color;
 }
 void main() {
@@ -150,12 +150,13 @@ void main() {
 //    for (int i = 0; i < numDirL; i++) {
 //        light += DirCalc(i, object_color);
 //    }
-//    for (int i = 0; i < numPointL; i++) {
-//        light += PointCalc(PLIGHTS[i], object_color);
-//    }
+    for (int i = 0; i < numPointL; i++) {
+        light += PointCalc(PLIGHTS[i], object_color, i);
+    }
 
-    vec3 fragToLight = fragPos - PLIGHTS[0].position;
-    float closestDepth = texture(cubeShadows[1], fragToLight).r;
+//    vec3 fragToLight = fragPos - PLIGHTS[0].position;
+//    float closestDepth = texture(cubeShadows[0], fragToLight).r;
 
-    FragmentColor = vec4(vec3(closestDepth * 10.f) ,1);
+//    FragmentColor = vec4(vec3(closestDepth * 10.f) ,1);
+    FragmentColor = vec4(light * object_color ,1);
 }
