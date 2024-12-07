@@ -10,7 +10,7 @@
 |                                                      | Priesvitné objekty                                                                             | 2       | &#9744;  |
 | **Scéna**                                            | Procedurálne generovaná scéna                                                                  | 2       | &#x2705; |
 |                                                      | Hierarchická reprezentácia scény                                                               | 4       | &#x2705; |
-| **Animované objekty**                                | Procedurálna animácia                                                                          | 2       | &#9744;  |
+| **Animované objekty**                                | Procedurálna animácia                                                                          | 2       | &#x2705;  |
 |                                                      | Animácia na základe dát uložených v kľúčových snímkoch a interpolácie                          | 3       | &#x2705; |
 |                                                      | Animácia riadená komplexnými animačnými krivkami pre plynulý pohyb                             | 1       | &#9744;  |
 | **Simulácia, časticový systém**                      | Efektívna kolízia medzi objektami                                                              | 3       | &#9744;  |
