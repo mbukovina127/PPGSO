@@ -69,10 +69,10 @@ public:
         };
         pointLights = {
             {
-                {{1,1,1}, 0, .6f}, {0,1,0}, {25.0}, {0.0}, {0.15}, {0.032}
+                {{1,1,1}, 0.15, .6f}, {1.15, 2.9, 0.3}, {25.0}, {0.0}, {0.15}, {0.032}
             },
             {
-                {{1,1,1}, 0, .6f}, {-.4,1.2,-0.2}, {25.0}, {0.0}, {0.15}, {0.032}
+                {{0.95,0.63,0.63}, 0.01, .6f}, {0.25, 3.53, -4.12}, {15.0}, {0.0}, {0.18}, {0.022}
             }
         };
         shader.use();
@@ -95,26 +95,6 @@ public:
             shader.setUniform("PLIGHTS[" + std::to_string(i) + "].quadratic", pointLights[i].quadratic);
         }
         shader.setUniform("numPointL", (GLint)pointLights.size());
-        //
-        // int numofpointlights = 1;
-        //
-        // // p light 1
-        // shader.setUniform("PLIGHTS[0].constant", 0.0f);
-        // shader.setUniform("PLIGHTS[0].linear", 0.15f);
-        // shader.setUniform("PLIGHTS[0].quadratic", 0.032f);
-        //
-        //
-        //
-        //
-
-        // //p light 2
-        // shader.setUniform("PLIGHTS[1].position", glm::vec3(-0.5, 1, 0));
-        // shader.setUniform("PLIGHTS[1].base.color", glm::vec3(1, 0.8f, 0.8f));
-        // shader.setUniform("PLIGHTS[1].base.ambI", 0.1f);
-        // shader.setUniform("PLIGHTS[1].base.difI", 0.8f);
-        // shader.setUniform("PLIGHTS[1].constant", 0.1f);
-        // shader.setUniform("PLIGHTS[1].linear", 0.09f);
-        // shader.setUniform("PLIGHTS[1].quadratic", 0.032f);
     }
 
     void setUpDepthMap() {
