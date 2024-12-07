@@ -70,7 +70,7 @@ private:
     //LODING OBJECTS
     auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
     auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
-    auto room = std::make_unique<Room>("../data/room4/room.obj");
+    auto room = std::make_unique<Room>("../data/room/room.obj");
     auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
     auto laptop = std::make_unique<Lamp>("../data/laptop4/laptop.obj");
     auto roomba = std::make_unique<Chair>("../data/roomba/roomba.obj");
@@ -80,6 +80,7 @@ private:
     auto zaves_spod = std::make_unique<Zaves>("../data/zaves/cast2.obj");
     auto okno = std::make_unique<Chair>("../data/okno/okno.obj");
     auto obal = std::make_unique<Obal>("../data/book/obal.obj", zaves_spod->fulltime);
+    auto vyhlad = std::make_unique<Room>("../data/vyhlad/vyhlad.obj");
 
     //positioning
     backpack->scale = {0.2, 0.2, 0.2};
@@ -94,6 +95,9 @@ private:
     zaves_vrch->scale = {1.5, 1, 1};
     zaves_vrch->rotation = {glm::radians(90.0f), 0, 0};
     obal->position = {0.0, 0.06, -0.36};
+    lamp->position = {-1.41, 0.94, -1.07};
+    lamp->rotation = {0, 0, glm::radians(90.0f)};
+    //vyhlad->position = {0.5, -0.5, -0.5};
 
     //animation
     chair->keyframes.push_back(Keyframe(0.0f, {0.2,0,-0.5}, {0, 0, glm::radians(-30.0f)}, {1.2, 1.2, 1.2}));
@@ -140,6 +144,7 @@ private:
     //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));
     scene.models.push_back(std::move(plane));
+    scene.models.push_back(std::move(vyhlad));
   }
   /*!
    * Reset and initialize the game scene
