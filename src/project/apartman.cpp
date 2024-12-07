@@ -20,6 +20,9 @@
 #include <shaders/ddebug_vert_glsl.h>
 #include <shaders/ddebug_frag_glsl.h>
 
+#include "models/obal.h"
+#include "models/zaves_spod.h"
+
 const unsigned int WIDTH = 1280;
 const unsigned int HEIGHT = 720;
 
@@ -73,10 +76,10 @@ private:
     auto roomba = std::make_unique<Chair>("../data/roomba/roomba.obj");
     auto plane = std::make_unique<Chair>("../data/plane/plane.obj");
     auto book = std::make_unique<Chair>("../data/book/book.obj");
-    auto obal = std::make_unique<Chair>("../data/book/obal.obj");
-    auto okno = std::make_unique<Chair>("../data/okno/okno.obj");
     auto zaves_vrch = std::make_unique<Chair>("../data/zaves/cast1.obj");
-    auto zaves_spod = std::make_unique<Chair>("../data/zaves/cast2.obj");
+    auto zaves_spod = std::make_unique<Zaves>("../data/zaves/cast2.obj");
+    auto okno = std::make_unique<Chair>("../data/okno/okno.obj");
+    auto obal = std::make_unique<Obal>("../data/book/obal.obj", zaves_spod->fulltime);
 
     //positioning
     backpack->scale = {0.2, 0.2, 0.2};
@@ -90,6 +93,7 @@ private:
     zaves_vrch->position = {-0.37, 3, -1.7};
     zaves_vrch->scale = {1.5, 1, 1};
     zaves_vrch->rotation = {glm::radians(90.0f), 0, 0};
+    obal->position = {0.0, 0.06, -0.36};
 
     //animation
     chair->keyframes.push_back(Keyframe(0.0f, {0.2,0,-0.5}, {0, 0, glm::radians(-30.0f)}, {1.2, 1.2, 1.2}));
@@ -113,10 +117,10 @@ private:
     plane->keyframes.push_back(Keyframe(14.0f, {0.93, 1.59, -0.05}, {0, glm::radians(15.0f), 0}, {1, 1, 1}));
     plane->keyframes.push_back(Keyframe(17.0f, {0.35, 1.05, -1.8}, {0, glm::radians(20.0f), glm::radians(15.0f)}, {1, 1, 1}));
 
-    obal->keyframes.push_back(Keyframe(0.0f, {0.0, 0.06, -0.36}, {0, 0, 0}, {1, 1, 1}));
+    /*obal->keyframes.push_back(Keyframe(0.0f, {0.0, 0.06, -0.36}, {0, 0, 0}, {1, 1, 1}));
     obal->keyframes.push_back(Keyframe(5.0f, {0.0, 0.06, -0.36}, {0, 0, 0}, {1, 1, 1}));
     obal->keyframes.push_back(Keyframe(6.0f, {0.0, 0.06, -0.36}, {glm::radians(-20.0f), 0, 0}, {1, 1, 1}));
-    obal->keyframes.push_back(Keyframe(7.0f, {0.0, 0.06, -0.36}, {0, 0, 0}, {1, 1, 1}));
+    obal->keyframes.push_back(Keyframe(7.0f, {0.0, 0.06, -0.36}, {0, 0, 0}, {1, 1, 1}));*/
 
     okno->keyframes.push_back(Keyframe(0.0f, {-0.3, 1.1, -2.09}, {0, 0, 0}, {1, 1, 1}));
     okno->keyframes.push_back(Keyframe(10.0f, {-0.3, 1.1, -2.09}, {0, 0, 0}, {1, 1, 1}));
