@@ -161,7 +161,9 @@ private:
     scene.setUpLights();
     //Shadows
     scene.setUpDepthMap();
+    scene.setUpDepthMap();
     scene.computeDepthCubemapMatrix(scene.pointLights[0].position, scene.pointLights[0].far_plane);
+    scene.computeDepthCubemapMatrix(scene.pointLights[1].position, scene.pointLights[1].far_plane);
 
     //LODING OBJECTS
     loadObjects();
@@ -218,7 +220,7 @@ public:
     // debugDepthQuad.setUniform("far_plane", 20.f);
     // debugDepthQuad.setUniform("depthMap", 0);
     // glActiveTexture(GL_TEXTURE0);
-    // glBindTexture(GL_TEXTURE_2D_ARRAY, scene.depthMapTex_dir_ARRAY);
+    // glBindTexture(GL_TEXTURE_2D, scene.depthMapTex_dir[0]);
     // renderQuad();
 
     scene.camera->update();
