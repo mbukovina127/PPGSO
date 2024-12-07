@@ -41,7 +41,6 @@ public:
     ppgso::Shader shader = ppgso::Shader(light_vert_glsl, light_frag_glsl, "");
     ppgso::Shader depthshader = ppgso::Shader(depth_vert_glsl, depth_frag_glsl, "");
     ppgso::Shader cubemap_shader = ppgso::Shader(cubemap_vert_glsl, cubemap_frag_glsl, cubemap_geo_glsl);
-    // cubeShader cubemap_shader = cubeShader("../shader/cubemap_vert.glsl", "../shader/cubemap_frag.glsl", "../shader/cubemap_geo.glsl");
     std::unique_ptr<Camera> camera;
     std::vector<std::unique_ptr<Model>> models;
     //lights
@@ -60,20 +59,24 @@ public:
 
     void setUpLights() {
         directionalLights = {
-            {
-                {{1,1,1}, .2f, 1.f}, {-2, 3, -4}
-            },
+            // {
+            //     {{1,1,1}, .2f, 1.f}, {-2, 3, -4}
+            // },
             // {
             //     {{1,0.4,0.4}, .0f, .8f}, {4, 5, -4}
             // }
         };
         pointLights = {
             {
-                {{1,1,1}, 0.15, .6f}, {1.15, 2.9, 0.3}, {25.0}, {0.0}, {0.15}, {0.032}
+                {{1,1,1}, 0.15, .5f}, {1.15, 2.9, 0.3}, {25.0}, {0.0}, {0.15}, {0.002}
             },
+            // {
+            //     {{0.95,0.63,0.63}, 0.01, .8f}, {0.25, 3.53, -4.12}, {25.0}, {0.0}, {0.18}, {0.002}
+            // },
             {
-                {{0.95,0.63,0.63}, 0.01, .6f}, {0.25, 3.53, -4.12}, {15.0}, {0.0}, {0.18}, {0.022}
+                {{0,1,0}, 0., .6f}, {-1.41, 1.4, -1.07}, {15.0}, {0.0}, {0.18}, {0.012}
             }
+
         };
         shader.use();
         for (int i = 0; i < directionalLights.size(); i++) {
@@ -124,7 +127,7 @@ public:
                 std::cerr << "Framebuffer " << i << " is not complete!" << std::endl;
         }
         // Point Lights
-        unsigned int pocet = 2;
+        unsigned int pocet = 3;
         cubemapTEXs.resize(pocet);
         cubemapFBOs.resize(pocet);
         // create depth cubemap texture
@@ -259,10 +262,6 @@ public:
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTEXs[0]);
         glActiveTexture(GL_TEXTURE0 + directionalLights.size() + 1);
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTEXs[1]);
-
-
-        // shader.setUniform("lSpaceMatrix", getlightSpaceMatrix(light1_direction));
-        // shader.setUniform("shadows", 0);
 
         for ( auto& model : models )
             model->render(*this);

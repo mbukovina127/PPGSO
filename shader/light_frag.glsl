@@ -47,7 +47,7 @@ uniform int numDirL;
 
 //Shadows
 uniform sampler2D dirShadows[MAX_dirLights];
-uniform samplerCube cubeShadows[2];
+uniform samplerCube cubeShadows[3];
 
 
 // The vertex shader will feed this input
@@ -101,6 +101,8 @@ vec3 DirCalc(int index, vec3 objDiffuse) {
 
     float shadow = calcDirShadow(dirShadows[index], fragPosLSpace[index], light.direction);
     return (ambient + (1.0 - shadow) * (diffuse + specular)) * light.base.color;
+//    // Combine all lighting contributions
+//    return (ambient + diffuse + specular) * light.base.color;
 }
 float calcPointShadow(vec3 fragPosition, vec3 lightPos, float far_plane, int index) {
     vec3 fragToLight = fragPosition - lightPos;
