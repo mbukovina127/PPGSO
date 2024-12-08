@@ -96,7 +96,6 @@ private:
     obal->position = {0.0, 0.06, -0.36};
     lamp->position = {-1.41, 0.94, -1.07};
     lamp->rotation = {0, 0, glm::radians(90.0f)};
-    //vyhlad->position = {0.5, -0.5, -0.5};
 
     //animation
     chair->keyframes.push_back(Keyframe(0.0f, {0.2,0,-0.5}, {0, 0, glm::radians(-30.0f)}, {1.2, 1.2, 1.2}));
@@ -119,11 +118,6 @@ private:
     plane->keyframes.push_back(Keyframe(10.0f, {1.36, 2.09, 2.68}, {0, 0, 0}, {1, 1, 1}));
     plane->keyframes.push_back(Keyframe(14.0f, {0.93, 1.59, -0.05}, {0, glm::radians(15.0f), 0}, {1, 1, 1}));
     plane->keyframes.push_back(Keyframe(17.0f, {0.35, 1.05, -1.8}, {0, glm::radians(20.0f), glm::radians(15.0f)}, {1, 1, 1}));
-
-    /*obal->keyframes.push_back(Keyframe(0.0f, {0.0, 0.06, -0.36}, {0, 0, 0}, {1, 1, 1}));
-    obal->keyframes.push_back(Keyframe(5.0f, {0.0, 0.06, -0.36}, {0, 0, 0}, {1, 1, 1}));
-    obal->keyframes.push_back(Keyframe(6.0f, {0.0, 0.06, -0.36}, {glm::radians(-20.0f), 0, 0}, {1, 1, 1}));
-    obal->keyframes.push_back(Keyframe(7.0f, {0.0, 0.06, -0.36}, {0, 0, 0}, {1, 1, 1}));*/
 
     okno->keyframes.push_back(Keyframe(0.0f, {-0.3, 1.1, -2.09}, {0, 0, 0}, {1, 1, 1}));
     okno->keyframes.push_back(Keyframe(10.0f, {-0.3, 1.1, -2.09}, {0, 0, 0}, {1, 1, 1}));
@@ -229,9 +223,12 @@ public:
     scene.anicam->update(dt);
     scene.update(dt);
     scene.shader.use();
-    scene.shader.setUniform("ProjectionMatrix", scene.anicam->projectionMatrix);
-    scene.shader.setUniform("ViewMatrix", scene.anicam->viewMatrix);
-    scene.shader.setUniform("viewPos", scene.anicam->position);
+    scene.shader.setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
+    scene.shader.setUniform("ViewMatrix", scene.camera->viewMatrix);
+    scene.shader.setUniform("viewPos", cameraPostion);
+    // scene.shader.setUniform("ProjectionMatrix", scene.anicam->projectionMatrix);
+    // scene.shader.setUniform("ViewMatrix", scene.anicam->viewMatrix);
+    // scene.shader.setUniform("viewPos", scene.anicam->position);
     scene.render();
   }
 
