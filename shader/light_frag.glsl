@@ -154,9 +154,9 @@ void main() {
         light += PointCalc(PLIGHTS[i], object_color, i);
     }
 
-//    vec3 fragToLight = fragPos - PLIGHTS[0].position;
-//    float closestDepth = texture(cubeShadows[0], fragToLight).r;
-
-//    FragmentColor = vec4(vec3(closestDepth * 10.f) ,1);
+//    vec3 fragToLight = fragPos - PLIGHTS[1].position;
+//    float closestDepth = texture(cubeShadows[1], fragToLight).r;
+//
+//    FragmentColor = vec4(vec3(closestDepth * 2.f) ,1);
     FragmentColor = vec4(light * object_color ,1);
 }

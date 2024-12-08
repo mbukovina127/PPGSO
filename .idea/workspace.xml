@@ -26,17 +26,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48e1ef06-6f41-4785-b61a-b040db424d36" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/anicam.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/room/room.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/data/room/room.mtl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/room/room.obj" beforeDir="false" afterPath="$PROJECT_DIR$/data/room/room.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/room2/WoodFine22_COL_1K.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/room2/carpet.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/room2/floor.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/room2/plaster.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/room2/room.mtl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/room2/room.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/room2/wood.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/light_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/shader/light_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/apartman.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/apartman.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/scene.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +124,7 @@
       <workItem from="1733654190200" duration="47000" />
       <workItem from="1733654254213" duration="18000" />
       <workItem from="1733654280620" duration="334000" />
-      <workItem from="1733654646311" duration="572000" />
+      <workItem from="1733654646311" duration="3365000" />
     </task>
     <servers />
   </component>

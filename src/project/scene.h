@@ -14,6 +14,8 @@
 #include <shaders/cubemap_frag_glsl.h>
 #include <shaders/cubemap_geo_glsl.h>
 
+#include "anicam.h"
+
 const unsigned int SHADOW_WIDTH = 2048, SHADOW_HEIGHT = 2048;
 
 struct BaseLight {
@@ -42,6 +44,7 @@ public:
     ppgso::Shader depthshader = ppgso::Shader(depth_vert_glsl, depth_frag_glsl, "");
     ppgso::Shader cubemap_shader = ppgso::Shader(cubemap_vert_glsl, cubemap_frag_glsl, cubemap_geo_glsl);
     std::unique_ptr<Camera> camera;
+    std::unique_ptr<Anicam> anicam;
     std::vector<std::unique_ptr<Model>> models;
     //lights
     std::vector<DirectionalLight> directionalLights;
@@ -68,13 +71,13 @@ public:
         };
         pointLights = {
             {
-                {{1,1,1}, 0.15, .5f}, {1.15, 2.9, 0.3}, {25.0}, {0.0}, {0.15}, {0.002}
+                {{1,1,1}, 0.05, .3f}, {1.15, 2.9, 0.3}, {25.0}, {0.0}, {0.15}, {0.002}
             },
             // {
             //     {{0.95,0.63,0.63}, 0.01, .8f}, {0.25, 3.53, -4.12}, {25.0}, {0.0}, {0.18}, {0.002}
             // },
             {
-                {{0,1,0}, 0., .6f}, {-1.41, 1.4, -1.07}, {15.0}, {0.0}, {0.18}, {0.012}
+                {{0,1,0}, 0., .15f}, {-1.15, 1.30, -1.04}, {15.0}, {0.0}, {0.18}, {0.012}
             }
         };
         shader.use();
@@ -243,10 +246,6 @@ public:
     }
 
     void render() {
-        shader.use();
-        shader.setUniform("ProjectionMatrix", camera->projectionMatrix);
-        shader.setUniform("ViewMatrix", camera->viewMatrix);
-        shader.setUniform("viewPos", cameraPostion);
         // shader.setUniform("")
         for (int i = 0; i < directionalLights.size(); i++) {
             glActiveTexture(GL_TEXTURE0 + i);

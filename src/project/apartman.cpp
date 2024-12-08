@@ -130,6 +130,9 @@ private:
     okno->keyframes.push_back(Keyframe(10.0f, {-0.3, 1.1, -2.09}, {0, 0, 0}, {1, 1, 1}));
     okno->keyframes.push_back(Keyframe(20.0f, {-0.3, 1.94, -2.09}, {0, 0, 0}, {1, 1, 1}));
 
+    scene.anicam->keyframes.push_back(cam_keyframe(0.f, {0.67, 1.67, 3.36}, {-0.247105, 0.38785, -0.556736}));
+    scene.anicam->keyframes.push_back(cam_keyframe(20.f, {-0.720415, 1.17124,0.60603}, {-0.247105, 0.38785, -0.556736}));
+
     room->addChild(std::move(lamp));
     chair->addChild(std::move(backpack));
     room->addChild(std::move(chair));
@@ -154,6 +157,7 @@ private:
     scene.models.clear();
     // Create a camera
     scene.camera = std::make_unique<Camera>();
+    scene.anicam = std::make_unique<Anicam>();
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -208,7 +212,7 @@ public:
     scene.cubemapPass();
 
     glViewport(0, 0, WIDTH, HEIGHT);
-    std::cout << cameraPostion.x << " " << cameraPostion.y << " " << cameraPostion.z << std::endl;
+    std::cout << cameraPostion.x << ", " << cameraPostion.y << "," << cameraPostion.z << std::endl;
     // Set gray background
     glClearColor(.2f, .2f, .2f, 1);
     // Clear depth and color buffers
@@ -224,7 +228,12 @@ public:
     // renderQuad();
 
     scene.camera->update();
+    scene.anicam->update(dt);
     scene.update(dt);
+    scene.shader.use();
+    scene.shader.setUniform("ProjectionMatrix", scene.anicam->projectionMatrix);
+    scene.shader.setUniform("ViewMatrix", scene.anicam->viewMatrix);
+    scene.shader.setUniform("viewPos", scene.anicam->position);
     scene.render();
   }
 

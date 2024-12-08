@@ -179,6 +179,7 @@ add_executable(main
         src/project/models/plane.h
         src/project/models/zaves_spod.h
         src/project/models/obal.h
+        src/project/anicam.h
 )
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)
