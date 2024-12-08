@@ -71,14 +71,14 @@ public:
         };
         pointLights = {
             {
-                {{1,1,1}, 0.05, .3f}, {1.15, 2.9, 0.3}, {25.0}, {0.0}, {0.15}, {0.002}
+                {{1,1,1}, 0.05, .3f}, {1.15, 2.9, 0.3}, {25.0}, {0.0}, {0.05}, {0.002}
             },
-            // {
-            //     {{0.95,0.63,0.63}, 0.01, .8f}, {0.25, 3.53, -4.12}, {25.0}, {0.0}, {0.18}, {0.002}
-            // },
             {
-                {{0,1,0}, 0., .15f}, {-1.15, 1.30, -1.04}, {15.0}, {0.0}, {0.18}, {0.012}
-            }
+                {{0.5f,0.5f,1.f}, 0., .5f}, {0.396003, 2.19034,0.0967224}, {15.0}, {0.0}, {0.18}, {0.032}
+            },
+            {
+                {{0.95,0.63,0.63}, 0.01, .8f}, {0.25, 3.53, -4.12}, {25.0}, {0.0}, {0.18}, {0.002}
+            },
         };
         shader.use();
         for (int i = 0; i < directionalLights.size(); i++) {
@@ -255,11 +255,14 @@ public:
         }
         shader.setUniform("cubeShadows[0]", (GLint)directionalLights.size());
         shader.setUniform("cubeShadows[1]", (GLint)directionalLights.size() + 1);
+        shader.setUniform("cubeShadows[2]", (GLint)directionalLights.size() + 2);
         // adding texture for cubemap
         glActiveTexture(GL_TEXTURE0 + directionalLights.size());
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTEXs[0]);
         glActiveTexture(GL_TEXTURE0 + directionalLights.size() + 1);
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTEXs[1]);
+        glActiveTexture(GL_TEXTURE0 + directionalLights.size() + 2);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTEXs[2]);
 
         for ( auto& model : models )
             model->render(*this);

@@ -98,6 +98,7 @@ private:
     lamp->rotation = {0, 0, glm::radians(90.0f)};
 
     //animation
+
     chair->keyframes.push_back(Keyframe(0.0f, {0.2,0,-0.5}, {0, 0, glm::radians(-30.0f)}, {1.2, 1.2, 1.2}));
     chair->keyframes.push_back(Keyframe(10.0f, {0.2,0,-0.5}, {0, 0, glm::radians(-30.0f)}, {1.2, 1.2, 1.2}));
     chair->keyframes.push_back(Keyframe(20.0f, {0.2,0,-0.5}, {0, 0, glm::radians(30.0f)}, {1.2, 1.2, 1.2}));
@@ -114,17 +115,30 @@ private:
     roomba->keyframes.push_back(Keyframe(44.0f, {1.38, 0, -1}, {0, 0, glm::radians(-90.0f)}, {1.2, 1.2, 1.2}));
     roomba->keyframes.push_back(Keyframe(50.0f, {2.76, 0, -1}, {0, 0, glm::radians(-90.0f)}, {1.2, 1.2, 1.2}));
 
+    float plane_offset = 50.f;
     plane->keyframes.push_back(Keyframe(0.0f, {1.36, 2.09, 2.68}, {0, 0, 0}, {1, 1, 1}));
-    plane->keyframes.push_back(Keyframe(10.0f, {1.36, 2.09, 2.68}, {0, 0, 0}, {1, 1, 1}));
-    plane->keyframes.push_back(Keyframe(14.0f, {0.93, 1.59, -0.05}, {0, glm::radians(15.0f), 0}, {1, 1, 1}));
-    plane->keyframes.push_back(Keyframe(17.0f, {0.35, 1.05, -1.8}, {0, glm::radians(20.0f), glm::radians(15.0f)}, {1, 1, 1}));
+    plane->keyframes.push_back(Keyframe(plane_offset + 10.0f, {1.36, 2.09, 2.68}, {0, 0, 0}, {1, 1, 1}));
+    plane->keyframes.push_back(Keyframe(plane_offset + 14.0f, {0.93, 1.59, -0.05}, {0, glm::radians(15.0f), 0}, {1, 1, 1}));
+    plane->keyframes.push_back(Keyframe(plane_offset + 17.0f, {0.35, 1.05, -1.8}, {0, glm::radians(20.0f), glm::radians(15.0f)}, {1, 1, 1}));
 
+    float okno_offset = -7.f;
     okno->keyframes.push_back(Keyframe(0.0f, {-0.3, 1.1, -2.09}, {0, 0, 0}, {1, 1, 1}));
-    okno->keyframes.push_back(Keyframe(10.0f, {-0.3, 1.1, -2.09}, {0, 0, 0}, {1, 1, 1}));
-    okno->keyframes.push_back(Keyframe(20.0f, {-0.3, 1.94, -2.09}, {0, 0, 0}, {1, 1, 1}));
+    okno->keyframes.push_back(Keyframe(okno_offset + 10.0f, {-0.3, 1.1, -2.09}, {0, 0, 0}, {1, 1, 1}));
+    okno->keyframes.push_back(Keyframe(okno_offset + 20.0f, {-0.3, 1.94, -2.09}, {0, 0, 0}, {1, 1, 1}));
 
-    scene.anicam->keyframes.push_back(cam_keyframe(0.f, {0.67, 1.67, 3.36}, {-0.247105, 0.38785, -0.556736}));
-    scene.anicam->keyframes.push_back(cam_keyframe(20.f, {-0.720415, 1.17124,0.60603}, {-0.247105, 0.38785, -0.556736}));
+    scene.anicam->keyframe_position.push_back(cam_keyframe(0.f, {0.67, 1.67, 3.36}, {0,0,0}));
+    scene.anicam->keyframe_position.push_back(cam_keyframe(30.f, {-0.720415, 1.17124,0.60603}, {0,0,0}));
+    scene.anicam->keyframe_position.push_back(cam_keyframe(40.f, {-1.26455, 1.72814, -0.169158}, {0,0,0}));
+    scene.anicam->keyframe_position.push_back(cam_keyframe(50.f, {-0.870189, 1.f, -1.3531}, {0,0,0}));
+    scene.anicam->keyframe_position.push_back(cam_keyframe(70.f, {-1.43896, 1.07107,-0.748533}, {0,0,0}));
+
+    scene.anicam->keyframe_target.push_back(cam_keyframe(0.f, {0,0,0}, {-0.247105, 0.38785, -0.556736}));
+    scene.anicam->keyframe_target.push_back(cam_keyframe(20.f, {0,0,0}, {-0.247105, 0.38785, -0.556736}));
+    scene.anicam->keyframe_target.push_back(cam_keyframe(40.f, {0,0,0}, {-0.571761, 1.0181,-0.70207}));
+    scene.anicam->keyframe_target.push_back(cam_keyframe(50.f, {0,0,0}, {-0.28732, 1.10886, -1.8558}));
+
+    // scene.anicam->keyframe_position.push_back(cam_keyframe(0.f, {0.67, 1.67, 3.36}, {-0.247105, 0.38785, -0.556736}));
+    // scene.anicam->keyframe_position.push_back(cam_keyframe(20.f, {-0.720415, 1.17124,0.60603}, {-0.247105, 0.38785, -0.556736}));
 
     room->addChild(std::move(lamp));
     chair->addChild(std::move(backpack));
@@ -160,6 +174,7 @@ private:
     scene.setUpDepthMap();
     scene.computeDepthCubemapMatrix(scene.pointLights[0].position, scene.pointLights[0].far_plane);
     scene.computeDepthCubemapMatrix(scene.pointLights[1].position, scene.pointLights[1].far_plane);
+    scene.computeDepthCubemapMatrix(scene.pointLights[2].position, scene.pointLights[2].far_plane);
 
     //LODING OBJECTS
     loadObjects();
@@ -223,12 +238,12 @@ public:
     scene.anicam->update(dt);
     scene.update(dt);
     scene.shader.use();
-    scene.shader.setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-    scene.shader.setUniform("ViewMatrix", scene.camera->viewMatrix);
-    scene.shader.setUniform("viewPos", cameraPostion);
-    // scene.shader.setUniform("ProjectionMatrix", scene.anicam->projectionMatrix);
-    // scene.shader.setUniform("ViewMatrix", scene.anicam->viewMatrix);
-    // scene.shader.setUniform("viewPos", scene.anicam->position);
+    // scene.shader.setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
+    // scene.shader.setUniform("ViewMatrix", scene.camera->viewMatrix);
+    // scene.shader.setUniform("viewPos", cameraPostion);
+    scene.shader.setUniform("ProjectionMatrix", scene.anicam->projectionMatrix);
+    scene.shader.setUniform("ViewMatrix", scene.anicam->viewMatrix);
+    scene.shader.setUniform("viewPos", scene.anicam->position);
     scene.render();
   }
 

@@ -10,14 +10,14 @@
 |                                                      | Priesvitné objekty                                                                             | 2       | &#9744;  |
 | **Scéna**                                            | Procedurálne generovaná scéna                                                                  | 2       | &#x2705; |
 |                                                      | Hierarchická reprezentácia scény                                                               | 4       | &#x2705; |
-| **Animované objekty**                                | Procedurálna animácia                                                                          | 2       | &#x2705;  |
+| **Animované objekty**                                | Procedurálna animácia                                                                          | 2       | &#x2705; |
 |                                                      | Animácia na základe dát uložených v kľúčových snímkoch a interpolácie                          | 3       | &#x2705; |
 |                                                      | Animácia riadená komplexnými animačnými krivkami pre plynulý pohyb                             | 1       | &#9744;  |
 | **Simulácia, časticový systém**                      | Efektívna kolízia medzi objektami                                                              | 3       | &#9744;  |
 |                                                      | Simulácia aspoň s dvoma silami s použitím vektorovej algebry                                   | 3       | &#9744;  |
 | **Práca s kamerou**                                  | Kamera s perspektívnou projekciou                                                              | 1       | &#x2705; |
-|                                                      | Animovaná kamera pomocou kľúčových snímkov                                                     | 2       | &#9744;  |
-| **Osvetlenie za pomoci viacerých svetelných zdrojov** | Použitie všetkých typov zdrojov svetla s príslušnými parametrami: smerové, bodové, reflektor  | 3       | &#9744;  |
+|                                                      | Animovaná kamera pomocou kľúčových snímkov                                                     | 2       | &#x2705; |
+| **Osvetlenie za pomoci viacerých svetelných zdrojov** | Použitie všetkých typov zdrojov svetla s príslušnými parametrami: smerové, bodové, reflektor  | **2**/3 | &#x2705; |
 |                                                      | Zmena pozície a orientácie zdrojov svetla a odtieňov farby osvetlenia                          | 1       | &#x2705; |
 |                                                      | Správne kombinovať difúzne svetlo z 2 zdrojov svetla s difúznymi materiálmi                    | 1       | &#x2705; |
 |                                                      | Správny Phongov osvetlovací model s viacerými (aspoň 3) zdrojmi svetla                         | 2       | &#x2705; |

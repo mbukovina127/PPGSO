@@ -24,7 +24,8 @@ public:
     glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
 
-    std::vector<cam_keyframe> keyframes;  // Store keyframes for animation
+    std::vector<cam_keyframe> keyframe_position;  // Store keyframes for animation
+    std::vector<cam_keyframe> keyframe_target;  // Store keyframes for animation
 
     glm::vec3 position = {0, 1 ,0};
     glm::vec3 target = {0,0,0};
@@ -49,26 +50,37 @@ public:
     void interpolateKeyframes(float dt) {
         animationTime += dt;
 
-        if (keyframes.size() < 2) return;
+        if (keyframe_position.size() < 2) return;
 
         // Find the current keyframe pair
-        cam_keyframe* prev = nullptr;
-        cam_keyframe* next = nullptr;
-        for (size_t i = 0; i < keyframes.size() - 1; ++i) {
-            if (animationTime >= keyframes[i].time && animationTime <= keyframes[i + 1].time) {
-                prev = &keyframes[i];
-                next = &keyframes[i + 1];
+        cam_keyframe* prev_p = nullptr;
+        cam_keyframe* next_p = nullptr;
+        for (size_t i = 0; i < keyframe_position.size() - 1; ++i) {
+            if (animationTime >= keyframe_position[i].time && animationTime <= keyframe_position[i + 1].time) {
+                prev_p = &keyframe_position[i];
+                next_p = &keyframe_position[i + 1];
                 break;
             }
         }
 
-        if (!prev || !next) return;
+        cam_keyframe* prev_t = nullptr;
+        cam_keyframe* next_t = nullptr;
+        for (size_t i = 0; i < keyframe_target.size() - 1; ++i) {
+            if (animationTime >= keyframe_target[i].time && animationTime <= keyframe_target[i + 1].time) {
+                prev_t = &keyframe_target[i];
+                next_t = &keyframe_target[i + 1];
+                break;
+            }
+        }
 
-        // Interpolate based on time
-        float t = (animationTime - prev->time) / (next->time - prev->time);
-        position = glm::mix(prev->position, next->position, t);
-        target = glm::mix(prev->target, next->target, t);
-        up = glm::mix(prev->up, next->up, t);
+        if (prev_p && next_p) {
+            float t = (animationTime - prev_p->time) / (next_p->time - prev_p->time);
+            position = glm::mix(prev_p->position, next_p->position, t);
+        }
+        if (prev_t && next_t) {
+            float t = (animationTime - prev_t->time) / (next_t->time - prev_t->time);
+            target = glm::mix(prev_t->target, next_t->target, t);
+        }
     }
 
     /*!
