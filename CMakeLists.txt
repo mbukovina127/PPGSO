@@ -168,18 +168,16 @@ add_executable(main
         src/project/camera.h
         src/project/mesh.h
         src/project/model.h
-        src/project/models/test_backpack.h
         src/project/imgloader.cpp
         src/project/imgloader.h
         src/project/models/chair.h
         src/project/models/room.h
         src/project/models/lamp.h
-        src/project/models/laptop.h
-        src/project/models/roomba.h
-        src/project/models/plane.h
         src/project/models/zaves_spod.h
         src/project/models/obal.h
         src/project/anicam.h
+        src/project/models/static.h
+        src/project/models/Animated.h
 )
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)

@@ -15,12 +15,12 @@
 #include "scene.h"
 #include "camera.h"
 #include "models/lamp.h"
-#include "models/room.h"
-#include "models/test_backpack.h"
 #include <shaders/ddebug_vert_glsl.h>
 #include <shaders/ddebug_frag_glsl.h>
 
+#include "models/animated.h"
 #include "models/obal.h"
+#include "models/static.h"
 #include "models/zaves_spod.h"
 
 const unsigned int WIDTH = 1280;
@@ -68,19 +68,18 @@ private:
    * Creating unique smart pointers to objects that are stored in the scene object list
    */
     //LODING OBJECTS
-    auto backpack = std::make_unique<BPACK>("../data/testpack/backpack.obj");
-    auto chair = std::make_unique<Chair>("../data/diff_chair/chair.obj");
-    auto room = std::make_unique<Room>("../data/room/room.obj");
-    auto lamp = std::make_unique<Lamp>("../data/lamp/lampa.obj");
-    auto laptop = std::make_unique<Lamp>("../data/laptop4/laptop.obj");
-    auto roomba = std::make_unique<Chair>("../data/roomba/roomba.obj");
-    auto plane = std::make_unique<Chair>("../data/plane/plane.obj");
-    auto book = std::make_unique<Chair>("../data/book/book.obj");
-    auto zaves_vrch = std::make_unique<Chair>("../data/zaves/cast1.obj");
-    auto zaves_spod = std::make_unique<Zaves>("../data/zaves/cast2.obj");
-    auto okno = std::make_unique<Chair>("../data/okno/okno.obj");
-    auto obal = std::make_unique<Obal>("../data/book/obal.obj", zaves_spod->fulltime);
-    auto vyhlad = std::make_unique<Room>("../data/vyhlad/vyhlad.obj");
+    auto backpack =     std::make_unique<Static>("../data/testpack/backpack.obj");
+    auto room =         std::make_unique<Static>("../data/room/room.obj");
+    auto laptop =       std::make_unique<Static>("../data/laptop4/laptop.obj");
+    auto book =         std::make_unique<Static>("../data/book/book.obj");
+    auto zaves_vrch =   std::make_unique<Static>("../data/zaves/cast1.obj");
+    auto roomba =       std::make_unique<Animated>("../data/roomba/roomba.obj");
+    auto plane =        std::make_unique<Animated>("../data/plane/plane.obj");
+    auto okno =         std::make_unique<Animated>("../data/okno/okno.obj");
+    auto chair =        std::make_unique<Chair>("../data/diff_chair/chair.obj");
+    auto lamp =         std::make_unique<Lamp>("../data/lamp/lampa.obj");
+    auto zaves_spod =   std::make_unique<Zaves>("../data/zaves/cast2.obj");
+    auto obal =         std::make_unique<Obal>("../data/book/obal.obj", zaves_spod->fulltime);
 
     //positioning
     backpack->scale = {0.2, 0.2, 0.2};
@@ -147,7 +146,6 @@ private:
     //ADDING THEM TO THE SCENE
     scene.models.push_back(std::move(room));
     scene.models.push_back(std::move(plane));
-    scene.models.push_back(std::move(vyhlad));
   }
   /*!
    * Reset and initialize the game scene

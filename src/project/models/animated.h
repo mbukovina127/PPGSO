@@ -1,22 +1,26 @@
 //
-// Created by Iveta Leskova on 26/11/2024.
+// Created by marko on 8. 12. 2024.
 //
 
-#ifndef LAPTOP_H
-#define LAPTOP_H
-#include "src/project/model.h"
-#include "src/project/scene.h"
+#ifndef ANIMATED_H
+#define ANIMATED_H
+#include "../scene.h"
+#include "../model.h"
+#include <ppgso/shader.h>
 
-
-class Laptop : public Model {
+class Animated : public Model {
 public:
-    Laptop(string const &path, bool gamma = false) : Model(path, gamma) {}
+    Animated(string const &path, bool gamma = false) : Model(path, gamma) {}
     float fulltime = 0;
 
     bool update(Scene &scene, float dt) override {
+        interpolateKeyframes(dt);  // proceduralne animovanie???
+
+
         for (auto &child : children) {
             child->update(scene, dt);
         }
+
         return true;
     }
 
@@ -24,11 +28,11 @@ public:
         // Generate the model matrix from position, rotation, and scale
         generateModelMatrix();
         // Pass the model matrix to the shader
-        scene.shader->setUniform("ModelMatrix", modelMatrix);
+        scene.shader.setUniform("ModelMatrix", modelMatrix);
 
         // Render each mesh
         for (auto &mesh : meshes) {
-            mesh.render(*scene.shader);
+            mesh.render(scene.shader);
         }
         for (auto &child : children) {
             child->render(scene);
@@ -46,4 +50,4 @@ public:
     }
 };
 
-#endif //LAPTOP_H
+#endif //ANIMATED_H

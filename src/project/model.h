@@ -72,12 +72,15 @@ public:
         if (!prev || !next) return;
 
         // Interpolate based on time
-        float t = (animationTime - prev->time) / (next->time - prev->time);
+        float t = easingFunction(prev->time, next->time);
         position = glm::mix(prev->position, next->position, t);
         rotation = glm::mix(prev->rotation, next->rotation, t);
         scale = glm::mix(prev->scale, next->scale, t);
     }
 
+    virtual float easingFunction(float pTime, float nTime) {
+        return (animationTime - pTime) / (nTime - pTime);
+    }
     // constructor, expects a filepath to a 3D model.
     Model(string const &path, bool gamma = false) : gammaCorrection(gamma)
     {

@@ -24,6 +24,11 @@ public:
         return true;
     }
 
+    float easingFunction(float pTime, float nTime) override {
+        float x = (animationTime - pTime) / (nTime - pTime);
+        return 1 - pow(1 - x, 4);
+    }
+
     void render (Scene &scene) override {
         // Generate the model matrix from position, rotation, and scale
         generateModelMatrix();

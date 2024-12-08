@@ -1,29 +1,30 @@
 //
-// Created by marko on 15. 11. 2024.
+// Created by marko on 8. 12. 2024.
 //
 
-#ifndef TEST_BACKPACK_H
-#define TEST_BACKPACK_H
-#include "../model.h"
-#include "../scene.h"
-#include <ppgso/shader.h>
+#ifndef STATIC_H
+#define STATIC_H
+#include <string>
 
-class BPACK : public Model {
+#include "src/project/model.h"
+
+class Scene;
+
+class Static : public Model {
 public:
-    BPACK(string const &path, bool gamma = false) : Model(path, gamma) {}
+    Static(std::string const &path, bool gamma = false) : Model(path, gamma) {}
 
     bool update(Scene &scene, float dt) override {
         for (auto &child : children) {
             child->update(scene, dt);
         }
+
         return true;
     }
+
     void render (Scene &scene) override {
         // Generate the model matrix from position, rotation, and scale
         generateModelMatrix();
-
-        // Use a shader program (assuming scene has a shader or it's passed in some other way)
-
         // Pass the model matrix to the shader
         scene.shader.setUniform("ModelMatrix", modelMatrix);
 
@@ -46,5 +47,4 @@ public:
             child->renderDepth(shader);
     }
 };
-
-#endif //TEST_BACKPACK_H
+#endif //STATIC_H
