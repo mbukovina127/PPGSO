@@ -178,6 +178,7 @@ add_executable(main
         src/project/anicam.h
         src/project/models/static.h
         src/project/models/Animated.h
+        src/project/skybox.h
 )
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)

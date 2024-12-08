@@ -147,9 +147,9 @@ void main() {
       object_color = texture(texture_diffuse1, texCoord).rgb;
     }
     vec3 light = vec3(0.0);
-//    for (int i = 0; i < numDirL; i++) {
-//        light += DirCalc(i, object_color);
-//    }
+    for (int i = 0; i < numDirL; i++) {
+        light += DirCalc(i, object_color);
+    }
     for (int i = 0; i < numPointL; i++) {
         light += PointCalc(PLIGHTS[i], object_color, i);
     }
