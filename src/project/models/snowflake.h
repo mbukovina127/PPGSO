@@ -35,15 +35,15 @@ public:
         generateIndices();
         setupBuffers();
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10000; i++) {
             float x = -2.0f + static_cast<float>(std::rand()) / (static_cast<float>(RAND_MAX / (2.0f - (-2.0f))));
             float y = -3.0f + static_cast<float>(std::rand()) / (static_cast<float>(RAND_MAX / (3.0f - (-3.0f))));
             float z = -1.0f + static_cast<float>(std::rand()) / (static_cast<float>(RAND_MAX / (1.0f - (-1.0f))));
 
-            glm::vec3 position(x, y, z);
+            glm::vec3 pos(position.x + x, position.y + y, position.z + z);
 
             // Create a transformation matrix with translation
-            glm::mat4 matrix = glm::translate(glm::mat4(1.0f), position);
+            glm::mat4 matrix = glm::translate(glm::mat4(1.0f), pos);
 
             // Add the matrix to the vector
             instanceTransforms.push_back(matrix);
@@ -162,9 +162,7 @@ public:
 
     void update(float deltaTime) {
         position.y -= 2*deltaTime;
-        if (position.y <= 0.0f) {
-            position.y = 20.5f;
-        }
+
     }
 
     ~Snowflake() {

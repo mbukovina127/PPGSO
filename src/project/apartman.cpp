@@ -64,7 +64,7 @@ private:
   Scene scene;
   ppgso::Shader debugDepthQuad;
   unique_ptr<Skybox> skybox = std::make_unique<Skybox>("../data/skybox/skybox.obj");
-  Snowflake snow = Snowflake(glm::vec3(-0.38111, -3.15953,5.45285), glm::vec3(0,0,0), glm::vec3(0.01,0.01,0.01));
+  Snowflake snow = Snowflake(glm::vec3(-0.293866, 3.85717, -2.93412), glm::vec3(0,0,0), glm::vec3(0.01,0.01,0.01));
 
 
   void loadObjects() {
