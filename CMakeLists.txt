@@ -179,6 +179,7 @@ add_executable(main
         src/project/models/static.h
         src/project/models/Animated.h
         src/project/skybox.h
+        src/project/models/instance.h
 )
 target_link_libraries(main ppgso shaders)
 install(TARGETS main DESTINATION .)

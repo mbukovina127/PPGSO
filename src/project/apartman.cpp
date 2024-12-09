@@ -235,14 +235,14 @@ public:
     scene.anicam->update(dt);
     scene.update(dt);
     scene.shader.use();
-    scene.shader.setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-    scene.shader.setUniform("ViewMatrix", scene.camera->viewMatrix);
-    scene.shader.setUniform("viewPos", cameraPostion);
-    // scene.shader.setUniform("ProjectionMatrix", scene.anicam->projectionMatrix);
-    // scene.shader.setUniform("ViewMatrix", scene.anicam->viewMatrix);
-    // scene.shader.setUniform("viewPos", scene.anicam->position);
+    // scene.shader.setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
+    // scene.shader.setUniform("ViewMatrix", scene.camera->viewMatrix);
+    // scene.shader.setUniform("viewPos", cameraPostion);
+    scene.shader.setUniform("ProjectionMatrix", scene.anicam->projectionMatrix);
+    scene.shader.setUniform("ViewMatrix", scene.anicam->viewMatrix);
+    scene.shader.setUniform("viewPos", scene.anicam->position);
     scene.render();
-    skybox->render(scene.camera->projectionMatrix, scene.camera->viewMatrix);
+    skybox->render(scene.anicam->projectionMatrix, scene.anicam->viewMatrix);
   }
 
   void processInput(GLFWwindow *window, float dt)

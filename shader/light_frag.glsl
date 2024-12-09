@@ -104,9 +104,9 @@ vec3 DirCalc(int index, vec3 objDiffuse) {
 //    // Combine all lighting contributions
 //    return (ambient + diffuse + specular) * light.base.color;
 }
-float calcPointShadow(vec3 fragPosition, vec3 lightPos, float far_plane, int index) {
+float calcPointShadow(vec3 fragPosition, vec3 lightPos, float far_plane, samplerCube shadowmap) {
     vec3 fragToLight = fragPosition - lightPos;
-    float closestDepth = texture(cubeShadows[index], fragToLight).r;
+    float closestDepth = texture(shadowmap, fragToLight).r;
     closestDepth *= far_plane;
 
     float currentDepth = length(fragToLight);
@@ -116,7 +116,7 @@ float calcPointShadow(vec3 fragPosition, vec3 lightPos, float far_plane, int ind
 vec3 PointCalc(PointLight light, vec3 objDiffuse, int index) {
     // Normalize vectors
     vec3 norm = normalize(normal);
-    vec3 lightDir = normalize(light.position);
+    vec3 lightDir = normalize(light.position - fragPos);
 
     // Diffuse component
     float diff = max(dot(norm, lightDir), 0.0);
@@ -137,7 +137,7 @@ vec3 PointCalc(PointLight light, vec3 objDiffuse, int index) {
     ambient *= attenuation;
     diffuse *= attenuation;
     specular *= attenuation;
-    float shadow = calcPointShadow(fragPos, light.position, light.far_plane, index);
+    float shadow = calcPointShadow(fragPos, light.position, light.far_plane, cubeShadows[index]);
     return (ambient + (1.0 - shadow) * (diffuse + specular)) * light.base.color;
 }
 void main() {
@@ -154,9 +154,9 @@ void main() {
         light += PointCalc(PLIGHTS[i], object_color, i);
     }
 //    light += PointCalc(PLIGHTS[0], object_color, 0);
-//    vec3 fragToLight = fragPos - PLIGHTS[2].position;
-//    float closestDepth = texture(cubeShadows[2], fragToLight).r;
-//
+//    vec3 fragToLight = fragPos - PLIGHTS[0].position;
+//    float closestDepth = texture(cubeShadows[0], fragToLight).r;
+
 //    FragmentColor = vec4(vec3(closestDepth * 2.f) ,1);
     FragmentColor = vec4(light * object_color ,1);
 }

@@ -63,18 +63,15 @@ public:
     void setUpLights() {
         directionalLights = {
             {
-                {{1,1,1}, .2f, 1.f}, {-2, 3, -4}
-            },
-            // {
-            //     {{1,0.4,0.4}, .0f, .8f}, {4, 5, -4}
-            // }
+            {{1,1,1}, .07f, 1.f}, {1.36661, -0.396618,-6.7505}
+            }
         };
         pointLights = {
             {
-                {{1,1,1}, 0.05, .3f}, {1.15, 2.9, 0.3}, {25.0}, {0.0}, {0.05}, {0.002}
+            {{1,1,1}, 0.0, .09f}, {1.15, 2.85, 0.3}, {25.0}, {0.0}, {0.05}, {0.002}
             },
             {
-                {{0.95,0.63,0.63}, 0.01, .8f}, {0.25, 3.53, -4.12}, {25.0}, {0.0}, {0.18}, {0.002}
+                {{0.63,0.63,0.93}, 0.00, 0.2f}, {-1.16945, 1.3148,-1.05781}, {25.0}, {0.0}, {0.18}, {0.34}
             },
             // {
             //     {{0.5f,0.5f,1.f}, 0., .5f}, {0.396003, 2.19034,0.0967224}, {15.0}, {0.0}, {0.18}, {0.032}
@@ -129,7 +126,7 @@ public:
                 std::cerr << "Framebuffer " << i << " is not complete!" << std::endl;
         }
         // Point Lights
-        unsigned int pocet = 3;
+        unsigned int pocet = 2;
         cubemapTEXs.resize(pocet);
         cubemapFBOs.resize(pocet);
         // create depth cubemap texture
@@ -171,7 +168,7 @@ public:
 
     // Needs to be called only once
     auto computeDepthCubemapMatrix(glm::vec3 lightPos, float far_plane = 25.0f) {
-        float near_plane = .1f;
+        float near_plane = .01f;
         glm::mat4 shadowProj = glm::perspective(glm::radians(90.0f), static_cast<float>(SHADOW_WIDTH) / SHADOW_HEIGHT, near_plane, far_plane);
         shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f)));
         shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f)));
