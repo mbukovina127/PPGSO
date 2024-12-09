@@ -25,7 +25,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48e1ef06-6f41-4785-b61a-b040db424d36" name="Changes" comment="" />
+    <list default="true" id="48e1ef06-6f41-4785-b61a-b040db424d36" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/shader/instance_vert.glsl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/project/models/snowflake.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/color_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/shader/color_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/color_vert.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/shader/color_vert.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/light_frag.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/shader/light_frag.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project/apartman.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/project/apartman.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +44,13 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="shader-template" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -47,9 +63,12 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/vgg-fiit/ppgso-projekt-1800-leskova_bukovina-apartman.git&quot;,
-    &quot;accountId&quot;: &quot;4365fdb7-2b3e-4766-a196-2788a1c2643e&quot;
+    &quot;accountId&quot;: &quot;ecb040de-2871-4fef-a30b-f9407f27a1b7&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/TINKPAD/Documents/REPO/ppgso/src/project/models/snowflake.h" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -78,10 +97,15 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\TINKPAD\Documents\REPO\ppgso\src\project\models" />
+    </key>
+  </component>
   <component name="RunManager" selected="CMake Application.main">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="main" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ppgso" TARGET_NAME="main" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ppgso" RUN_TARGET_NAME="main">
@@ -119,7 +143,9 @@
       <workItem from="1733654280620" duration="334000" />
       <workItem from="1733654646311" duration="8412000" />
       <workItem from="1733672763267" duration="11612000" />
-      <workItem from="1733695207809" duration="12000" />
+      <workItem from="1733695207809" duration="281000" />
+      <workItem from="1733749622621" duration="7650000" />
+      <workItem from="1733769262395" duration="8065000" />
     </task>
     <servers />
   </component>

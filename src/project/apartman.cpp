@@ -21,6 +21,7 @@
 #include "skybox.h"
 #include "models/animated.h"
 #include "models/obal.h"
+#include "models/snowflake.h"
 #include "models/static.h"
 #include "models/zaves_spod.h"
 
@@ -63,6 +64,8 @@ private:
   Scene scene;
   ppgso::Shader debugDepthQuad;
   unique_ptr<Skybox> skybox = std::make_unique<Skybox>("../data/skybox/skybox.obj");
+  Snowflake snow = Snowflake(glm::vec3(-0.38111, -3.15953,5.45285), glm::vec3(0,0,0), glm::vec3(0.01,0.01,0.01));
+
 
   void loadObjects() {
   /*!
@@ -241,6 +244,10 @@ public:
     // scene.shader.setUniform("ProjectionMatrix", scene.anicam->projectionMatrix);
     // scene.shader.setUniform("ViewMatrix", scene.anicam->viewMatrix);
     // scene.shader.setUniform("viewPos", scene.anicam->position);
+
+    snow.update(dt);
+    snow.render(scene.camera->projectionMatrix, scene.camera->viewMatrix);
+
     scene.render();
     skybox->render(scene.camera->projectionMatrix, scene.camera->viewMatrix);
   }
