@@ -63,7 +63,7 @@ class SceneWindow : public ppgso::Window {
 private:
   Scene scene;
   ppgso::Shader debugDepthQuad;
-  unique_ptr<Skybox> skybox = std::make_unique<Skybox>("../data/skybox/skybox.obj");
+  unique_ptr<Skybox> skybox = std::make_unique<Skybox>("data/skybox/skybox.obj");
   Snowflake snow = Snowflake(glm::vec3(-0.293866, 3.85717, -2.93412), glm::vec3(0,0,0), glm::vec3(0.01,0.01,0.01));
 
 
@@ -73,18 +73,18 @@ private:
    * Creating unique smart pointers to objects that are stored in the scene object list
    */
     //LODING OBJECTS
-    auto backpack =     std::make_unique<Static>("../data/testpack/backpack.obj");
-    auto room =         std::make_unique<Static>("../data/room/room.obj");
-    auto laptop =       std::make_unique<Static>("../data/laptop4/laptop.obj");
-    auto book =         std::make_unique<Static>("../data/book/book.obj");
-    auto zaves_vrch =   std::make_unique<Static>("../data/zaves/cast1.obj");
-    auto roomba =       std::make_unique<Animated>("../data/roomba/roomba.obj");
-    auto plane =        std::make_unique<Animated>("../data/plane/plane.obj");
-    auto okno =         std::make_unique<Animated>("../data/okno/okno.obj");
-    auto chair =        std::make_unique<Chair>("../data/diff_chair/chair.obj");
-    auto lamp =         std::make_unique<Lamp>("../data/lamp/lampa.obj");
-    auto zaves_spod =   std::make_unique<Zaves>("../data/zaves/cast2.obj");
-    auto obal =         std::make_unique<Obal>("../data/book/obal.obj", zaves_spod->fulltime);
+    auto backpack =     std::make_unique<Static>("data/testpack/backpack.obj");
+    auto room =         std::make_unique<Static>("data/room/room.obj");
+    auto laptop =       std::make_unique<Static>("data/laptop4/laptop.obj");
+    auto book =         std::make_unique<Static>("data/book/book.obj");
+    auto zaves_vrch =   std::make_unique<Static>("data/zaves/cast1.obj");
+    auto roomba =       std::make_unique<Animated>("data/roomba/roomba.obj");
+    auto plane =        std::make_unique<Animated>("data/plane/plane.obj");
+    auto okno =         std::make_unique<Animated>("data/okno/okno.obj");
+    auto chair =        std::make_unique<Chair>("data/diff_chair/chair.obj");
+    auto lamp =         std::make_unique<Lamp>("data/lamp/lampa.obj");
+    auto zaves_spod =   std::make_unique<Zaves>("data/zaves/cast2.obj");
+    auto obal =         std::make_unique<Obal>("data/book/obal.obj", zaves_spod->fulltime);
 
     //positioning
     backpack->scale = {0.2, 0.2, 0.2};
@@ -234,22 +234,26 @@ public:
     // glBindTexture(GL_TEXTURE_2D, scene.depthMapTex_dir[0]);
     // renderQuad();
 
-    scene.camera->update();
-    scene.anicam->update(dt);
+    scene.camera->update(); // FREE view camera
+    scene.anicam->update(dt); // Presentation view camera
+    auto pr_matrix = scene.anicam->projectionMatrix;
+    auto vw_matrix = scene.anicam->viewMatrix;
+    auto vw_position = scene.anicam->position;
+
     scene.update(dt);
     scene.shader.use();
-    scene.shader.setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-    scene.shader.setUniform("ViewMatrix", scene.camera->viewMatrix);
-    scene.shader.setUniform("viewPos", cameraPostion);
-    // scene.shader.setUniform("ProjectionMatrix", scene.anicam->projectionMatrix);
-    // scene.shader.setUniform("ViewMatrix", scene.anicam->viewMatrix);
-    // scene.shader.setUniform("viewPos", scene.anicam->position);
+    // CHANGE the camera for 
+
+    scene.shader.setUniform("ProjectionMatrix", pr_matrix);
+    scene.shader.setUniform("ViewMatrix", vw_matrix);
+    scene.shader.setUniform("viewPos", vw_position);
+
 
     snow.update(dt);
-    snow.render(scene.camera->projectionMatrix, scene.camera->viewMatrix);
+    snow.render(pr_matrix, vw_matrix);
 
     scene.render();
-    skybox->render(scene.camera->projectionMatrix, scene.camera->viewMatrix);
+    skybox->render(pr_matrix, vw_matrix);
   }
 
   void processInput(GLFWwindow *window, float dt)

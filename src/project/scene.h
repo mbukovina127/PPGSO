@@ -244,6 +244,11 @@ public:
 
     void render() {
         // shader.setUniform("")
+        std::cout << "directionalLights.size() = " << directionalLights.size() << std::endl;
+        std::cout << "depthMapTex_dir.size() = " << depthMapTex_dir.size() << std::endl;
+        std::cout << "lSpaceMatrices.size() = " << lSpaceMatrices.size() << std::endl;
+        std::cout << "cubemapTEXs.size() = " << cubemapTEXs.size() << std::endl;
+
         for (int i = 0; i < directionalLights.size(); i++) {
             glActiveTexture(GL_TEXTURE0 + i);
             glBindTexture(GL_TEXTURE_2D, depthMapTex_dir[i]);
@@ -254,12 +259,11 @@ public:
         shader.setUniform("cubeShadows[1]", (GLint)directionalLights.size() + 1);
         shader.setUniform("cubeShadows[2]", (GLint)directionalLights.size() + 2);
         // adding texture for cubemap
+        // error prone
         glActiveTexture(GL_TEXTURE0 + directionalLights.size());
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTEXs[0]);
         glActiveTexture(GL_TEXTURE0 + directionalLights.size() + 1);
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTEXs[1]);
-        glActiveTexture(GL_TEXTURE0 + directionalLights.size() + 2);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTEXs[2]);
 
         for ( auto& model : models )
             model->render(*this);
